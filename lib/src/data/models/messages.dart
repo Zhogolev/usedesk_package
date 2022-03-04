@@ -1,4 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:mime/mime.dart';
+
+import 'socket/message.dart';
 
 part 'messages.g.dart';
 part 'messages.freezed.dart';
@@ -6,26 +9,62 @@ part 'messages.freezed.dart';
 abstract class MessageBase {
   int get id;
   DateTime get createdAt;
-  String get text;
+  bool get fromClient;
+
+  static MessageBase convert(Message message) {
+    final fromClient = message.type == MessageType.clientToOperator ||
+        message.type == MessageType.clientToBot;
+    if (message.text?.isNotEmpty ?? false) {
+      return MessageText(
+        id: message.id,
+        createdAt: message.createdAt,
+        text: message.text!,
+        fromClient: fromClient,
+      );
+    } else if (message.file != null) {
+      final mime = lookupMimeType(message.file!.name) ?? '';
+      if (mime.startsWith('image')) {
+        return MessageImage(
+          id: message.id,
+          createdAt: message.createdAt,
+          file: message.file!,
+          fromClient: fromClient,
+        );
+      }
+
+      return MessageUnknownFile(
+        id: message.id,
+        createdAt: message.createdAt,
+        file: message.file!,
+        fromClient: fromClient,
+      );
+    }
+
+    throw Exception('Unsupported message');
+  }
 
   static MessageBase decode(Map<String, dynamic> data) {
-    switch (data['type']) {
-      case 'message_client_text':
-        return MessageClientText.fromJson(data) as MessageBase;
-      case 'message_text':
-      default:
-        return MessageText.fromJson(data) as MessageBase;
-    }
+    return MessageText.fromJson(data);
   }
 }
 
+abstract class MessageTextBase {
+  String get text;
+}
+
+abstract class MessageFileBase {
+  MessageFile get file;
+}
+
 @freezed
-class MessageText with _$MessageText {
+class MessageText with _$MessageText, MessageBase, MessageTextBase {
   @Implements<MessageBase>()
+  @Implements<MessageTextBase>()
   const factory MessageText({
     required int id,
     required DateTime createdAt,
     required String text,
+    required bool fromClient,
   }) = _MessageText;
 
   factory MessageText.fromJson(Map<String, dynamic> json) =>
@@ -33,14 +72,32 @@ class MessageText with _$MessageText {
 }
 
 @freezed
-class MessageClientText with _$MessageClientText {
+class MessageImage with _$MessageImage, MessageBase, MessageFileBase {
   @Implements<MessageBase>()
-  const factory MessageClientText({
+  @Implements<MessageFileBase>()
+  const factory MessageImage({
     required int id,
     required DateTime createdAt,
-    required String text,
-  }) = _MessageClientText;
+    required MessageFile file,
+    required bool fromClient,
+  }) = _MessageImage;
 
-  factory MessageClientText.fromJson(Map<String, dynamic> json) =>
-      _$MessageClientTextFromJson(json);
+  factory MessageImage.fromJson(Map<String, dynamic> json) =>
+      _$MessageImageFromJson(json);
+}
+
+@freezed
+class MessageUnknownFile
+    with _$MessageUnknownFile, MessageBase, MessageFileBase {
+  @Implements<MessageBase>()
+  @Implements<MessageFileBase>()
+  const factory MessageUnknownFile({
+    required int id,
+    required DateTime createdAt,
+    required MessageFile file,
+    required bool fromClient,
+  }) = _MessageUnknownFile;
+
+  factory MessageUnknownFile.fromJson(Map<String, dynamic> json) =>
+      _$MessageUnknownFileFromJson(json);
 }

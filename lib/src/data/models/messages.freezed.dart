@@ -23,11 +23,15 @@ class _$MessageTextTearOff {
   const _$MessageTextTearOff();
 
   _MessageText call(
-      {required int id, required DateTime createdAt, required String text}) {
+      {required int id,
+      required DateTime createdAt,
+      required String text,
+      required bool fromClient}) {
     return _MessageText(
       id: id,
       createdAt: createdAt,
       text: text,
+      fromClient: fromClient,
     );
   }
 
@@ -44,6 +48,7 @@ mixin _$MessageText {
   int get id => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
+  bool get fromClient => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -56,7 +61,7 @@ abstract class $MessageTextCopyWith<$Res> {
   factory $MessageTextCopyWith(
           MessageText value, $Res Function(MessageText) then) =
       _$MessageTextCopyWithImpl<$Res>;
-  $Res call({int id, DateTime createdAt, String text});
+  $Res call({int id, DateTime createdAt, String text, bool fromClient});
 }
 
 /// @nodoc
@@ -72,6 +77,7 @@ class _$MessageTextCopyWithImpl<$Res> implements $MessageTextCopyWith<$Res> {
     Object? id = freezed,
     Object? createdAt = freezed,
     Object? text = freezed,
+    Object? fromClient = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -86,6 +92,10 @@ class _$MessageTextCopyWithImpl<$Res> implements $MessageTextCopyWith<$Res> {
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
+      fromClient: fromClient == freezed
+          ? _value.fromClient
+          : fromClient // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -97,7 +107,7 @@ abstract class _$MessageTextCopyWith<$Res>
           _MessageText value, $Res Function(_MessageText) then) =
       __$MessageTextCopyWithImpl<$Res>;
   @override
-  $Res call({int id, DateTime createdAt, String text});
+  $Res call({int id, DateTime createdAt, String text, bool fromClient});
 }
 
 /// @nodoc
@@ -115,6 +125,7 @@ class __$MessageTextCopyWithImpl<$Res> extends _$MessageTextCopyWithImpl<$Res>
     Object? id = freezed,
     Object? createdAt = freezed,
     Object? text = freezed,
+    Object? fromClient = freezed,
   }) {
     return _then(_MessageText(
       id: id == freezed
@@ -129,6 +140,10 @@ class __$MessageTextCopyWithImpl<$Res> extends _$MessageTextCopyWithImpl<$Res>
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
+      fromClient: fromClient == freezed
+          ? _value.fromClient
+          : fromClient // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -136,9 +151,13 @@ class __$MessageTextCopyWithImpl<$Res> extends _$MessageTextCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 @Implements<MessageBase>()
+@Implements<MessageTextBase>()
 class _$_MessageText implements _MessageText {
   const _$_MessageText(
-      {required this.id, required this.createdAt, required this.text});
+      {required this.id,
+      required this.createdAt,
+      required this.text,
+      required this.fromClient});
 
   factory _$_MessageText.fromJson(Map<String, dynamic> json) =>
       _$$_MessageTextFromJson(json);
@@ -149,10 +168,12 @@ class _$_MessageText implements _MessageText {
   final DateTime createdAt;
   @override
   final String text;
+  @override
+  final bool fromClient;
 
   @override
   String toString() {
-    return 'MessageText(id: $id, createdAt: $createdAt, text: $text)';
+    return 'MessageText(id: $id, createdAt: $createdAt, text: $text, fromClient: $fromClient)';
   }
 
   @override
@@ -162,7 +183,9 @@ class _$_MessageText implements _MessageText {
             other is _MessageText &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.text, text));
+            const DeepCollectionEquality().equals(other.text, text) &&
+            const DeepCollectionEquality()
+                .equals(other.fromClient, fromClient));
   }
 
   @override
@@ -170,7 +193,8 @@ class _$_MessageText implements _MessageText {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(text));
+      const DeepCollectionEquality().hash(text),
+      const DeepCollectionEquality().hash(fromClient));
 
   @JsonKey(ignore: true)
   @override
@@ -183,11 +207,13 @@ class _$_MessageText implements _MessageText {
   }
 }
 
-abstract class _MessageText implements MessageText, MessageBase {
+abstract class _MessageText
+    implements MessageText, MessageBase, MessageTextBase {
   const factory _MessageText(
       {required int id,
       required DateTime createdAt,
-      required String text}) = _$_MessageText;
+      required String text,
+      required bool fromClient}) = _$_MessageText;
 
   factory _MessageText.fromJson(Map<String, dynamic> json) =
       _$_MessageText.fromJson;
@@ -199,70 +225,79 @@ abstract class _MessageText implements MessageText, MessageBase {
   @override
   String get text;
   @override
+  bool get fromClient;
+  @override
   @JsonKey(ignore: true)
   _$MessageTextCopyWith<_MessageText> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
-MessageClientText _$MessageClientTextFromJson(Map<String, dynamic> json) {
-  return _MessageClientText.fromJson(json);
+MessageImage _$MessageImageFromJson(Map<String, dynamic> json) {
+  return _MessageImage.fromJson(json);
 }
 
 /// @nodoc
-class _$MessageClientTextTearOff {
-  const _$MessageClientTextTearOff();
+class _$MessageImageTearOff {
+  const _$MessageImageTearOff();
 
-  _MessageClientText call(
-      {required int id, required DateTime createdAt, required String text}) {
-    return _MessageClientText(
+  _MessageImage call(
+      {required int id,
+      required DateTime createdAt,
+      required MessageFile file,
+      required bool fromClient}) {
+    return _MessageImage(
       id: id,
       createdAt: createdAt,
-      text: text,
+      file: file,
+      fromClient: fromClient,
     );
   }
 
-  MessageClientText fromJson(Map<String, Object?> json) {
-    return MessageClientText.fromJson(json);
+  MessageImage fromJson(Map<String, Object?> json) {
+    return MessageImage.fromJson(json);
   }
 }
 
 /// @nodoc
-const $MessageClientText = _$MessageClientTextTearOff();
+const $MessageImage = _$MessageImageTearOff();
 
 /// @nodoc
-mixin _$MessageClientText {
+mixin _$MessageImage {
   int get id => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
-  String get text => throw _privateConstructorUsedError;
+  MessageFile get file => throw _privateConstructorUsedError;
+  bool get fromClient => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $MessageClientTextCopyWith<MessageClientText> get copyWith =>
+  $MessageImageCopyWith<MessageImage> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $MessageClientTextCopyWith<$Res> {
-  factory $MessageClientTextCopyWith(
-          MessageClientText value, $Res Function(MessageClientText) then) =
-      _$MessageClientTextCopyWithImpl<$Res>;
-  $Res call({int id, DateTime createdAt, String text});
+abstract class $MessageImageCopyWith<$Res> {
+  factory $MessageImageCopyWith(
+          MessageImage value, $Res Function(MessageImage) then) =
+      _$MessageImageCopyWithImpl<$Res>;
+  $Res call({int id, DateTime createdAt, MessageFile file, bool fromClient});
+
+  $MessageFileCopyWith<$Res> get file;
 }
 
 /// @nodoc
-class _$MessageClientTextCopyWithImpl<$Res>
-    implements $MessageClientTextCopyWith<$Res> {
-  _$MessageClientTextCopyWithImpl(this._value, this._then);
+class _$MessageImageCopyWithImpl<$Res> implements $MessageImageCopyWith<$Res> {
+  _$MessageImageCopyWithImpl(this._value, this._then);
 
-  final MessageClientText _value;
+  final MessageImage _value;
   // ignore: unused_field
-  final $Res Function(MessageClientText) _then;
+  final $Res Function(MessageImage) _then;
 
   @override
   $Res call({
     Object? id = freezed,
     Object? createdAt = freezed,
-    Object? text = freezed,
+    Object? file = freezed,
+    Object? fromClient = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -273,42 +308,56 @@ class _$MessageClientTextCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      text: text == freezed
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as String,
+      file: file == freezed
+          ? _value.file
+          : file // ignore: cast_nullable_to_non_nullable
+              as MessageFile,
+      fromClient: fromClient == freezed
+          ? _value.fromClient
+          : fromClient // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
+  }
+
+  @override
+  $MessageFileCopyWith<$Res> get file {
+    return $MessageFileCopyWith<$Res>(_value.file, (value) {
+      return _then(_value.copyWith(file: value));
+    });
   }
 }
 
 /// @nodoc
-abstract class _$MessageClientTextCopyWith<$Res>
-    implements $MessageClientTextCopyWith<$Res> {
-  factory _$MessageClientTextCopyWith(
-          _MessageClientText value, $Res Function(_MessageClientText) then) =
-      __$MessageClientTextCopyWithImpl<$Res>;
+abstract class _$MessageImageCopyWith<$Res>
+    implements $MessageImageCopyWith<$Res> {
+  factory _$MessageImageCopyWith(
+          _MessageImage value, $Res Function(_MessageImage) then) =
+      __$MessageImageCopyWithImpl<$Res>;
   @override
-  $Res call({int id, DateTime createdAt, String text});
+  $Res call({int id, DateTime createdAt, MessageFile file, bool fromClient});
+
+  @override
+  $MessageFileCopyWith<$Res> get file;
 }
 
 /// @nodoc
-class __$MessageClientTextCopyWithImpl<$Res>
-    extends _$MessageClientTextCopyWithImpl<$Res>
-    implements _$MessageClientTextCopyWith<$Res> {
-  __$MessageClientTextCopyWithImpl(
-      _MessageClientText _value, $Res Function(_MessageClientText) _then)
-      : super(_value, (v) => _then(v as _MessageClientText));
+class __$MessageImageCopyWithImpl<$Res> extends _$MessageImageCopyWithImpl<$Res>
+    implements _$MessageImageCopyWith<$Res> {
+  __$MessageImageCopyWithImpl(
+      _MessageImage _value, $Res Function(_MessageImage) _then)
+      : super(_value, (v) => _then(v as _MessageImage));
 
   @override
-  _MessageClientText get _value => super._value as _MessageClientText;
+  _MessageImage get _value => super._value as _MessageImage;
 
   @override
   $Res call({
     Object? id = freezed,
     Object? createdAt = freezed,
-    Object? text = freezed,
+    Object? file = freezed,
+    Object? fromClient = freezed,
   }) {
-    return _then(_MessageClientText(
+    return _then(_MessageImage(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -317,10 +366,14 @@ class __$MessageClientTextCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      text: text == freezed
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as String,
+      file: file == freezed
+          ? _value.file
+          : file // ignore: cast_nullable_to_non_nullable
+              as MessageFile,
+      fromClient: fromClient == freezed
+          ? _value.fromClient
+          : fromClient // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -328,33 +381,41 @@ class __$MessageClientTextCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 @Implements<MessageBase>()
-class _$_MessageClientText implements _MessageClientText {
-  const _$_MessageClientText(
-      {required this.id, required this.createdAt, required this.text});
+@Implements<MessageFileBase>()
+class _$_MessageImage implements _MessageImage {
+  const _$_MessageImage(
+      {required this.id,
+      required this.createdAt,
+      required this.file,
+      required this.fromClient});
 
-  factory _$_MessageClientText.fromJson(Map<String, dynamic> json) =>
-      _$$_MessageClientTextFromJson(json);
+  factory _$_MessageImage.fromJson(Map<String, dynamic> json) =>
+      _$$_MessageImageFromJson(json);
 
   @override
   final int id;
   @override
   final DateTime createdAt;
   @override
-  final String text;
+  final MessageFile file;
+  @override
+  final bool fromClient;
 
   @override
   String toString() {
-    return 'MessageClientText(id: $id, createdAt: $createdAt, text: $text)';
+    return 'MessageImage(id: $id, createdAt: $createdAt, file: $file, fromClient: $fromClient)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _MessageClientText &&
+            other is _MessageImage &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.text, text));
+            const DeepCollectionEquality().equals(other.file, file) &&
+            const DeepCollectionEquality()
+                .equals(other.fromClient, fromClient));
   }
 
   @override
@@ -362,36 +423,273 @@ class _$_MessageClientText implements _MessageClientText {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(text));
+      const DeepCollectionEquality().hash(file),
+      const DeepCollectionEquality().hash(fromClient));
 
   @JsonKey(ignore: true)
   @override
-  _$MessageClientTextCopyWith<_MessageClientText> get copyWith =>
-      __$MessageClientTextCopyWithImpl<_MessageClientText>(this, _$identity);
+  _$MessageImageCopyWith<_MessageImage> get copyWith =>
+      __$MessageImageCopyWithImpl<_MessageImage>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MessageClientTextToJson(this);
+    return _$$_MessageImageToJson(this);
   }
 }
 
-abstract class _MessageClientText implements MessageClientText, MessageBase {
-  const factory _MessageClientText(
+abstract class _MessageImage
+    implements MessageImage, MessageBase, MessageFileBase {
+  const factory _MessageImage(
       {required int id,
       required DateTime createdAt,
-      required String text}) = _$_MessageClientText;
+      required MessageFile file,
+      required bool fromClient}) = _$_MessageImage;
 
-  factory _MessageClientText.fromJson(Map<String, dynamic> json) =
-      _$_MessageClientText.fromJson;
+  factory _MessageImage.fromJson(Map<String, dynamic> json) =
+      _$_MessageImage.fromJson;
 
   @override
   int get id;
   @override
   DateTime get createdAt;
   @override
-  String get text;
+  MessageFile get file;
+  @override
+  bool get fromClient;
   @override
   @JsonKey(ignore: true)
-  _$MessageClientTextCopyWith<_MessageClientText> get copyWith =>
+  _$MessageImageCopyWith<_MessageImage> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+MessageUnknownFile _$MessageUnknownFileFromJson(Map<String, dynamic> json) {
+  return _MessageUnknownFile.fromJson(json);
+}
+
+/// @nodoc
+class _$MessageUnknownFileTearOff {
+  const _$MessageUnknownFileTearOff();
+
+  _MessageUnknownFile call(
+      {required int id,
+      required DateTime createdAt,
+      required MessageFile file,
+      required bool fromClient}) {
+    return _MessageUnknownFile(
+      id: id,
+      createdAt: createdAt,
+      file: file,
+      fromClient: fromClient,
+    );
+  }
+
+  MessageUnknownFile fromJson(Map<String, Object?> json) {
+    return MessageUnknownFile.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $MessageUnknownFile = _$MessageUnknownFileTearOff();
+
+/// @nodoc
+mixin _$MessageUnknownFile {
+  int get id => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  MessageFile get file => throw _privateConstructorUsedError;
+  bool get fromClient => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $MessageUnknownFileCopyWith<MessageUnknownFile> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MessageUnknownFileCopyWith<$Res> {
+  factory $MessageUnknownFileCopyWith(
+          MessageUnknownFile value, $Res Function(MessageUnknownFile) then) =
+      _$MessageUnknownFileCopyWithImpl<$Res>;
+  $Res call({int id, DateTime createdAt, MessageFile file, bool fromClient});
+
+  $MessageFileCopyWith<$Res> get file;
+}
+
+/// @nodoc
+class _$MessageUnknownFileCopyWithImpl<$Res>
+    implements $MessageUnknownFileCopyWith<$Res> {
+  _$MessageUnknownFileCopyWithImpl(this._value, this._then);
+
+  final MessageUnknownFile _value;
+  // ignore: unused_field
+  final $Res Function(MessageUnknownFile) _then;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? createdAt = freezed,
+    Object? file = freezed,
+    Object? fromClient = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      createdAt: createdAt == freezed
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      file: file == freezed
+          ? _value.file
+          : file // ignore: cast_nullable_to_non_nullable
+              as MessageFile,
+      fromClient: fromClient == freezed
+          ? _value.fromClient
+          : fromClient // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+
+  @override
+  $MessageFileCopyWith<$Res> get file {
+    return $MessageFileCopyWith<$Res>(_value.file, (value) {
+      return _then(_value.copyWith(file: value));
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$MessageUnknownFileCopyWith<$Res>
+    implements $MessageUnknownFileCopyWith<$Res> {
+  factory _$MessageUnknownFileCopyWith(
+          _MessageUnknownFile value, $Res Function(_MessageUnknownFile) then) =
+      __$MessageUnknownFileCopyWithImpl<$Res>;
+  @override
+  $Res call({int id, DateTime createdAt, MessageFile file, bool fromClient});
+
+  @override
+  $MessageFileCopyWith<$Res> get file;
+}
+
+/// @nodoc
+class __$MessageUnknownFileCopyWithImpl<$Res>
+    extends _$MessageUnknownFileCopyWithImpl<$Res>
+    implements _$MessageUnknownFileCopyWith<$Res> {
+  __$MessageUnknownFileCopyWithImpl(
+      _MessageUnknownFile _value, $Res Function(_MessageUnknownFile) _then)
+      : super(_value, (v) => _then(v as _MessageUnknownFile));
+
+  @override
+  _MessageUnknownFile get _value => super._value as _MessageUnknownFile;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? createdAt = freezed,
+    Object? file = freezed,
+    Object? fromClient = freezed,
+  }) {
+    return _then(_MessageUnknownFile(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      createdAt: createdAt == freezed
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      file: file == freezed
+          ? _value.file
+          : file // ignore: cast_nullable_to_non_nullable
+              as MessageFile,
+      fromClient: fromClient == freezed
+          ? _value.fromClient
+          : fromClient // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+@Implements<MessageBase>()
+@Implements<MessageFileBase>()
+class _$_MessageUnknownFile implements _MessageUnknownFile {
+  const _$_MessageUnknownFile(
+      {required this.id,
+      required this.createdAt,
+      required this.file,
+      required this.fromClient});
+
+  factory _$_MessageUnknownFile.fromJson(Map<String, dynamic> json) =>
+      _$$_MessageUnknownFileFromJson(json);
+
+  @override
+  final int id;
+  @override
+  final DateTime createdAt;
+  @override
+  final MessageFile file;
+  @override
+  final bool fromClient;
+
+  @override
+  String toString() {
+    return 'MessageUnknownFile(id: $id, createdAt: $createdAt, file: $file, fromClient: $fromClient)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _MessageUnknownFile &&
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
+            const DeepCollectionEquality().equals(other.file, file) &&
+            const DeepCollectionEquality()
+                .equals(other.fromClient, fromClient));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(createdAt),
+      const DeepCollectionEquality().hash(file),
+      const DeepCollectionEquality().hash(fromClient));
+
+  @JsonKey(ignore: true)
+  @override
+  _$MessageUnknownFileCopyWith<_MessageUnknownFile> get copyWith =>
+      __$MessageUnknownFileCopyWithImpl<_MessageUnknownFile>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_MessageUnknownFileToJson(this);
+  }
+}
+
+abstract class _MessageUnknownFile
+    implements MessageUnknownFile, MessageBase, MessageFileBase {
+  const factory _MessageUnknownFile(
+      {required int id,
+      required DateTime createdAt,
+      required MessageFile file,
+      required bool fromClient}) = _$_MessageUnknownFile;
+
+  factory _MessageUnknownFile.fromJson(Map<String, dynamic> json) =
+      _$_MessageUnknownFile.fromJson;
+
+  @override
+  int get id;
+  @override
+  DateTime get createdAt;
+  @override
+  MessageFile get file;
+  @override
+  bool get fromClient;
+  @override
+  @JsonKey(ignore: true)
+  _$MessageUnknownFileCopyWith<_MessageUnknownFile> get copyWith =>
       throw _privateConstructorUsedError;
 }

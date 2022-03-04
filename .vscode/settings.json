@@ -1,5 +1,12 @@
 {
+    "files.exclude": {
+        "**/*.g.dart": true,
+        "**/*.freezed.dart": true
+    },
     "cSpell.words": [
+        "INITED",
+        "prefs",
+        "sioc",
         "usedesk"
     ]
 }
