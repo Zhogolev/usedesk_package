@@ -20,6 +20,7 @@ dependencies:
   intl: ^0.17.0
   open_file: ^3.2.1
   uuid: ^3.0.5
+  url_launcher: ^6.0.20
 
 dev_dependencies:
   flutter_test:

@@ -109,6 +109,11 @@ class _SpecifyProjectPageState extends State<SpecifyProjectPage> {
     );
   }
 
+  void _onClearToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return SharedPreferencesUsedeskChatStorage(prefs).clearToken();
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -186,6 +191,18 @@ class _SpecifyProjectPageState extends State<SpecifyProjectPage> {
               child: ElevatedButton(
                 onPressed: _onOpenChatPressed,
                 child: const Text('Open chat'),
+              ),
+            ),
+            const SizedBox(height: 40),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: _onClearToken,
+                child: const Text('Clear token'),
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.grey),
+                ),
               ),
             ),
           ],

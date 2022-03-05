@@ -21,11 +21,43 @@ class Message<C> with _$Message<C> {
       toJson: Message._chatToJson,
     )
         C? chat,
+    // ignore: invalid_annotation_target
+    @JsonKey(ignore: true)
+        List<MessageButton>? buttons,
     MessageFile? file,
   }) = _Message<C>;
 
-  factory Message.fromJson(Map<String, dynamic> json) =>
-      _$MessageFromJson(json);
+  factory Message.fromJson(Map<String, dynamic> json) => () {
+        final matches = RegExp(r'\{{button\:([^\}}]*)\}}')
+            .allMatches(json.containsKey('text') ? json['text'] : '');
+
+        String? newText = json.containsKey('text') ? json['text'] : null;
+
+        final buttons = matches.map((match) {
+          final sections = match.group(1)!.split(';');
+
+          final button = MessageButton(
+            text: sections[0],
+            url: sections[1],
+            type: sections[2],
+            isShow: sections[3] == 'show',
+          );
+
+          if (button.isShow) {
+            newText =
+                newText?.replaceFirst(match.group(0)!, '"${button.text}"');
+          } else {
+            newText = newText?.replaceFirst(match.group(0)!, '');
+          }
+
+          return button;
+        }).toList();
+
+        return _$MessageFromJson<C>(json).copyWith(
+          buttons: buttons,
+          text: newText,
+        );
+      }();
 
   static _chatFromJson(dynamic data) {
     if (data == null) {
@@ -81,6 +113,19 @@ class MessagePayload with _$MessagePayload {
     }
     return int.tryParse(data);
   }
+}
+
+@freezed
+class MessageButton with _$MessageButton {
+  const factory MessageButton({
+    required String text,
+    required bool isShow,
+    String? url,
+    String? type,
+  }) = _MessageButton;
+
+  factory MessageButton.fromJson(Map<String, dynamic> json) =>
+      _$MessageButtonFromJson(json);
 }
 
 @JsonEnum(fieldRename: FieldRename.snake)

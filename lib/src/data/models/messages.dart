@@ -3,6 +3,8 @@ import 'package:mime/mime.dart';
 
 import 'socket/message.dart';
 
+export 'socket/message.dart' show MessageButton;
+
 part 'messages.g.dart';
 part 'messages.freezed.dart';
 
@@ -20,6 +22,7 @@ abstract class MessageBase {
         createdAt: message.createdAt,
         text: message.text!,
         fromClient: fromClient,
+        buttons: message.buttons ?? [],
       );
     } else if (message.file != null) {
       final mime = lookupMimeType(message.file!.name) ?? '';
@@ -65,6 +68,7 @@ class MessageText with _$MessageText, MessageBase, MessageTextBase {
     required DateTime createdAt,
     required String text,
     required bool fromClient,
+    required List<MessageButton> buttons,
   }) = _MessageText;
 
   factory MessageText.fromJson(Map<String, dynamic> json) =>

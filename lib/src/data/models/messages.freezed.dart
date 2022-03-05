@@ -26,12 +26,14 @@ class _$MessageTextTearOff {
       {required int id,
       required DateTime createdAt,
       required String text,
-      required bool fromClient}) {
+      required bool fromClient,
+      required List<MessageButton> buttons}) {
     return _MessageText(
       id: id,
       createdAt: createdAt,
       text: text,
       fromClient: fromClient,
+      buttons: buttons,
     );
   }
 
@@ -49,6 +51,7 @@ mixin _$MessageText {
   DateTime get createdAt => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
   bool get fromClient => throw _privateConstructorUsedError;
+  List<MessageButton> get buttons => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -61,7 +64,12 @@ abstract class $MessageTextCopyWith<$Res> {
   factory $MessageTextCopyWith(
           MessageText value, $Res Function(MessageText) then) =
       _$MessageTextCopyWithImpl<$Res>;
-  $Res call({int id, DateTime createdAt, String text, bool fromClient});
+  $Res call(
+      {int id,
+      DateTime createdAt,
+      String text,
+      bool fromClient,
+      List<MessageButton> buttons});
 }
 
 /// @nodoc
@@ -78,6 +86,7 @@ class _$MessageTextCopyWithImpl<$Res> implements $MessageTextCopyWith<$Res> {
     Object? createdAt = freezed,
     Object? text = freezed,
     Object? fromClient = freezed,
+    Object? buttons = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -96,6 +105,10 @@ class _$MessageTextCopyWithImpl<$Res> implements $MessageTextCopyWith<$Res> {
           ? _value.fromClient
           : fromClient // ignore: cast_nullable_to_non_nullable
               as bool,
+      buttons: buttons == freezed
+          ? _value.buttons
+          : buttons // ignore: cast_nullable_to_non_nullable
+              as List<MessageButton>,
     ));
   }
 }
@@ -107,7 +120,12 @@ abstract class _$MessageTextCopyWith<$Res>
           _MessageText value, $Res Function(_MessageText) then) =
       __$MessageTextCopyWithImpl<$Res>;
   @override
-  $Res call({int id, DateTime createdAt, String text, bool fromClient});
+  $Res call(
+      {int id,
+      DateTime createdAt,
+      String text,
+      bool fromClient,
+      List<MessageButton> buttons});
 }
 
 /// @nodoc
@@ -126,6 +144,7 @@ class __$MessageTextCopyWithImpl<$Res> extends _$MessageTextCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? text = freezed,
     Object? fromClient = freezed,
+    Object? buttons = freezed,
   }) {
     return _then(_MessageText(
       id: id == freezed
@@ -144,6 +163,10 @@ class __$MessageTextCopyWithImpl<$Res> extends _$MessageTextCopyWithImpl<$Res>
           ? _value.fromClient
           : fromClient // ignore: cast_nullable_to_non_nullable
               as bool,
+      buttons: buttons == freezed
+          ? _value.buttons
+          : buttons // ignore: cast_nullable_to_non_nullable
+              as List<MessageButton>,
     ));
   }
 }
@@ -157,7 +180,8 @@ class _$_MessageText implements _MessageText {
       {required this.id,
       required this.createdAt,
       required this.text,
-      required this.fromClient});
+      required this.fromClient,
+      required this.buttons});
 
   factory _$_MessageText.fromJson(Map<String, dynamic> json) =>
       _$$_MessageTextFromJson(json);
@@ -170,10 +194,12 @@ class _$_MessageText implements _MessageText {
   final String text;
   @override
   final bool fromClient;
+  @override
+  final List<MessageButton> buttons;
 
   @override
   String toString() {
-    return 'MessageText(id: $id, createdAt: $createdAt, text: $text, fromClient: $fromClient)';
+    return 'MessageText(id: $id, createdAt: $createdAt, text: $text, fromClient: $fromClient, buttons: $buttons)';
   }
 
   @override
@@ -185,7 +211,8 @@ class _$_MessageText implements _MessageText {
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.text, text) &&
             const DeepCollectionEquality()
-                .equals(other.fromClient, fromClient));
+                .equals(other.fromClient, fromClient) &&
+            const DeepCollectionEquality().equals(other.buttons, buttons));
   }
 
   @override
@@ -194,7 +221,8 @@ class _$_MessageText implements _MessageText {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(text),
-      const DeepCollectionEquality().hash(fromClient));
+      const DeepCollectionEquality().hash(fromClient),
+      const DeepCollectionEquality().hash(buttons));
 
   @JsonKey(ignore: true)
   @override
@@ -213,7 +241,8 @@ abstract class _MessageText
       {required int id,
       required DateTime createdAt,
       required String text,
-      required bool fromClient}) = _$_MessageText;
+      required bool fromClient,
+      required List<MessageButton> buttons}) = _$_MessageText;
 
   factory _MessageText.fromJson(Map<String, dynamic> json) =
       _$_MessageText.fromJson;
@@ -226,6 +255,8 @@ abstract class _MessageText
   String get text;
   @override
   bool get fromClient;
+  @override
+  List<MessageButton> get buttons;
   @override
   @JsonKey(ignore: true)
   _$MessageTextCopyWith<_MessageText> get copyWith =>

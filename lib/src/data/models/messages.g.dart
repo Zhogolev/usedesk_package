@@ -12,6 +12,9 @@ _$_MessageText _$$_MessageTextFromJson(Map<String, dynamic> json) =>
       createdAt: DateTime.parse(json['createdAt'] as String),
       text: json['text'] as String,
       fromClient: json['fromClient'] as bool,
+      buttons: (json['buttons'] as List<dynamic>)
+          .map((e) => MessageButton.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_MessageTextToJson(_$_MessageText instance) =>
@@ -20,6 +23,7 @@ Map<String, dynamic> _$$_MessageTextToJson(_$_MessageText instance) =>
       'createdAt': instance.createdAt.toIso8601String(),
       'text': instance.text,
       'fromClient': instance.fromClient,
+      'buttons': instance.buttons,
     };
 
 _$_MessageImage _$$_MessageImageFromJson(Map<String, dynamic> json) =>

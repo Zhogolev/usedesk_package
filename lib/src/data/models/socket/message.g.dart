@@ -72,3 +72,19 @@ Map<String, dynamic> _$$_MessagePayloadToJson(_$_MessagePayload instance) =>
       'userRating': instance.userRating,
       'message_id': instance.messageId,
     };
+
+_$_MessageButton _$$_MessageButtonFromJson(Map<String, dynamic> json) =>
+    _$_MessageButton(
+      text: json['text'] as String,
+      isShow: json['isShow'] as bool,
+      url: json['url'] as String?,
+      type: json['type'] as String?,
+    );
+
+Map<String, dynamic> _$$_MessageButtonToJson(_$_MessageButton instance) =>
+    <String, dynamic>{
+      'text': instance.text,
+      'isShow': instance.isShow,
+      'url': instance.url,
+      'type': instance.type,
+    };

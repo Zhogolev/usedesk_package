@@ -5,8 +5,10 @@ import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mime/mime.dart';
 import 'package:open_file/open_file.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:usedesk/usedesk.dart';
 import 'package:usedesk_example/pages/specify_project_page.dart';
+import 'package:usedesk_example/widgets/text_message_with_buttons.dart' as ui;
 import 'package:uuid/uuid.dart';
 
 class ChatPage extends StatefulWidget {
@@ -207,10 +209,11 @@ class _ChatPageState extends State<ChatPage> {
                           // firstName: message.,
                         );
                         if (message is MessageText) {
-                          return types.TextMessage(
+                          return TextMessageWithButtons(
                             id: message.id.toString(),
                             author: author,
                             text: message.text,
+                            buttons: message.buttons,
                           );
                         } else if (message is MessageFileBase) {
                           if (message is MessageImage) {
@@ -252,6 +255,31 @@ class _ChatPageState extends State<ChatPage> {
                     onPreviewDataFetched: _handlePreviewDataFetched,
                     onSendPressed: _handleSendPressed,
                     user: _user,
+                    textMessageBuilder: (
+                      textMessage, {
+                      required messageWidth,
+                      required showName,
+                    }) {
+                      final chatMessageWithButtons =
+                          textMessage as TextMessageWithButtons;
+                      return ui.TextMessageWithButtons(
+                        emojiEnlargementBehavior:
+                            EmojiEnlargementBehavior.multi,
+                        hideBackgroundOnEmojiMessages: true,
+                        message: textMessage,
+                        onPreviewDataFetched: _handlePreviewDataFetched,
+                        showName: showName,
+                        usePreviewData: true,
+                        buttons: chatMessageWithButtons.buttons,
+                        onButtonPressed: (text, {url}) async {
+                          if (url?.isNotEmpty ?? false) {
+                            !await launch(url!);
+                          } else {
+                            widget.usedeskChat.sendText(text);
+                          }
+                        },
+                      );
+                    },
                   );
                 },
               ),
@@ -277,4 +305,21 @@ class _ChatPageState extends State<ChatPage> {
           )),
     );
   }
+}
+
+// ignore: must_be_immutable
+class TextMessageWithButtons extends types.TextMessage {
+  /// Creates a text message.
+  TextMessageWithButtons({
+    required types.User author,
+    required String id,
+    required String text,
+    required this.buttons,
+  }) : super(
+          id: id,
+          author: author,
+          text: text,
+        );
+
+  List<MessageButton> buttons;
 }
