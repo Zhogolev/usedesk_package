@@ -5,9 +5,10 @@ import 'package:http_parser/http_parser.dart';
 import 'package:mime/mime.dart';
 import 'package:socket_io_client/socket_io_client.dart' as sioc;
 
+import 'data/models/_converters/message.dart';
 import 'data/models/configuration/chat_api_configuration.dart';
 import 'data/models/configuration/identify_configuration.dart';
-import 'data/models/messages.dart';
+import 'data/models/messages/base.dart';
 import 'data/models/socket/base/base_response.dart';
 import 'data/models/socket/error/error_response.dart';
 import 'data/models/socket/inited/inited_request.dart';
@@ -28,6 +29,7 @@ class UsedeskChatSocket {
     required this.apiConfig,
     required this.companyId,
     required this.channelId,
+    required this.debug,
     required String? token,
   }) : _clientToken = token;
 
@@ -36,6 +38,7 @@ class UsedeskChatSocket {
   final ChatApiConfiguration apiConfig;
   final String companyId;
   final String? channelId;
+  final bool debug;
 
   late sioc.Socket _socket;
   String? _clientToken;
@@ -55,7 +58,7 @@ class UsedeskChatSocket {
     _socket.disconnect();
   }
 
-  void sendText(String text) {
+  void sendText(String text, int? localId) {
     if (text.isEmpty) {
       return;
     }
@@ -64,13 +67,18 @@ class UsedeskChatSocket {
       MessageRequest(
         message: MessageRequestTextMessage(
           text: text,
+          payload: localId != null
+              ? MessageRequestTextMessagePayload(
+                  messageId: localId.toString(),
+                )
+              : null,
         ),
       ),
     );
   }
 
-  Future<bool> sendFile(String filename, Uint8List bytes) {
-    return _uploadFile(filename, bytes);
+  Future<bool> sendFile(String filename, Uint8List bytes, int? localId) {
+    return _uploadFile(filename, bytes, localId);
   }
 
   void init() {
@@ -93,7 +101,9 @@ class UsedeskChatSocket {
   }
 
   void _onConnect() {
-    print('[UsedeskChat] socket connected');
+    if (debug) {
+      print('[UsedeskChat] socket connected');
+    }
 
     final combinedCompanyId =
         (channelId?.isNotEmpty ?? false) ? '$companyId _$channelId' : companyId;
@@ -109,7 +119,11 @@ class UsedeskChatSocket {
   }
 
   void _onDisconnect() {
-    print('[UsedeskChat] socket disconnect');
+    if (debug) {
+      print('[UsedeskChat] socket disconnect');
+    }
+    repository.markFailedMessages();
+    repository.saveFailedMessages();
   }
 
   void _onConnectError(dynamic error) {
@@ -151,7 +165,7 @@ class UsedeskChatSocket {
             // Temporary ignore online status message
             return !(message.file == null && (message.text?.isEmpty ?? true));
           })
-          .map(MessageBase.convert)
+          .map(MessageConverter.convertToTypedMessage)
           .toList(),
     );
 
@@ -162,11 +176,14 @@ class UsedeskChatSocket {
           payload: SetClientRequestPayload(
             token: _clientToken,
             email: _identify!.email,
-            name: _identify!.name,
+            username: _identify!.name,
             phone: _identify!.phoneNumber,
+            additionalId: _identify!.additionalId,
           ),
         ).toJson(),
       );
+    } else {
+      _reSendMessages();
     }
   }
 
@@ -185,7 +202,7 @@ class UsedeskChatSocket {
     }
 
     repository.addMessage(
-      MessageBase.convert(response.message),
+      MessageConverter.convertToTypedMessage(response.message),
     );
   }
 
@@ -195,6 +212,19 @@ class UsedeskChatSocket {
     if (response.state.client.token != null) {
       _setToken(response.state.client.token!);
     }
+
+    _reSendMessages();
+  }
+
+  Future<void> _reSendMessages() async {
+    List<MessageTextClient> messages = await repository.cachedMessages();
+    if (messages.isEmpty) {
+      messages = repository.failedMessages();
+    }
+    for (final message in messages) {
+      repository.addToQueueForDeletion(message);
+      sendText(message.text, message.localId);
+    }
   }
 
   Future<void> _setToken(String token) {
@@ -202,7 +232,11 @@ class UsedeskChatSocket {
     return storage.setToken(token);
   }
 
-  Future<bool> _uploadFile(String filename, Uint8List bytes) async {
+  Future<bool> _uploadFile(
+    String filename,
+    Uint8List bytes,
+    int? localId,
+  ) async {
     final mimeTypeData = lookupMimeType(filename)?.split('/') ?? [];
 
     final postUri = Uri.parse(apiConfig.urlToSendFile);
@@ -220,8 +254,16 @@ class UsedeskChatSocket {
         ),
       );
 
+    if (localId != null) {
+      request.fields['message_id'] = localId.toString();
+    }
+
     final response = await request.send();
 
     return (response.statusCode >= 200 && response.statusCode < 400);
+  }
+
+  void dispose() {
+    _socket.dispose();
   }
 }

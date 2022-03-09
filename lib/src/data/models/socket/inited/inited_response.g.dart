@@ -51,10 +51,10 @@ Map<String, dynamic> _$$_SetupToJson(_$_Setup instance) => <String, dynamic>{
 _$_SetupTicket _$$_SetupTicketFromJson(Map<String, dynamic> json) =>
     _$_SetupTicket(
       id: json['id'] as int,
-      assigneeId: json['assignee_id'],
+      assigneeId: json['assignee_id'] as int?,
       clientId: json['client_id'] as int,
       companyId: json['company_id'] as int,
-      email: json['email'] as String,
+      email: json['email'] as String?,
       subject: json['subject'] as String,
       channelId: json['channel_id'] as int,
       publishedAt: DateTime.parse(json['published_at'] as String),

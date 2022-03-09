@@ -21,9 +21,10 @@ class SetClientRequestPayload with _$SetClientRequestPayload {
   const factory SetClientRequestPayload({
     String? token,
     String? email,
-    String? name,
+    String? username,
     String? note,
     int? phone,
+    String? additionalId,
   }) = _SetClientRequestPayload;
 
   factory SetClientRequestPayload.fromJson(Map<String, dynamic> json) =>

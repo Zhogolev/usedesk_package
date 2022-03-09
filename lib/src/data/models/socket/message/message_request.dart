@@ -19,7 +19,7 @@ class MessageRequestTextMessage with _$MessageRequestTextMessage {
   const factory MessageRequestTextMessage({
     required String text,
     @Default(MessageRequestTextMessagePayload())
-        MessageRequestTextMessagePayload payload,
+        MessageRequestTextMessagePayload? payload,
   }) = _MessageRequestTextMessage;
 
   factory MessageRequestTextMessage.fromJson(Map<String, dynamic> json) =>

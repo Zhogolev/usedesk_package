@@ -1,6 +1,6 @@
 # usedesk
 
-Pure dart SDK implementation of usedesk.ru
+Pure dart SDK implementation of usedesk.com service
 Now added only `UsedeskChat` sdk 
 
 [![pub package](https://img.shields.io/pub/v/usedesk.svg)](https://pub.dev/packages/usedesk)
@@ -59,6 +59,7 @@ usedeskChat.identify(IdentifyConfiguration(
     name: 'Serge Shkurko',
     email: 'mySuper@email.com',
     phoneNumber: 88005553535,
+    additionalId: 'uuid_in_my_system',
 ));
 ```
 4. Subscribe on messages stream
@@ -91,4 +92,15 @@ usedeskChat.sendText('My cool message');
 
 // File
 usedeskChat.sendFile('My_cool_image.jpg', fileBytes);
+```
+
+## Contributing 
+
+Rebuild code generation tools
+```bash
+# One time run 
+dart pub run build_runner build --delete-conflicting-outputs
+
+# Watching of file changes
+dart pub run build_runner watch --delete-conflicting-outputs
 ```

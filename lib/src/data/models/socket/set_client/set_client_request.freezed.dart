@@ -210,13 +210,19 @@ class _$SetClientRequestPayloadTearOff {
   const _$SetClientRequestPayloadTearOff();
 
   _SetClientRequestPayload call(
-      {String? token, String? email, String? name, String? note, int? phone}) {
+      {String? token,
+      String? email,
+      String? username,
+      String? note,
+      int? phone,
+      String? additionalId}) {
     return _SetClientRequestPayload(
       token: token,
       email: email,
-      name: name,
+      username: username,
       note: note,
       phone: phone,
+      additionalId: additionalId,
     );
   }
 
@@ -232,9 +238,10 @@ const $SetClientRequestPayload = _$SetClientRequestPayloadTearOff();
 mixin _$SetClientRequestPayload {
   String? get token => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
+  String? get username => throw _privateConstructorUsedError;
   String? get note => throw _privateConstructorUsedError;
   int? get phone => throw _privateConstructorUsedError;
+  String? get additionalId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -248,7 +255,12 @@ abstract class $SetClientRequestPayloadCopyWith<$Res> {
           $Res Function(SetClientRequestPayload) then) =
       _$SetClientRequestPayloadCopyWithImpl<$Res>;
   $Res call(
-      {String? token, String? email, String? name, String? note, int? phone});
+      {String? token,
+      String? email,
+      String? username,
+      String? note,
+      int? phone,
+      String? additionalId});
 }
 
 /// @nodoc
@@ -264,9 +276,10 @@ class _$SetClientRequestPayloadCopyWithImpl<$Res>
   $Res call({
     Object? token = freezed,
     Object? email = freezed,
-    Object? name = freezed,
+    Object? username = freezed,
     Object? note = freezed,
     Object? phone = freezed,
+    Object? additionalId = freezed,
   }) {
     return _then(_value.copyWith(
       token: token == freezed
@@ -277,9 +290,9 @@ class _$SetClientRequestPayloadCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      username: username == freezed
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
               as String?,
       note: note == freezed
           ? _value.note
@@ -289,6 +302,10 @@ class _$SetClientRequestPayloadCopyWithImpl<$Res>
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as int?,
+      additionalId: additionalId == freezed
+          ? _value.additionalId
+          : additionalId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -301,7 +318,12 @@ abstract class _$SetClientRequestPayloadCopyWith<$Res>
       __$SetClientRequestPayloadCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? token, String? email, String? name, String? note, int? phone});
+      {String? token,
+      String? email,
+      String? username,
+      String? note,
+      int? phone,
+      String? additionalId});
 }
 
 /// @nodoc
@@ -320,9 +342,10 @@ class __$SetClientRequestPayloadCopyWithImpl<$Res>
   $Res call({
     Object? token = freezed,
     Object? email = freezed,
-    Object? name = freezed,
+    Object? username = freezed,
     Object? note = freezed,
     Object? phone = freezed,
+    Object? additionalId = freezed,
   }) {
     return _then(_SetClientRequestPayload(
       token: token == freezed
@@ -333,9 +356,9 @@ class __$SetClientRequestPayloadCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      username: username == freezed
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
               as String?,
       note: note == freezed
           ? _value.note
@@ -345,6 +368,10 @@ class __$SetClientRequestPayloadCopyWithImpl<$Res>
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as int?,
+      additionalId: additionalId == freezed
+          ? _value.additionalId
+          : additionalId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -354,7 +381,12 @@ class __$SetClientRequestPayloadCopyWithImpl<$Res>
 @JsonSerializable(fieldRename: FieldRename.snake)
 class _$_SetClientRequestPayload implements _SetClientRequestPayload {
   const _$_SetClientRequestPayload(
-      {this.token, this.email, this.name, this.note, this.phone});
+      {this.token,
+      this.email,
+      this.username,
+      this.note,
+      this.phone,
+      this.additionalId});
 
   factory _$_SetClientRequestPayload.fromJson(Map<String, dynamic> json) =>
       _$$_SetClientRequestPayloadFromJson(json);
@@ -364,15 +396,17 @@ class _$_SetClientRequestPayload implements _SetClientRequestPayload {
   @override
   final String? email;
   @override
-  final String? name;
+  final String? username;
   @override
   final String? note;
   @override
   final int? phone;
+  @override
+  final String? additionalId;
 
   @override
   String toString() {
-    return 'SetClientRequestPayload(token: $token, email: $email, name: $name, note: $note, phone: $phone)';
+    return 'SetClientRequestPayload(token: $token, email: $email, username: $username, note: $note, phone: $phone, additionalId: $additionalId)';
   }
 
   @override
@@ -382,9 +416,11 @@ class _$_SetClientRequestPayload implements _SetClientRequestPayload {
             other is _SetClientRequestPayload &&
             const DeepCollectionEquality().equals(other.token, token) &&
             const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.username, username) &&
             const DeepCollectionEquality().equals(other.note, note) &&
-            const DeepCollectionEquality().equals(other.phone, phone));
+            const DeepCollectionEquality().equals(other.phone, phone) &&
+            const DeepCollectionEquality()
+                .equals(other.additionalId, additionalId));
   }
 
   @override
@@ -392,9 +428,10 @@ class _$_SetClientRequestPayload implements _SetClientRequestPayload {
       runtimeType,
       const DeepCollectionEquality().hash(token),
       const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(username),
       const DeepCollectionEquality().hash(note),
-      const DeepCollectionEquality().hash(phone));
+      const DeepCollectionEquality().hash(phone),
+      const DeepCollectionEquality().hash(additionalId));
 
   @JsonKey(ignore: true)
   @override
@@ -412,9 +449,10 @@ abstract class _SetClientRequestPayload implements SetClientRequestPayload {
   const factory _SetClientRequestPayload(
       {String? token,
       String? email,
-      String? name,
+      String? username,
       String? note,
-      int? phone}) = _$_SetClientRequestPayload;
+      int? phone,
+      String? additionalId}) = _$_SetClientRequestPayload;
 
   factory _SetClientRequestPayload.fromJson(Map<String, dynamic> json) =
       _$_SetClientRequestPayload.fromJson;
@@ -424,11 +462,13 @@ abstract class _SetClientRequestPayload implements SetClientRequestPayload {
   @override
   String? get email;
   @override
-  String? get name;
+  String? get username;
   @override
   String? get note;
   @override
   int? get phone;
+  @override
+  String? get additionalId;
   @override
   @JsonKey(ignore: true)
   _$SetClientRequestPayloadCopyWith<_SetClientRequestPayload> get copyWith =>

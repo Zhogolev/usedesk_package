@@ -39,10 +39,10 @@ class SetupTicket with _$SetupTicket {
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory SetupTicket({
     required int id,
-    required dynamic assigneeId,
+    required int? assigneeId,
     required int clientId,
     required int companyId,
-    required String email,
+    required String? email,
     required String subject,
     required int channelId,
     required DateTime publishedAt,

@@ -548,10 +548,10 @@ class _$SetupTicketTearOff {
 
   _SetupTicket call(
       {required int id,
-      required dynamic assigneeId,
+      required int? assigneeId,
       required int clientId,
       required int companyId,
-      required String email,
+      required String? email,
       required String subject,
       required int channelId,
       required DateTime publishedAt,
@@ -588,10 +588,10 @@ const $SetupTicket = _$SetupTicketTearOff();
 /// @nodoc
 mixin _$SetupTicket {
   int get id => throw _privateConstructorUsedError;
-  dynamic get assigneeId => throw _privateConstructorUsedError;
+  int? get assigneeId => throw _privateConstructorUsedError;
   int get clientId => throw _privateConstructorUsedError;
   int get companyId => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
   String get subject => throw _privateConstructorUsedError;
   int get channelId => throw _privateConstructorUsedError;
   DateTime get publishedAt => throw _privateConstructorUsedError;
@@ -614,10 +614,10 @@ abstract class $SetupTicketCopyWith<$Res> {
       _$SetupTicketCopyWithImpl<$Res>;
   $Res call(
       {int id,
-      dynamic assigneeId,
+      int? assigneeId,
       int clientId,
       int companyId,
-      String email,
+      String? email,
       String subject,
       int channelId,
       DateTime publishedAt,
@@ -660,7 +660,7 @@ class _$SetupTicketCopyWithImpl<$Res> implements $SetupTicketCopyWith<$Res> {
       assigneeId: assigneeId == freezed
           ? _value.assigneeId
           : assigneeId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       clientId: clientId == freezed
           ? _value.clientId
           : clientId // ignore: cast_nullable_to_non_nullable
@@ -672,7 +672,7 @@ class _$SetupTicketCopyWithImpl<$Res> implements $SetupTicketCopyWith<$Res> {
       email: email == freezed
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       subject: subject == freezed
           ? _value.subject
           : subject // ignore: cast_nullable_to_non_nullable
@@ -718,10 +718,10 @@ abstract class _$SetupTicketCopyWith<$Res>
   @override
   $Res call(
       {int id,
-      dynamic assigneeId,
+      int? assigneeId,
       int clientId,
       int companyId,
-      String email,
+      String? email,
       String subject,
       int channelId,
       DateTime publishedAt,
@@ -766,7 +766,7 @@ class __$SetupTicketCopyWithImpl<$Res> extends _$SetupTicketCopyWithImpl<$Res>
       assigneeId: assigneeId == freezed
           ? _value.assigneeId
           : assigneeId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       clientId: clientId == freezed
           ? _value.clientId
           : clientId // ignore: cast_nullable_to_non_nullable
@@ -778,7 +778,7 @@ class __$SetupTicketCopyWithImpl<$Res> extends _$SetupTicketCopyWithImpl<$Res>
       email: email == freezed
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       subject: subject == freezed
           ? _value.subject
           : subject // ignore: cast_nullable_to_non_nullable
@@ -840,13 +840,13 @@ class _$_SetupTicket implements _SetupTicket {
   @override
   final int id;
   @override
-  final dynamic assigneeId;
+  final int? assigneeId;
   @override
   final int clientId;
   @override
   final int companyId;
   @override
-  final String email;
+  final String? email;
   @override
   final String subject;
   @override
@@ -923,10 +923,10 @@ class _$_SetupTicket implements _SetupTicket {
 abstract class _SetupTicket implements SetupTicket {
   const factory _SetupTicket(
       {required int id,
-      required dynamic assigneeId,
+      required int? assigneeId,
       required int clientId,
       required int companyId,
-      required String email,
+      required String? email,
       required String subject,
       required int channelId,
       required DateTime publishedAt,
@@ -942,13 +942,13 @@ abstract class _SetupTicket implements SetupTicket {
   @override
   int get id;
   @override
-  dynamic get assigneeId;
+  int? get assigneeId;
   @override
   int get clientId;
   @override
   int get companyId;
   @override
-  String get email;
+  String? get email;
   @override
   String get subject;
   @override

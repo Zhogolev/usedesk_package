@@ -38,8 +38,8 @@ class Message<C> with _$Message<C> {
 
           final button = MessageButton(
             text: sections[0],
-            url: sections[1],
-            type: sections[2],
+            url: sections[1].isEmpty ? null : sections[1],
+            type: sections[2].isEmpty ? null : sections[2],
             isShow: sections[3] == 'show',
           );
 

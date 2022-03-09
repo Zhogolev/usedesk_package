@@ -1,3 +1,20 @@
+## 0.3.0
+
+* Added `additionalId` for identify
+* Added `messageId` in payload for message
+* Added `debug` init field 
+* Added `reset` method for token deletion
+* Added failed message caching for re-send on connection restore
+* Refactored messages
+```diff
+- message.fromClient
+
++ message is MessageFromClient
+```
+* Fixed chat user name
+* Fixed `null` email on init ticket
+* In message buttons empty string fields replaced by null
+
 ## 0.2.0
 
 * Added message buttons support

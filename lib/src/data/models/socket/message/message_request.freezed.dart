@@ -211,7 +211,7 @@ class _$MessageRequestTextMessageTearOff {
 
   _MessageRequestTextMessage call(
       {required String text,
-      MessageRequestTextMessagePayload payload =
+      MessageRequestTextMessagePayload? payload =
           const MessageRequestTextMessagePayload()}) {
     return _MessageRequestTextMessage(
       text: text,
@@ -230,7 +230,7 @@ const $MessageRequestTextMessage = _$MessageRequestTextMessageTearOff();
 /// @nodoc
 mixin _$MessageRequestTextMessage {
   String get text => throw _privateConstructorUsedError;
-  MessageRequestTextMessagePayload get payload =>
+  MessageRequestTextMessagePayload? get payload =>
       throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -244,9 +244,9 @@ abstract class $MessageRequestTextMessageCopyWith<$Res> {
   factory $MessageRequestTextMessageCopyWith(MessageRequestTextMessage value,
           $Res Function(MessageRequestTextMessage) then) =
       _$MessageRequestTextMessageCopyWithImpl<$Res>;
-  $Res call({String text, MessageRequestTextMessagePayload payload});
+  $Res call({String text, MessageRequestTextMessagePayload? payload});
 
-  $MessageRequestTextMessagePayloadCopyWith<$Res> get payload;
+  $MessageRequestTextMessagePayloadCopyWith<$Res>? get payload;
 }
 
 /// @nodoc
@@ -271,13 +271,17 @@ class _$MessageRequestTextMessageCopyWithImpl<$Res>
       payload: payload == freezed
           ? _value.payload
           : payload // ignore: cast_nullable_to_non_nullable
-              as MessageRequestTextMessagePayload,
+              as MessageRequestTextMessagePayload?,
     ));
   }
 
   @override
-  $MessageRequestTextMessagePayloadCopyWith<$Res> get payload {
-    return $MessageRequestTextMessagePayloadCopyWith<$Res>(_value.payload,
+  $MessageRequestTextMessagePayloadCopyWith<$Res>? get payload {
+    if (_value.payload == null) {
+      return null;
+    }
+
+    return $MessageRequestTextMessagePayloadCopyWith<$Res>(_value.payload!,
         (value) {
       return _then(_value.copyWith(payload: value));
     });
@@ -291,10 +295,10 @@ abstract class _$MessageRequestTextMessageCopyWith<$Res>
           $Res Function(_MessageRequestTextMessage) then) =
       __$MessageRequestTextMessageCopyWithImpl<$Res>;
   @override
-  $Res call({String text, MessageRequestTextMessagePayload payload});
+  $Res call({String text, MessageRequestTextMessagePayload? payload});
 
   @override
-  $MessageRequestTextMessagePayloadCopyWith<$Res> get payload;
+  $MessageRequestTextMessagePayloadCopyWith<$Res>? get payload;
 }
 
 /// @nodoc
@@ -322,7 +326,7 @@ class __$MessageRequestTextMessageCopyWithImpl<$Res>
       payload: payload == freezed
           ? _value.payload
           : payload // ignore: cast_nullable_to_non_nullable
-              as MessageRequestTextMessagePayload,
+              as MessageRequestTextMessagePayload?,
     ));
   }
 }
@@ -341,7 +345,7 @@ class _$_MessageRequestTextMessage implements _MessageRequestTextMessage {
   final String text;
   @JsonKey()
   @override
-  final MessageRequestTextMessagePayload payload;
+  final MessageRequestTextMessagePayload? payload;
 
   @override
   String toString() {
@@ -378,8 +382,8 @@ class _$_MessageRequestTextMessage implements _MessageRequestTextMessage {
 
 abstract class _MessageRequestTextMessage implements MessageRequestTextMessage {
   const factory _MessageRequestTextMessage(
-      {required String text,
-      MessageRequestTextMessagePayload payload}) = _$_MessageRequestTextMessage;
+          {required String text, MessageRequestTextMessagePayload? payload}) =
+      _$_MessageRequestTextMessage;
 
   factory _MessageRequestTextMessage.fromJson(Map<String, dynamic> json) =
       _$_MessageRequestTextMessage.fromJson;
@@ -387,7 +391,7 @@ abstract class _MessageRequestTextMessage implements MessageRequestTextMessage {
   @override
   String get text;
   @override
-  MessageRequestTextMessagePayload get payload;
+  MessageRequestTextMessagePayload? get payload;
   @override
   @JsonKey(ignore: true)
   _$MessageRequestTextMessageCopyWith<_MessageRequestTextMessage>

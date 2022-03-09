@@ -205,8 +205,7 @@ class _ChatPageState extends State<ChatPage> {
                   _messages = snapshot.data!
                       .map((message) {
                         final author = types.User(
-                          id: message.fromClient ? '1' : '2',
-                          // firstName: message.,
+                          id: message is MessageFromClient ? '1' : '2',
                         );
                         if (message is MessageText) {
                           return TextMessageWithButtons(

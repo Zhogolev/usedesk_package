@@ -24,9 +24,10 @@ _$_SetClientRequestPayload _$$_SetClientRequestPayloadFromJson(
     _$_SetClientRequestPayload(
       token: json['token'] as String?,
       email: json['email'] as String?,
-      name: json['name'] as String?,
+      username: json['username'] as String?,
       note: json['note'] as String?,
       phone: json['phone'] as int?,
+      additionalId: json['additional_id'] as String?,
     );
 
 Map<String, dynamic> _$$_SetClientRequestPayloadToJson(
@@ -34,7 +35,8 @@ Map<String, dynamic> _$$_SetClientRequestPayloadToJson(
     <String, dynamic>{
       'token': instance.token,
       'email': instance.email,
-      'name': instance.name,
+      'username': instance.username,
       'note': instance.note,
       'phone': instance.phone,
+      'additional_id': instance.additionalId,
     };
