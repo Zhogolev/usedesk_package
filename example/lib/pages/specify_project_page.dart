@@ -18,6 +18,7 @@ class _SpecifyProjectPageState extends State<SpecifyProjectPage> {
   late TextEditingController nameTextEditingController;
   late TextEditingController emailTextEditingController;
   late TextEditingController phoneTextEditingController;
+  late TextEditingController additionalIdTextEditingController;
   bool saveFields = true;
 
   @override
@@ -28,6 +29,7 @@ class _SpecifyProjectPageState extends State<SpecifyProjectPage> {
     nameTextEditingController = TextEditingController();
     emailTextEditingController = TextEditingController();
     phoneTextEditingController = TextEditingController();
+    additionalIdTextEditingController = TextEditingController();
     restoreFields();
   }
 
@@ -38,6 +40,7 @@ class _SpecifyProjectPageState extends State<SpecifyProjectPage> {
     nameTextEditingController.dispose();
     emailTextEditingController.dispose();
     phoneTextEditingController.dispose();
+    additionalIdTextEditingController.dispose();
     super.dispose();
   }
 
@@ -50,18 +53,21 @@ class _SpecifyProjectPageState extends State<SpecifyProjectPage> {
     nameTextEditingController.text = prefs.getString('name') ?? '';
     emailTextEditingController.text = prefs.getString('email') ?? '';
     phoneTextEditingController.text = prefs.getString('phone') ?? '';
+    additionalIdTextEditingController.text =
+        prefs.getString('additionalId') ?? '';
   }
 
   Future<void> _onOpenChatPressed() async {
     final companyId = companyIdTextEditingController.text;
     if (companyId.isEmpty) {
-      throw Exception('companyId field  required!');
+      throw Exception('companyId field required!');
     }
     final channelId = channelIdTextEditingController.textOrNull;
     final name = nameTextEditingController.textOrNull;
     final email = emailTextEditingController.textOrNull;
     final _phone = phoneTextEditingController.textOrNull;
     final phone = _phone != null ? int.tryParse(_phone) : null;
+    final additionalId = additionalIdTextEditingController.textOrNull;
 
     final prefs = await SharedPreferences.getInstance();
 
@@ -75,6 +81,7 @@ class _SpecifyProjectPageState extends State<SpecifyProjectPage> {
       name: name,
       email: email,
       phoneNumber: phone,
+      additionalId: additionalId,
     ));
 
     if (saveFields) {
@@ -99,6 +106,11 @@ class _SpecifyProjectPageState extends State<SpecifyProjectPage> {
         prefs.setString('phone', _phone);
       } else {
         prefs.remove('phone');
+      }
+      if (additionalId != null) {
+        prefs.setString('additionalId', additionalId);
+      } else {
+        prefs.remove('additionalId');
       }
     }
 
@@ -168,6 +180,14 @@ class _SpecifyProjectPageState extends State<SpecifyProjectPage> {
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Your phone',
+              ),
+            ),
+            const SizedBox(height: 15),
+            TextField(
+              controller: additionalIdTextEditingController,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Additional id',
               ),
             ),
             const SizedBox(height: 40),

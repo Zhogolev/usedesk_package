@@ -193,13 +193,6 @@ class _ChatPageState extends State<ChatPage> {
                     return const Center(
                       child: CircularProgressIndicator(),
                     );
-                  } else if (snapshot.data!.isEmpty) {
-                    return const Center(
-                      child: Text(
-                        'Chat not initialized. '
-                        'Maybe incorrect companyId',
-                      ),
-                    );
                   }
 
                   _messages = snapshot.data!
@@ -207,21 +200,23 @@ class _ChatPageState extends State<ChatPage> {
                         final author = types.User(
                           id: message is MessageFromClient ? '1' : '2',
                         );
-                        if (message is MessageText) {
+                        if (message is MessageTextBase) {
+                          final typedMessage = message as MessageTextBase;
                           return TextMessageWithButtons(
                             id: message.id.toString(),
                             author: author,
-                            text: message.text,
-                            buttons: message.buttons,
+                            text: typedMessage.text,
+                            buttons: typedMessage.buttons,
                           );
                         } else if (message is MessageFileBase) {
-                          if (message is MessageImage) {
+                          if (message is MessageImageBase) {
+                            final typedMessage = message as MessageImageBase;
                             return types.ImageMessage(
                               id: message.id.toString(),
                               author: author,
-                              size: num.tryParse(message.file.size) ?? 0,
-                              name: message.file.name,
-                              uri: message.file.content,
+                              size: num.tryParse(typedMessage.file.size) ?? 0,
+                              name: typedMessage.file.name,
+                              uri: typedMessage.file.content,
                             );
                           }
 
