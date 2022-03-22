@@ -1,3 +1,7 @@
+## 0.4.1
+
+* Fixed flutter compatibility
+
 ## 0.4.0
 
 * Renamed / changed api
