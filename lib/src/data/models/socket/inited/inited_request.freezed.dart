@@ -24,7 +24,7 @@ class _$InitedRequestTearOff {
 
   _InitedRequest call(
       {String type = '@@server/chat/INIT',
-      @JsonKey(name: 'company_id') required String companyId,
+      required String companyId,
       InitedRequestPayload payload = const InitedRequestPayload(),
       String? url,
       String? token}) {
@@ -47,12 +47,8 @@ const $InitedRequest = _$InitedRequestTearOff();
 
 /// @nodoc
 mixin _$InitedRequest {
-  String get type =>
-      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
-  @JsonKey(name: 'company_id')
-  String get companyId =>
-      throw _privateConstructorUsedError; // // ignore: invalid_annotation_target
-// @JsonKey(ignore: true) String? chanelId,
+  String get type => throw _privateConstructorUsedError;
+  String get companyId => throw _privateConstructorUsedError;
   InitedRequestPayload get payload => throw _privateConstructorUsedError;
   String? get url => throw _privateConstructorUsedError;
   String? get token => throw _privateConstructorUsedError;
@@ -70,7 +66,7 @@ abstract class $InitedRequestCopyWith<$Res> {
       _$InitedRequestCopyWithImpl<$Res>;
   $Res call(
       {String type,
-      @JsonKey(name: 'company_id') String companyId,
+      String companyId,
       InitedRequestPayload payload,
       String? url,
       String? token});
@@ -136,7 +132,7 @@ abstract class _$InitedRequestCopyWith<$Res>
   @override
   $Res call(
       {String type,
-      @JsonKey(name: 'company_id') String companyId,
+      String companyId,
       InitedRequestPayload payload,
       String? url,
       String? token});
@@ -190,11 +186,12 @@ class __$InitedRequestCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(fieldRename: FieldRename.snake)
 class _$_InitedRequest implements _InitedRequest {
   const _$_InitedRequest(
       {this.type = '@@server/chat/INIT',
-      @JsonKey(name: 'company_id') required this.companyId,
+      required this.companyId,
       this.payload = const InitedRequestPayload(),
       this.url,
       this.token});
@@ -205,12 +202,10 @@ class _$_InitedRequest implements _InitedRequest {
   @JsonKey()
   @override
   final String type;
-  @override // ignore: invalid_annotation_target
-  @JsonKey(name: 'company_id')
+  @override
   final String companyId;
   @JsonKey()
-  @override // // ignore: invalid_annotation_target
-// @JsonKey(ignore: true) String? chanelId,
+  @override
   final InitedRequestPayload payload;
   @override
   final String? url;
@@ -257,7 +252,7 @@ class _$_InitedRequest implements _InitedRequest {
 abstract class _InitedRequest implements InitedRequest {
   const factory _InitedRequest(
       {String type,
-      @JsonKey(name: 'company_id') required String companyId,
+      required String companyId,
       InitedRequestPayload payload,
       String? url,
       String? token}) = _$_InitedRequest;
@@ -267,11 +262,9 @@ abstract class _InitedRequest implements InitedRequest {
 
   @override
   String get type;
-  @override // ignore: invalid_annotation_target
-  @JsonKey(name: 'company_id')
+  @override
   String get companyId;
-  @override // // ignore: invalid_annotation_target
-// @JsonKey(ignore: true) String? chanelId,
+  @override
   InitedRequestPayload get payload;
   @override
   String? get url;

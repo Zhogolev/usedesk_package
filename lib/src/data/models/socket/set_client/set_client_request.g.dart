@@ -16,7 +16,7 @@ _$_SetClientRequest _$$_SetClientRequestFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_SetClientRequestToJson(_$_SetClientRequest instance) =>
     <String, dynamic>{
       'type': instance.type,
-      'payload': instance.payload,
+      'payload': instance.payload.toJson(),
     };
 
 _$_SetClientRequestPayload _$$_SetClientRequestPayloadFromJson(

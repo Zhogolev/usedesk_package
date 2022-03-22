@@ -1,9 +1,9 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:usedesk/usedesk.dart';
 
-class SharedPreferencesUsedeskChatStorage extends UsedeskChatStorage
+class SharedPreferencesUsedeskChatStorage extends UsedeskChatStorageProvider
     with UsedeskChatCachedStorage {
-  SharedPreferencesUsedeskChatStorage(this.prefs);
+  const SharedPreferencesUsedeskChatStorage(this.prefs);
   final SharedPreferences prefs;
 
   @override

@@ -1,3 +1,23 @@
+## 0.4.0
+
+* Renamed / changed api
+```diff
+-UsedeskChatStorage
++UsedeskChatStorageProvider
+
+-usedeskChat.identify(...);
++usedeskChat.identify = ...;
+``` 
+* Added additional fields support. Example: 
+```dart 
+usedeskChat.additionalFields = { 'field id': 'field value' };
+```  
+* Added web support
+* Refactoring
+* Improved preview sending message. Now support file & image
+* Fixed invalid format of request socket data  
+* Improved example
+
 ## 0.3.0
 
 * Added `additionalId` for identify

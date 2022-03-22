@@ -31,9 +31,9 @@ Map<String, dynamic> _$$_MessageToJson<C>(_$_Message<C> instance) =>
       'text': instance.text,
       'name': instance.name,
       'user': instance.user,
-      'payload': instance.payload,
+      'payload': instance.payload?.toJson(),
       'chat': Message._chatToJson(instance.chat),
-      'file': instance.file,
+      'file': instance.file?.toJson(),
     };
 
 const _$MessageTypeEnumMap = {

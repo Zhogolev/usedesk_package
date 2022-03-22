@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mime/mime.dart';
 import 'package:open_file/open_file.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:usedesk/usedesk.dart';
 import 'package:usedesk_example/pages/specify_project_page.dart';
-import 'package:usedesk_example/widgets/text_message_with_buttons.dart' as ui;
-import 'package:uuid/uuid.dart';
+import 'package:usedesk_example/utils/random.dart';
+import 'package:usedesk_example/widgets/text_message.dart' as ui;
+import 'package:usedesk_example/widgets/image_message.dart' as ui;
 
 class ChatPage extends StatefulWidget {
   const ChatPage({
@@ -24,7 +25,6 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  List<types.Message> _messages = [];
   final _user = const types.User(id: '1');
 
   @override
@@ -37,12 +37,6 @@ class _ChatPageState extends State<ChatPage> {
   void dispose() {
     widget.usedeskChat.disconnect();
     super.dispose();
-  }
-
-  void _addMessage(types.Message message) {
-    setState(() {
-      _messages.insert(0, message);
-    });
   }
 
   void _handleAttachmentPressed() {
@@ -90,29 +84,8 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 
-  Future<void> _handleFileSelection() async {
-    final result = await FilePicker.platform.pickFiles(
-      type: FileType.any,
-      withData: true,
-    );
-
-    if (result != null && result.files.single.path != null) {
-      final bytes = result.files.single.bytes!;
-
-      final message = types.FileMessage(
-        author: _user,
-        createdAt: DateTime.now().millisecondsSinceEpoch,
-        id: const Uuid().v4(),
-        mimeType: lookupMimeType(result.files.single.path!),
-        name: result.files.single.name,
-        size: result.files.single.size,
-        uri: result.files.single.path!,
-      );
-
-      _addMessage(message);
-
-      await widget.usedeskChat.sendFile(result.files.single.name, bytes);
-    }
+  void _handleSendPressed(types.PartialText message) {
+    widget.usedeskChat.sendText(message.text, generateRandomInt(max: 80000));
   }
 
   Future<void> _handleImageSelection() async {
@@ -124,22 +97,29 @@ class _ChatPageState extends State<ChatPage> {
 
     if (result != null) {
       final bytes = await result.readAsBytes();
-      final image = await decodeImageFromList(bytes);
 
-      final message = types.ImageMessage(
-        author: _user,
-        createdAt: DateTime.now().millisecondsSinceEpoch,
-        height: image.height.toDouble(),
-        id: const Uuid().v4(),
-        name: result.name,
-        size: bytes.length,
-        uri: result.path,
-        width: image.width.toDouble(),
+      await widget.usedeskChat.sendFile(
+        result.name,
+        bytes,
+        generateRandomInt(max: 80000),
       );
+    }
+  }
 
-      _addMessage(message);
+  Future<void> _handleFileSelection() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.any,
+      withData: true,
+    );
 
-      await widget.usedeskChat.sendFile(result.name, bytes);
+    if (result != null && result.files.single.bytes != null) {
+      final bytes = result.files.single.bytes!;
+
+      await widget.usedeskChat.sendFile(
+        result.files.single.name,
+        bytes,
+        generateRandomInt(max: 80000),
+      );
     }
   }
 
@@ -149,30 +129,71 @@ class _ChatPageState extends State<ChatPage> {
     }
   }
 
-  void _handlePreviewDataFetched(
-    types.TextMessage message,
-    types.PreviewData previewData,
-  ) {
-    final index = _messages.indexWhere((element) => element.id == message.id);
-    final updatedMessage = _messages[index].copyWith(previewData: previewData);
-
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
-      setState(() {
-        _messages[index] = updatedMessage;
-      });
-    });
+  void _handleMessageButtonPressed(String text, {String? url}) async {
+    if (url?.isNotEmpty ?? false) {
+      !await launch(url!);
+    } else {
+      widget.usedeskChat.sendText(text);
+    }
   }
 
-  void _handleSendPressed(types.PartialText message) {
-    final textMessage = types.TextMessage(
-      author: _user,
-      createdAt: DateTime.now().millisecondsSinceEpoch,
-      id: const Uuid().v4(),
-      text: message.text,
-    );
+  List<types.Message> _convertImages(List<MessageBase> data) {
+    return data.reversed.map((message) {
+      final author = types.User(
+        id: message is MessageFromClient ? '1' : '2',
+      );
+      final localId = message is MessageFromClient
+          ? (message as MessageFromClient).localId?.toString()
+          : null;
+      final messageId = localId ?? message.id.toString();
+      final isSending = message.id.isNegative;
 
-    _addMessage(textMessage);
-    widget.usedeskChat.sendText(message.text);
+      if (message is MessageTextBase) {
+        final typedMessage = message as MessageTextBase;
+        return TextMessageWithButtons(
+          id: messageId,
+          author: author,
+          text: typedMessage.text,
+          buttons: typedMessage.buttons,
+        );
+      } else if (message is MessageFileBase) {
+        final typedMessage = message as MessageFileBase;
+        final fileSize = num.tryParse(
+                typedMessage.file.size.replaceAll(RegExp(r'[^0-9]'), '')) ??
+            0;
+
+        if (message is MessageImageBase &&
+            !typedMessage.file.type.contains('svg')) {
+          final typedMessage = message as MessageImageBase;
+
+          return types.ImageMessage(
+            id: messageId,
+            author: author,
+            size: fileSize,
+            name: typedMessage.file.name,
+            uri: typedMessage.file.content,
+            status: isSending ? types.Status.sending : null,
+            metadata: {
+              if (isSending) 'bytes': typedMessage.file.bytes,
+            },
+          );
+        }
+
+        return types.FileMessage(
+          id: messageId,
+          author: author,
+          size: fileSize,
+          name: typedMessage.file.name,
+          uri: typedMessage.file.content,
+          status: isSending ? types.Status.sending : null,
+        );
+      }
+
+      return types.UnsupportedMessage(
+        id: messageId,
+        author: author,
+      );
+    }).toList();
   }
 
   @override
@@ -195,60 +216,28 @@ class _ChatPageState extends State<ChatPage> {
                     );
                   }
 
-                  _messages = snapshot.data!
-                      .map((message) {
-                        final author = types.User(
-                          id: message is MessageFromClient ? '1' : '2',
-                        );
-                        if (message is MessageTextBase) {
-                          final typedMessage = message as MessageTextBase;
-                          return TextMessageWithButtons(
-                            id: message.id.toString(),
-                            author: author,
-                            text: typedMessage.text,
-                            buttons: typedMessage.buttons,
-                          );
-                        } else if (message is MessageFileBase) {
-                          if (message is MessageImageBase) {
-                            final typedMessage = message as MessageImageBase;
-                            return types.ImageMessage(
-                              id: message.id.toString(),
-                              author: author,
-                              size: num.tryParse(typedMessage.file.size) ?? 0,
-                              name: typedMessage.file.name,
-                              uri: typedMessage.file.content,
-                            );
-                          }
-
-                          return types.FileMessage(
-                            id: message.id.toString(),
-                            author: author,
-                            size: num.tryParse((message as MessageFileBase)
-                                    .file
-                                    .size
-                                    .replaceAll(RegExp(r'[^0-9]'), '')) ??
-                                0,
-                            name: (message as MessageFileBase).file.name,
-                            uri: (message as MessageFileBase).file.content,
-                          );
-                        }
-
-                        return types.UnsupportedMessage(
-                          id: message.id.toString(),
-                          author: author,
-                        );
-                      })
-                      .toList()
-                      .reversed
-                      .toList();
+                  final messages = _convertImages(snapshot.data!);
+                  // final isAttachmentUploading = messages
+                  //     .where(
+                  //         (message) => message.status == types.Status.sending)
+                  //     .isNotEmpty;
 
                   return Chat(
-                    messages: _messages,
+                    messages: messages,
                     onAttachmentPressed: _handleAttachmentPressed,
                     onMessageTap: _handleMessageTap,
-                    onPreviewDataFetched: _handlePreviewDataFetched,
                     onSendPressed: _handleSendPressed,
                     user: _user,
+                    // isAttachmentUploading: isAttachmentUploading,
+                    imageMessageBuilder: (
+                      imageMessage, {
+                      required messageWidth,
+                    }) {
+                      return ui.ImageMessage(
+                        message: imageMessage,
+                        messageWidth: messageWidth,
+                      );
+                    },
                     textMessageBuilder: (
                       textMessage, {
                       required messageWidth,
@@ -256,22 +245,11 @@ class _ChatPageState extends State<ChatPage> {
                     }) {
                       final chatMessageWithButtons =
                           textMessage as TextMessageWithButtons;
-                      return ui.TextMessageWithButtons(
-                        emojiEnlargementBehavior:
-                            EmojiEnlargementBehavior.multi,
-                        hideBackgroundOnEmojiMessages: true,
+                      return ui.TextMessage(
                         message: textMessage,
-                        onPreviewDataFetched: _handlePreviewDataFetched,
                         showName: showName,
-                        usePreviewData: true,
                         buttons: chatMessageWithButtons.buttons,
-                        onButtonPressed: (text, {url}) async {
-                          if (url?.isNotEmpty ?? false) {
-                            !await launch(url!);
-                          } else {
-                            widget.usedeskChat.sendText(text);
-                          }
-                        },
+                        onButtonPressed: _handleMessageButtonPressed,
                       );
                     },
                   );
@@ -285,10 +263,14 @@ class _ChatPageState extends State<ChatPage> {
                     backgroundColor: MaterialStateProperty.all<Color>(
                         const Color(0xff1d1c21)),
                   ),
-                  onPressed: () {
+                  onPressed: () async {
+                    final prefs = await SharedPreferences.getInstance();
+
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (context) => const SpecifyProjectPage(),
+                        builder: (context) => SpecifyProjectPage(
+                          prefs: prefs,
+                        ),
                       ),
                     );
                   },
@@ -301,10 +283,9 @@ class _ChatPageState extends State<ChatPage> {
   }
 }
 
-// ignore: must_be_immutable
 class TextMessageWithButtons extends types.TextMessage {
   /// Creates a text message.
-  TextMessageWithButtons({
+  const TextMessageWithButtons({
     required types.User author,
     required String id,
     required String text,
@@ -315,5 +296,5 @@ class TextMessageWithButtons extends types.TextMessage {
           text: text,
         );
 
-  List<MessageButton> buttons;
+  final List<MessageButton> buttons;
 }

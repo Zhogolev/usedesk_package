@@ -5,12 +5,11 @@ part 'inited_request.freezed.dart';
 
 @freezed
 class InitedRequest with _$InitedRequest {
+  // ignore: invalid_annotation_target
+  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory InitedRequest({
     @Default('@@server/chat/INIT') String type,
-    // ignore: invalid_annotation_target
-    @JsonKey(name: 'company_id') required String companyId,
-    // // ignore: invalid_annotation_target
-    // @JsonKey(ignore: true) String? chanelId,
+    required String companyId,
     @Default(InitedRequestPayload()) InitedRequestPayload payload,
     String? url,
     String? token,

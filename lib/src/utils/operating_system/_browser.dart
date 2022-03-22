@@ -1,0 +1,3 @@
+String getPlatformOperatingSystem() {
+  return 'web';
+}

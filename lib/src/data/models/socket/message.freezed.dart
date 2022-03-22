@@ -430,12 +430,14 @@ class _$MessageFileTearOff {
       {required String name,
       required String type,
       required String content,
-      required String size}) {
+      required String size,
+      @JsonKey(ignore: true) Uint8List? bytes}) {
     return _MessageFile(
       name: name,
       type: type,
       content: content,
       size: size,
+      bytes: bytes,
     );
   }
 
@@ -452,7 +454,10 @@ mixin _$MessageFile {
   String get name => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
-  String get size => throw _privateConstructorUsedError;
+  String get size =>
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+  @JsonKey(ignore: true)
+  Uint8List? get bytes => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -465,7 +470,12 @@ abstract class $MessageFileCopyWith<$Res> {
   factory $MessageFileCopyWith(
           MessageFile value, $Res Function(MessageFile) then) =
       _$MessageFileCopyWithImpl<$Res>;
-  $Res call({String name, String type, String content, String size});
+  $Res call(
+      {String name,
+      String type,
+      String content,
+      String size,
+      @JsonKey(ignore: true) Uint8List? bytes});
 }
 
 /// @nodoc
@@ -482,6 +492,7 @@ class _$MessageFileCopyWithImpl<$Res> implements $MessageFileCopyWith<$Res> {
     Object? type = freezed,
     Object? content = freezed,
     Object? size = freezed,
+    Object? bytes = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -500,6 +511,10 @@ class _$MessageFileCopyWithImpl<$Res> implements $MessageFileCopyWith<$Res> {
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
               as String,
+      bytes: bytes == freezed
+          ? _value.bytes
+          : bytes // ignore: cast_nullable_to_non_nullable
+              as Uint8List?,
     ));
   }
 }
@@ -511,7 +526,12 @@ abstract class _$MessageFileCopyWith<$Res>
           _MessageFile value, $Res Function(_MessageFile) then) =
       __$MessageFileCopyWithImpl<$Res>;
   @override
-  $Res call({String name, String type, String content, String size});
+  $Res call(
+      {String name,
+      String type,
+      String content,
+      String size,
+      @JsonKey(ignore: true) Uint8List? bytes});
 }
 
 /// @nodoc
@@ -530,6 +550,7 @@ class __$MessageFileCopyWithImpl<$Res> extends _$MessageFileCopyWithImpl<$Res>
     Object? type = freezed,
     Object? content = freezed,
     Object? size = freezed,
+    Object? bytes = freezed,
   }) {
     return _then(_MessageFile(
       name: name == freezed
@@ -548,6 +569,10 @@ class __$MessageFileCopyWithImpl<$Res> extends _$MessageFileCopyWithImpl<$Res>
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
               as String,
+      bytes: bytes == freezed
+          ? _value.bytes
+          : bytes // ignore: cast_nullable_to_non_nullable
+              as Uint8List?,
     ));
   }
 }
@@ -559,7 +584,8 @@ class _$_MessageFile implements _MessageFile {
       {required this.name,
       required this.type,
       required this.content,
-      required this.size});
+      required this.size,
+      @JsonKey(ignore: true) this.bytes});
 
   factory _$_MessageFile.fromJson(Map<String, dynamic> json) =>
       _$$_MessageFileFromJson(json);
@@ -572,10 +598,13 @@ class _$_MessageFile implements _MessageFile {
   final String content;
   @override
   final String size;
+  @override // ignore: invalid_annotation_target
+  @JsonKey(ignore: true)
+  final Uint8List? bytes;
 
   @override
   String toString() {
-    return 'MessageFile(name: $name, type: $type, content: $content, size: $size)';
+    return 'MessageFile(name: $name, type: $type, content: $content, size: $size, bytes: $bytes)';
   }
 
   @override
@@ -586,7 +615,8 @@ class _$_MessageFile implements _MessageFile {
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality().equals(other.content, content) &&
-            const DeepCollectionEquality().equals(other.size, size));
+            const DeepCollectionEquality().equals(other.size, size) &&
+            const DeepCollectionEquality().equals(other.bytes, bytes));
   }
 
   @override
@@ -595,7 +625,8 @@ class _$_MessageFile implements _MessageFile {
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(type),
       const DeepCollectionEquality().hash(content),
-      const DeepCollectionEquality().hash(size));
+      const DeepCollectionEquality().hash(size),
+      const DeepCollectionEquality().hash(bytes));
 
   @JsonKey(ignore: true)
   @override
@@ -613,7 +644,8 @@ abstract class _MessageFile implements MessageFile {
       {required String name,
       required String type,
       required String content,
-      required String size}) = _$_MessageFile;
+      required String size,
+      @JsonKey(ignore: true) Uint8List? bytes}) = _$_MessageFile;
 
   factory _MessageFile.fromJson(Map<String, dynamic> json) =
       _$_MessageFile.fromJson;
@@ -626,6 +658,9 @@ abstract class _MessageFile implements MessageFile {
   String get content;
   @override
   String get size;
+  @override // ignore: invalid_annotation_target
+  @JsonKey(ignore: true)
+  Uint8List? get bytes;
   @override
   @JsonKey(ignore: true)
   _$MessageFileCopyWith<_MessageFile> get copyWith =>

@@ -18,7 +18,7 @@ Map<String, dynamic> _$$_SetClientResponseToJson(
         _$_SetClientResponse instance) =>
     <String, dynamic>{
       'type': instance.type,
-      'state': instance.state,
+      'state': instance.state.toJson(),
       'reset': instance.reset,
     };
 
@@ -32,7 +32,7 @@ _$_SetClientResponseState _$$_SetClientResponseStateFromJson(
 Map<String, dynamic> _$$_SetClientResponseStateToJson(
         _$_SetClientResponseState instance) =>
     <String, dynamic>{
-      'client': instance.client,
+      'client': instance.client.toJson(),
     };
 
 _$_SetClientResponseStateClient _$$_SetClientResponseStateClientFromJson(

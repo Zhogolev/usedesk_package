@@ -16,7 +16,7 @@ Integrate anywhere by steps:
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:usedesk/usedesk.dart';
 
-class SharedPreferencesUsedeskChatStorage extends UsedeskChatStorage {
+class SharedPreferencesUsedeskChatStorage extends UsedeskChatStorageProvider {
   SharedPreferencesUsedeskChatStorage(this.prefs);
   final SharedPreferences prefs;
 
@@ -52,27 +52,33 @@ final usedeskChat = await UsedeskChat.init(
     ),
 );
 ```
-3. Identify client
+3. Identify client / pass additional data
 ```dart
-usedeskChat.identify(IdentifyConfiguration(
-    /* All params optional */
-    name: 'Serge Shkurko',
-    email: 'mySuper@email.com',
-    phoneNumber: 88005553535,
-    additionalId: 'uuid_in_my_system',
-));
+usedeskChat
+  ..identify = IdentifyConfiguration(
+      /* All params optional */
+      name: 'Serge Shkurko',
+      email: 'mySuper@email.com',
+      phoneNumber: 88005553535,
+      additionalId: 'uuid_in_my_system',
+  )
+  ..additionalFields = { 
+    '99999': 'v$appVersion:$appBuildNumber' 
+  };
 ```
 4. Subscribe on messages stream
 ```dart
 usedeskChat.messagesStream.listen((List<MessageBase> message) { 
     MessageBase message = message.first;
 
+    final isMyMessage = message is MessageFromClient;
+
     // Work with different messages
-    if (message is MessageText) {
+    if (message is MessageTextBase) {
         print(message.text);
-    } else if (message is MessageImage) {
+    } else if (message is MessageImageBase) {
         print(message.file);
-    } else if (message is MessageUnknownFile) {
+    } else if (message is MessageFileBase) {
         print(message.file);
     }
 });

@@ -22,7 +22,7 @@ Map<String, dynamic> _$$_InitedRequestToJson(_$_InitedRequest instance) =>
     <String, dynamic>{
       'type': instance.type,
       'company_id': instance.companyId,
-      'payload': instance.payload,
+      'payload': instance.payload.toJson(),
       'url': instance.url,
       'token': instance.token,
     };

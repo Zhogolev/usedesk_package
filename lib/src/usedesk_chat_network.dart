@@ -1,15 +1,11 @@
 import 'dart:typed_data';
 
-import 'package:http/http.dart' as http;
-import 'package:http_parser/http_parser.dart';
-import 'package:mime/mime.dart';
-import 'package:socket_io_client/socket_io_client.dart' as sioc;
-
+import 'data/interfaces/usedesk_chat_socket_callbacks.dart';
 import 'data/models/_converters/message.dart';
+import 'data/models/api/additional_fields/additional_fields_request.dart';
 import 'data/models/configuration/chat_api_configuration.dart';
 import 'data/models/configuration/identify_configuration.dart';
 import 'data/models/messages/base.dart';
-import 'data/models/socket/base/base_response.dart';
 import 'data/models/socket/error/error_response.dart';
 import 'data/models/socket/inited/inited_request.dart';
 import 'data/models/socket/inited/inited_response.dart';
@@ -18,12 +14,12 @@ import 'data/models/socket/message/message_response.dart';
 import 'data/models/socket/set_client/set_client_request.dart';
 import 'data/models/socket/set_client/set_client_response.dart';
 import 'data/resources/usedesk_chat_repository.dart';
-import 'usedesk_chat_storage.dart';
+import 'data/resources/usedesk_chat_socket_provider.dart';
+import 'data/resources/usedesk_chat_storage_provider.dart';
+import 'utils/network.dart';
 
-const _defaultSocketEvent = 'dispatch';
-
-class UsedeskChatSocket {
-  UsedeskChatSocket({
+class UsedeskChatNetwork implements UsedeskChatSocketCallbacks {
+  UsedeskChatNetwork({
     required this.repository,
     required this.storage,
     required this.apiConfig,
@@ -31,23 +27,38 @@ class UsedeskChatSocket {
     required this.channelId,
     required this.debug,
     required String? token,
-  }) : _clientToken = token;
+  }) : _clientToken = token {
+    _socket = UsedeskChatSocketProvider(
+      apiConfig: apiConfig,
+      callbacks: this,
+    );
+  }
 
   final UsedeskChatRepository repository;
-  final UsedeskChatStorage storage;
+  final UsedeskChatStorageProvider storage;
   final ChatApiConfiguration apiConfig;
   final String companyId;
   final String? channelId;
   final bool debug;
 
-  late sioc.Socket _socket;
+  late UsedeskChatSocketProvider _socket;
   String? _clientToken;
   IdentifyConfiguration? _identify;
+  bool _isAdditionalFieldsSended = false;
+  Map<String, String> _additionalFields = {};
 
-  bool get isConnected => _socket.connected;
+  bool get isConnected => _socket.isConnected;
 
-  void identify(IdentifyConfiguration? config) {
+  set identify(IdentifyConfiguration? config) {
     _identify = config;
+  }
+
+  set additionalFields(Map<String, String> fields) {
+    _additionalFields = fields;
+  }
+
+  void init() {
+    _socket.init();
   }
 
   void connect() {
@@ -58,12 +69,15 @@ class UsedeskChatSocket {
     _socket.disconnect();
   }
 
+  void dispose() {
+    _socket.dispose();
+  }
+
   void sendText(String text, int? localId) {
     if (text.isEmpty) {
       return;
     }
-    _socket.emit(
-      _defaultSocketEvent,
+    _socket.send(
       MessageRequest(
         message: MessageRequestTextMessage(
           text: text,
@@ -73,52 +87,54 @@ class UsedeskChatSocket {
                 )
               : null,
         ),
-      ),
-    );
-  }
-
-  Future<bool> sendFile(String filename, Uint8List bytes, int? localId) {
-    return _uploadFile(filename, bytes, localId);
-  }
-
-  void init() {
-    _socket = sioc.io(
-      apiConfig.urlChat,
-      sioc.OptionBuilder()
-          .setTransports(['websocket'])
-          .disableAutoConnect()
-          .build(),
-    )
-      ..onConnect((_) => _onConnect())
-      ..onDisconnect((_) => _onDisconnect())
-      ..onError(_onConnectError)
-      ..on(_defaultSocketEvent, (data) {
-        if (data == null || data is! Map) {
-          return;
-        }
-        _onResponse(data as Map<String, dynamic>);
-      });
-  }
-
-  void _onConnect() {
-    if (debug) {
-      print('[UsedeskChat] socket connected');
-    }
-
-    final combinedCompanyId =
-        (channelId?.isNotEmpty ?? false) ? '$companyId _$channelId' : companyId;
-
-    _socket.emit(
-      _defaultSocketEvent,
-      InitedRequest(
-        companyId: combinedCompanyId,
-        url: apiConfig.urlChat,
-        token: _clientToken,
       ).toJson(),
     );
   }
 
-  void _onDisconnect() {
+  Future<bool> sendFile(String filename, Uint8List bytes, int? localId) {
+    if (_clientToken == null) {
+      return Future.value(false);
+    }
+    return Network.uploadFiles(
+      apiConfig.urlToSendFile,
+      {
+        'chat_token': _clientToken!,
+        if (localId != null) 'message_id': localId.toString(),
+      },
+      [
+        NetworkFileField(
+          filename: filename,
+          bytes: bytes,
+          fieldName: 'file',
+        )
+      ],
+    );
+  }
+
+  @override
+  void onConnect() {
+    if (debug) {
+      print('[UsedeskChat] socket connected');
+    }
+
+    final combinedCompanyId = (channelId?.isNotEmpty ?? false)
+        ? '${companyId}_$channelId'
+        : companyId;
+
+    _socket.send(
+      InitedRequest(
+        companyId: combinedCompanyId,
+        url: apiConfig.urlChat,
+        token: _clientToken,
+        payload: InitedRequestPayload(
+            //   sdk: 'Flutter ${getOperatingSystem()}',
+            ),
+      ).toJson(),
+    );
+  }
+
+  @override
+  void onDisconnect() {
     if (debug) {
       print('[UsedeskChat] socket disconnect');
     }
@@ -126,35 +142,13 @@ class UsedeskChatSocket {
     repository.saveFailedMessages();
   }
 
-  void _onConnectError(dynamic error) {
+  @override
+  void onConnectError(dynamic error) {
     print('[UsedeskChat] error: $error');
   }
 
-  void _onResponse(Map<String, dynamic> rawData) {
-    final typeRaw =
-        rawData.containsKey('type') ? rawData['type'] as String : '';
-    final type = responseTypeByValue(typeRaw);
-    if (type == null) {
-      throw Exception('[UsedeskChat] cannot detect response type');
-    }
-
-    switch (type) {
-      case ResponseType.inited:
-        return _onInited(rawData);
-      case ResponseType.error:
-        return _onError(rawData);
-      case ResponseType.message:
-        return _onMessage(rawData);
-      case ResponseType.feedback:
-        throw Exception('Feedback response now not supports');
-      case ResponseType.setClient:
-        return _onSetClient(rawData);
-    }
-  }
-
-  void _onInited(Map<String, dynamic> rawData) {
-    final response = InitedResponse.fromJson(rawData);
-
+  @override
+  void onInited(InitedResponse response) {
     if (response.token.isNotEmpty) {
       _setToken(response.token);
     }
@@ -170,8 +164,7 @@ class UsedeskChatSocket {
     );
 
     if (_identify != null) {
-      _socket.emit(
-        _defaultSocketEvent,
+      _socket.send(
         SetClientRequest(
           payload: SetClientRequestPayload(
             token: _clientToken,
@@ -185,16 +178,17 @@ class UsedeskChatSocket {
     } else {
       _reSendMessages();
     }
+
+    _sendAdditionalFields();
   }
 
-  void _onError(Map<String, dynamic> rawData) {
-    final response = ErrorResponse.fromJson(rawData);
+  @override
+  void onError(ErrorResponse response) {
     print(response);
   }
 
-  void _onMessage(Map<String, dynamic> rawData) {
-    final response = MessageResponse.fromJson(rawData);
-
+  @override
+  void onMessage(MessageResponse response) {
     // Temporary ignore online status message
     if (response.message.file == null &&
         (response.message.text?.isEmpty ?? true)) {
@@ -206,14 +200,23 @@ class UsedeskChatSocket {
     );
   }
 
-  void _onSetClient(Map<String, dynamic> rawData) {
-    final response = SetClientResponse.fromJson(rawData);
-
+  @override
+  void onSetClient(SetClientResponse response) {
     if (response.state.client.token != null) {
       _setToken(response.state.client.token!);
     }
 
     _reSendMessages();
+  }
+
+  @override
+  void onFeedback(Map<String, dynamic> rawData) {
+    throw Exception('Feedback response now not supports');
+  }
+
+  Future<void> _setToken(String token) {
+    _clientToken = token;
+    return storage.setToken(token);
   }
 
   Future<void> _reSendMessages() async {
@@ -227,43 +230,29 @@ class UsedeskChatSocket {
     }
   }
 
-  Future<void> _setToken(String token) {
-    _clientToken = token;
-    return storage.setToken(token);
-  }
-
-  Future<bool> _uploadFile(
-    String filename,
-    Uint8List bytes,
-    int? localId,
-  ) async {
-    final mimeTypeData = lookupMimeType(filename)?.split('/') ?? [];
-
-    final postUri = Uri.parse(apiConfig.urlToSendFile);
-
-    final request = http.MultipartRequest('POST', postUri)
-      ..fields['chat_token'] = _clientToken!
-      ..files.add(
-        http.MultipartFile.fromBytes(
-          'file',
-          bytes,
-          filename: filename,
-          contentType: mimeTypeData.length == 2
-              ? MediaType(mimeTypeData[0], mimeTypeData[1])
-              : null,
-        ),
-      );
-
-    if (localId != null) {
-      request.fields['message_id'] = localId.toString();
+  Future<void> _sendAdditionalFields() async {
+    if (_isAdditionalFieldsSended ||
+        _additionalFields.isEmpty ||
+        _clientToken == null) {
+      return;
     }
 
-    final response = await request.send();
+    final fields = _additionalFields.entries
+        .map((entry) => AdditionalFieldsItemRequest(
+              id: entry.key,
+              value: entry.value,
+            ))
+        .toList();
 
-    return (response.statusCode >= 200 && response.statusCode < 400);
-  }
+    Network.post(
+      '${apiConfig.urlApi}/v1/addFieldsToChat',
+      AdditionalFieldsRequest(
+        chatToken: _clientToken!,
+        additionalFields: fields,
+      ).toJson(),
+    );
 
-  void dispose() {
-    _socket.dispose();
+    _isAdditionalFieldsSended = true;
+    _additionalFields = {};
   }
 }

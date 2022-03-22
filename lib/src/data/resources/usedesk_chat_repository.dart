@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:usedesk/src/data/models/messages/base.dart';
-import 'package:usedesk/src/usedesk_chat_storage.dart';
+import 'package:usedesk/src/data/resources/usedesk_chat_storage_provider.dart';
 
 class UsedeskChatRepository {
   UsedeskChatRepository({
@@ -30,8 +30,10 @@ class UsedeskChatRepository {
     if (_messages.isNotEmpty) {
       _messages.clear();
     }
-    _messages.addAll({...messages, ...failedMessages});
-    _messagesController.sink.add(_messages);
+    if (messages != _messages) {
+      _messages.addAll({...messages, ...failedMessages});
+      _messagesController.sink.add(_messages);
+    }
   }
 
   void addMessage(MessageBase message) {

@@ -16,5 +16,5 @@ _$_MessageResponse _$$_MessageResponseFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_MessageResponseToJson(_$_MessageResponse instance) =>
     <String, dynamic>{
       'type': instance.type,
-      'message': instance.message,
+      'message': instance.message.toJson(),
     };

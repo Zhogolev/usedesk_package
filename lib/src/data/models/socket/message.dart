@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'chat.dart';
@@ -85,6 +87,8 @@ class MessageFile with _$MessageFile {
     required String type,
     required String content,
     required String size,
+    // ignore: invalid_annotation_target
+    @JsonKey(ignore: true) Uint8List? bytes,
   }) = _MessageFile;
 
   factory MessageFile.fromJson(Map<String, dynamic> json) =>

@@ -1,22 +1,26 @@
 import 'dart:typed_data';
 
-import 'package:usedesk/src/usedesk_chat_socket.dart';
+import 'package:filesize/filesize.dart';
+import 'package:mime/mime.dart';
+import 'package:path/path.dart' as p;
 
+import 'usedesk_chat_network.dart';
 import 'data/models/configuration/chat_api_configuration.dart';
 import 'data/models/configuration/identify_configuration.dart';
 import 'data/models/messages/base.dart';
+import 'data/models/socket/message.dart';
 import 'data/resources/usedesk_chat_repository.dart';
-import 'usedesk_chat_storage.dart';
+import 'data/resources/usedesk_chat_storage_provider.dart';
 
 class UsedeskChat {
   UsedeskChat._({
-    required UsedeskChatSocket api,
+    required UsedeskChatNetwork api,
     required UsedeskChatRepository repository,
     required this.debug,
   })  : _api = api,
         _repository = repository;
 
-  final UsedeskChatSocket _api;
+  final UsedeskChatNetwork _api;
   final UsedeskChatRepository _repository;
   final bool debug;
 
@@ -25,7 +29,7 @@ class UsedeskChat {
   Stream<List<MessageBase>> get messagesStream => _repository.messagesStream;
 
   static Future<UsedeskChat> init({
-    required UsedeskChatStorage storage,
+    required UsedeskChatStorageProvider storage,
     required String companyId,
     String? channelId,
     ChatApiConfiguration apiConfig = const ChatApiConfiguration(),
@@ -35,7 +39,7 @@ class UsedeskChat {
     final repository = UsedeskChatRepository(
       storage: storage is UsedeskChatCachedStorage ? storage : null,
     );
-    final api = UsedeskChatSocket(
+    final api = UsedeskChatNetwork(
       repository: repository,
       storage: storage,
       companyId: companyId,
@@ -51,8 +55,12 @@ class UsedeskChat {
     );
   }
 
-  void identify(IdentifyConfiguration config) {
-    _api.identify(config);
+  set identify(IdentifyConfiguration config) {
+    _api.identify = config;
+  }
+
+  set additionalFields(Map<String, String> fields) {
+    _api.additionalFields = fields;
   }
 
   void connect() {
@@ -67,8 +75,8 @@ class UsedeskChat {
     if (localId != null) {
       _repository.addMessage(MessageTextClient(
         id: -localId,
-        createdAt: DateTime.now(),
         localId: localId,
+        createdAt: DateTime.now(),
         text: text,
         status: _api.isConnected
             ? MessageSentStatus.sending
@@ -84,11 +92,48 @@ class UsedeskChat {
 
   Future<bool> sendFile(String filename, Uint8List bytes, [int? localId]) {
     _validateConnect();
+    if (localId != null) {
+      final mime = lookupMimeType(filename) ?? '';
+      final extension = p.extension(filename);
+
+      final file = MessageFile(
+        name: filename,
+        size: filesize(bytes.length),
+        content: '__loading__',
+        type: extension,
+        bytes: bytes,
+      );
+      final status = _api.isConnected
+          ? MessageSentStatus.sending
+          : MessageSentStatus.failed;
+
+      if (mime.startsWith('image')) {
+        _repository.addMessage(
+          MessageImageClient(
+            id: -localId,
+            localId: localId,
+            createdAt: DateTime.now(),
+            file: file,
+            status: status,
+          ),
+        );
+      } else {
+        _repository.addMessage(
+          MessageUnknownFileClient(
+            id: -localId,
+            localId: localId,
+            createdAt: DateTime.now(),
+            file: file,
+            status: status,
+          ),
+        );
+      }
+    }
     return _api.sendFile(filename, bytes, localId);
   }
 
   Future<void> reset() {
-    _api.identify(null);
+    _api.identify = null;
     if (_api.storage is UsedeskChatCachedStorage) {
       (_api.storage as UsedeskChatCachedStorage).clearMessages();
     }

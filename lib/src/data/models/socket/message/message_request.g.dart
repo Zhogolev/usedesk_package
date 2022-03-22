@@ -16,7 +16,7 @@ _$_MessageRequest _$$_MessageRequestFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_MessageRequestToJson(_$_MessageRequest instance) =>
     <String, dynamic>{
       'type': instance.type,
-      'message': instance.message,
+      'message': instance.message.toJson(),
     };
 
 _$_MessageRequestTextMessage _$$_MessageRequestTextMessageFromJson(
@@ -33,7 +33,7 @@ Map<String, dynamic> _$$_MessageRequestTextMessageToJson(
         _$_MessageRequestTextMessage instance) =>
     <String, dynamic>{
       'text': instance.text,
-      'payload': instance.payload,
+      'payload': instance.payload?.toJson(),
     };
 
 _$_MessageRequestTextMessagePayload

@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:usedesk/usedesk.dart';
-import 'package:usedesk_example/usedesk_chat_storage_implementation.dart';
+import 'package:usedesk_example/data/usedesk_chat_storage_implementation.dart';
 
 import 'chat_page.dart';
 
 class SpecifyProjectPage extends StatefulWidget {
-  const SpecifyProjectPage({Key? key}) : super(key: key);
+  SpecifyProjectPage({
+    required this.prefs,
+    Key? key,
+  })  : _storage = SharedPreferencesUsedeskChatStorage(prefs),
+        super(key: key);
+  final SharedPreferences prefs;
+  final SharedPreferencesUsedeskChatStorage _storage;
 
   @override
   State<SpecifyProjectPage> createState() => _SpecifyProjectPageState();
@@ -45,16 +52,16 @@ class _SpecifyProjectPageState extends State<SpecifyProjectPage> {
   }
 
   Future<void> restoreFields() async {
-    final prefs = await SharedPreferences.getInstance();
+    companyIdTextEditingController.text =
+        widget.prefs.getString('companyId') ?? '';
+    channelIdTextEditingController.text =
+        widget.prefs.getString('channelId') ?? '';
 
-    companyIdTextEditingController.text = prefs.getString('companyId') ?? '';
-    channelIdTextEditingController.text = prefs.getString('channelId') ?? '';
-
-    nameTextEditingController.text = prefs.getString('name') ?? '';
-    emailTextEditingController.text = prefs.getString('email') ?? '';
-    phoneTextEditingController.text = prefs.getString('phone') ?? '';
+    nameTextEditingController.text = widget.prefs.getString('name') ?? '';
+    emailTextEditingController.text = widget.prefs.getString('email') ?? '';
+    phoneTextEditingController.text = widget.prefs.getString('phone') ?? '';
     additionalIdTextEditingController.text =
-        prefs.getString('additionalId') ?? '';
+        widget.prefs.getString('additionalId') ?? '';
   }
 
   Future<void> _onOpenChatPressed() async {
@@ -69,22 +76,29 @@ class _SpecifyProjectPageState extends State<SpecifyProjectPage> {
     final phone = _phone != null ? int.tryParse(_phone) : null;
     final additionalId = additionalIdTextEditingController.textOrNull;
 
-    final prefs = await SharedPreferences.getInstance();
-
     final usedeskChat = await UsedeskChat.init(
-      storage: SharedPreferencesUsedeskChatStorage(prefs),
+      storage: widget._storage,
       companyId: companyId,
       channelId: channelId,
     );
 
-    usedeskChat.identify(IdentifyConfiguration(
-      name: name,
-      email: email,
-      phoneNumber: phone,
-      additionalId: additionalId,
-    ));
+    final packageInfo = await PackageInfo.fromPlatform();
+    String version = packageInfo.version;
+    String buildNumber = packageInfo.buildNumber;
+
+    usedeskChat
+      ..identify = IdentifyConfiguration(
+        name: name,
+        email: email,
+        phoneNumber: phone,
+        additionalId: additionalId,
+      )
+      ..additionalFields = {
+        '18944': 'v$version:$buildNumber',
+      };
 
     if (saveFields) {
+      final prefs = widget.prefs;
       prefs.setString('companyId', companyId);
       if (channelId != null) {
         prefs.setString('channelId', channelId);
@@ -121,9 +135,8 @@ class _SpecifyProjectPageState extends State<SpecifyProjectPage> {
     );
   }
 
-  void _onClearToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return SharedPreferencesUsedeskChatStorage(prefs).clearToken();
+  void _onClearToken() {
+    widget._storage.clearToken();
   }
 
   @override

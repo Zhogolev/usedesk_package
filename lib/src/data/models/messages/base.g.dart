@@ -21,7 +21,7 @@ Map<String, dynamic> _$$_MessageTextToJson(_$_MessageText instance) =>
       'id': instance.id,
       'createdAt': instance.createdAt.toIso8601String(),
       'text': instance.text,
-      'buttons': instance.buttons,
+      'buttons': instance.buttons.map((e) => e.toJson()).toList(),
     };
 
 _$_MessageTextClient _$$_MessageTextClientFromJson(Map<String, dynamic> json) =>
@@ -44,7 +44,7 @@ Map<String, dynamic> _$$_MessageTextClientToJson(
       'createdAt': instance.createdAt.toIso8601String(),
       'status': _$MessageSentStatusEnumMap[instance.status],
       'text': instance.text,
-      'buttons': instance.buttons,
+      'buttons': instance.buttons.map((e) => e.toJson()).toList(),
     };
 
 const _$MessageSentStatusEnumMap = {
@@ -64,7 +64,7 @@ Map<String, dynamic> _$$_MessageImageToJson(_$_MessageImage instance) =>
     <String, dynamic>{
       'id': instance.id,
       'createdAt': instance.createdAt.toIso8601String(),
-      'file': instance.file,
+      'file': instance.file.toJson(),
     };
 
 _$_MessageImageClient _$$_MessageImageClientFromJson(
@@ -84,7 +84,7 @@ Map<String, dynamic> _$$_MessageImageClientToJson(
       'localId': instance.localId,
       'createdAt': instance.createdAt.toIso8601String(),
       'status': _$MessageSentStatusEnumMap[instance.status],
-      'file': instance.file,
+      'file': instance.file.toJson(),
     };
 
 _$_MessageUnknownFile _$$_MessageUnknownFileFromJson(
@@ -100,7 +100,7 @@ Map<String, dynamic> _$$_MessageUnknownFileToJson(
     <String, dynamic>{
       'id': instance.id,
       'createdAt': instance.createdAt.toIso8601String(),
-      'file': instance.file,
+      'file': instance.file.toJson(),
     };
 
 _$_MessageUnknownFileClient _$$_MessageUnknownFileClientFromJson(
@@ -120,5 +120,5 @@ Map<String, dynamic> _$$_MessageUnknownFileClientToJson(
       'localId': instance.localId,
       'createdAt': instance.createdAt.toIso8601String(),
       'status': _$MessageSentStatusEnumMap[instance.status],
-      'file': instance.file,
+      'file': instance.file.toJson(),
     };

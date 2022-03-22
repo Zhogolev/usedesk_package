@@ -17,7 +17,7 @@ Map<String, dynamic> _$$_InitedResponseToJson(_$_InitedResponse instance) =>
     <String, dynamic>{
       'type': instance.type,
       'token': instance.token,
-      'setup': instance.setup,
+      'setup': instance.setup.toJson(),
     };
 
 _$_Setup _$$_SetupFromJson(Map<String, dynamic> json) => _$_Setup(
@@ -41,11 +41,11 @@ _$_Setup _$$_SetupFromJson(Map<String, dynamic> json) => _$_Setup(
 
 Map<String, dynamic> _$$_SetupToJson(_$_Setup instance) => <String, dynamic>{
       'waitingEmail': instance.waitingEmail,
-      'client': instance.client,
-      'callback_settings': instance.callbackSettings,
-      'ticket': instance.ticket,
+      'client': instance.client?.toJson(),
+      'callback_settings': instance.callbackSettings?.toJson(),
+      'ticket': instance.ticket?.toJson(),
       'noOperators': instance.noOperators,
-      'messages': instance.messages,
+      'messages': instance.messages.map((e) => e.toJson()).toList(),
     };
 
 _$_SetupTicket _$$_SetupTicketFromJson(Map<String, dynamic> json) =>

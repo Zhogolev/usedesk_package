@@ -13,15 +13,15 @@ import 'package:flutter_chat_ui/src/util.dart';
 import 'package:usedesk/usedesk.dart';
 
 /// A class that represents text message widget with optional link preview
-class TextMessageWithButtons extends StatelessWidget {
+class TextMessage extends StatelessWidget {
   /// Creates a text message widget from a [types.TextMessage] class
-  const TextMessageWithButtons({
+  const TextMessage({
     Key? key,
-    required this.emojiEnlargementBehavior,
-    required this.hideBackgroundOnEmojiMessages,
-    required this.message,
+    this.emojiEnlargementBehavior = EmojiEnlargementBehavior.multi,
+    this.hideBackgroundOnEmojiMessages = true,
     this.onPreviewDataFetched,
-    required this.usePreviewData,
+    this.usePreviewData = false,
+    required this.message,
     required this.showName,
     required this.buttons,
     required this.onButtonPressed,

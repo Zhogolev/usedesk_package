@@ -21,6 +21,8 @@ dependencies:
   open_file: ^3.2.1
   uuid: ^3.0.5
   url_launcher: ^6.0.20
+  package_info_plus: ^1.4.0
+  path_provider: ^2.0.9
 
 dev_dependencies:
   flutter_test:
