@@ -51,7 +51,7 @@ extension MessageConverter<T> on Message<T> {
           status: MessageSentStatus.success,
         );
       }
-      MessageUnknownFile(
+      return MessageUnknownFile(
         id: id,
         createdAt: createdAt,
         file: file!,

@@ -1,3 +1,7 @@
+## 0.4.2
+
+* Fixed operator file message
+
 ## 0.4.1
 
 * Fixed flutter compatibility
