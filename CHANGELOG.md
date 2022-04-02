@@ -1,3 +1,7 @@
+## 0.4.3
+
+* Fixed crash on dispose
+
 ## 0.4.2
 
 * Fixed operator file message

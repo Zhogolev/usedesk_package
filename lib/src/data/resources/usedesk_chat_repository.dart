@@ -9,6 +9,7 @@ class UsedeskChatRepository {
     required this.storage,
   });
 
+  bool _disposed = false;
   final UsedeskChatCachedStorage? storage;
 
   final List<MessageBase> _messages = [];
@@ -85,7 +86,9 @@ class UsedeskChatRepository {
         );
       }
     }
-    _messagesController.sink.add(_messages);
+    if (!_disposed) {
+      _messagesController.sink.add(_messages);
+    }
   }
 
   void saveFailedMessages() {
@@ -131,6 +134,7 @@ class UsedeskChatRepository {
   }
 
   void dispose() {
+    _disposed = true;
     _onMessageStreamController.close();
     _messagesController.close();
   }

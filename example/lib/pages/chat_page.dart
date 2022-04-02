@@ -35,7 +35,7 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   void dispose() {
-    widget.usedeskChat.disconnect();
+    widget.usedeskChat.dispose();
     super.dispose();
   }
 
