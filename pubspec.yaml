@@ -2,24 +2,24 @@ name: usedesk
 description: Pure dart SDK implementation of usedesk.com service. Includes client realtime chat
 repository: https://github.com/ScerIO/usedesk.dart
 issue_tracker: https://github.com/ScerIO/usedesk.dart/issues
-version: 0.4.3
+version: 0.5.0
 
 environment:
-  sdk: ">=2.16.1 <3.0.0"
+  sdk: '>=2.17.1 <3.0.0'
 
 dependencies:
-  freezed_annotation: ^1.1.0
-  json_annotation: ^4.4.0
+  freezed_annotation: ^2.0.3
+  json_annotation: ^4.5.0
   socket_io_client: ^2.0.0-beta.4-nullsafety.0
   mime: ^1.0.1
   http: ^0.13.4
-  http_parser: ^4.0.0
+  http_parser: ^4.0.1
   filesize: ^2.0.1
-  path: ^1.8.0
+  path: ^1.8.1
 
 dev_dependencies:
-  lints: ^1.0.1
+  lints: ^2.0.0
   build_runner: ^2.1.2
-  freezed: ^1.1.1
-  json_serializable: ^6.1.4
-  analyzer: '>=3.0.0 <3.3.0'
+  freezed: ^2.0.3+1
+  json_serializable: ^6.2.0
+  analyzer: ^4.1.0

@@ -1,3 +1,7 @@
+## 0.5.0
+
+* Upgrade to flutter 3.0.0
+
 ## 0.4.3
 
 * Fixed crash on dispose
