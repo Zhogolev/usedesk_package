@@ -55,7 +55,7 @@ _$_SetupTicket _$$_SetupTicketFromJson(Map<String, dynamic> json) =>
       clientId: json['client_id'] as int,
       companyId: json['company_id'] as int,
       email: json['email'] as String?,
-      subject: json['subject'] as String,
+      subject: json['subject'] as String?,
       channelId: json['channel_id'] as int,
       publishedAt: DateTime.parse(json['published_at'] as String),
       statusUpdatedAt: DateTime.parse(json['status_updated_at'] as String),

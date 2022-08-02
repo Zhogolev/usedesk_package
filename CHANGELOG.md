@@ -1,3 +1,8 @@
+## 0.6.0
+
+* Upgrade dependencies
+* Fix `SetupTicket.subject` nullable
+
 ## 0.5.0
 
 * Upgrade to flutter 3.0.0

@@ -12,38 +12,11 @@ part of 'inited_request.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 InitedRequest _$InitedRequestFromJson(Map<String, dynamic> json) {
   return _InitedRequest.fromJson(json);
 }
-
-/// @nodoc
-class _$InitedRequestTearOff {
-  const _$InitedRequestTearOff();
-
-  _InitedRequest call(
-      {String type = '@@server/chat/INIT',
-      required String companyId,
-      InitedRequestPayload payload = const InitedRequestPayload(),
-      String? url,
-      String? token}) {
-    return _InitedRequest(
-      type: type,
-      companyId: companyId,
-      payload: payload,
-      url: url,
-      token: token,
-    );
-  }
-
-  InitedRequest fromJson(Map<String, Object?> json) {
-    return InitedRequest.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $InitedRequest = _$InitedRequestTearOff();
 
 /// @nodoc
 mixin _$InitedRequest {
@@ -124,11 +97,11 @@ class _$InitedRequestCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$InitedRequestCopyWith<$Res>
+abstract class _$$_InitedRequestCopyWith<$Res>
     implements $InitedRequestCopyWith<$Res> {
-  factory _$InitedRequestCopyWith(
-          _InitedRequest value, $Res Function(_InitedRequest) then) =
-      __$InitedRequestCopyWithImpl<$Res>;
+  factory _$$_InitedRequestCopyWith(
+          _$_InitedRequest value, $Res Function(_$_InitedRequest) then) =
+      __$$_InitedRequestCopyWithImpl<$Res>;
   @override
   $Res call(
       {String type,
@@ -142,15 +115,15 @@ abstract class _$InitedRequestCopyWith<$Res>
 }
 
 /// @nodoc
-class __$InitedRequestCopyWithImpl<$Res>
+class __$$_InitedRequestCopyWithImpl<$Res>
     extends _$InitedRequestCopyWithImpl<$Res>
-    implements _$InitedRequestCopyWith<$Res> {
-  __$InitedRequestCopyWithImpl(
-      _InitedRequest _value, $Res Function(_InitedRequest) _then)
-      : super(_value, (v) => _then(v as _InitedRequest));
+    implements _$$_InitedRequestCopyWith<$Res> {
+  __$$_InitedRequestCopyWithImpl(
+      _$_InitedRequest _value, $Res Function(_$_InitedRequest) _then)
+      : super(_value, (v) => _then(v as _$_InitedRequest));
 
   @override
-  _InitedRequest get _value => super._value as _InitedRequest;
+  _$_InitedRequest get _value => super._value as _$_InitedRequest;
 
   @override
   $Res call({
@@ -160,7 +133,7 @@ class __$InitedRequestCopyWithImpl<$Res>
     Object? url = freezed,
     Object? token = freezed,
   }) {
-    return _then(_InitedRequest(
+    return _then(_$_InitedRequest(
       type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -199,13 +172,13 @@ class _$_InitedRequest implements _InitedRequest {
   factory _$_InitedRequest.fromJson(Map<String, dynamic> json) =>
       _$$_InitedRequestFromJson(json);
 
-  @JsonKey()
   @override
+  @JsonKey()
   final String type;
   @override
   final String companyId;
-  @JsonKey()
   @override
+  @JsonKey()
   final InitedRequestPayload payload;
   @override
   final String? url;
@@ -221,7 +194,7 @@ class _$_InitedRequest implements _InitedRequest {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _InitedRequest &&
+            other is _$_InitedRequest &&
             const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality().equals(other.companyId, companyId) &&
             const DeepCollectionEquality().equals(other.payload, payload) &&
@@ -229,6 +202,7 @@ class _$_InitedRequest implements _InitedRequest {
             const DeepCollectionEquality().equals(other.token, token));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -240,22 +214,24 @@ class _$_InitedRequest implements _InitedRequest {
 
   @JsonKey(ignore: true)
   @override
-  _$InitedRequestCopyWith<_InitedRequest> get copyWith =>
-      __$InitedRequestCopyWithImpl<_InitedRequest>(this, _$identity);
+  _$$_InitedRequestCopyWith<_$_InitedRequest> get copyWith =>
+      __$$_InitedRequestCopyWithImpl<_$_InitedRequest>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_InitedRequestToJson(this);
+    return _$$_InitedRequestToJson(
+      this,
+    );
   }
 }
 
 abstract class _InitedRequest implements InitedRequest {
   const factory _InitedRequest(
-      {String type,
-      required String companyId,
-      InitedRequestPayload payload,
-      String? url,
-      String? token}) = _$_InitedRequest;
+      {final String type,
+      required final String companyId,
+      final InitedRequestPayload payload,
+      final String? url,
+      final String? token}) = _$_InitedRequest;
 
   factory _InitedRequest.fromJson(Map<String, dynamic> json) =
       _$_InitedRequest.fromJson;
@@ -272,34 +248,13 @@ abstract class _InitedRequest implements InitedRequest {
   String? get token;
   @override
   @JsonKey(ignore: true)
-  _$InitedRequestCopyWith<_InitedRequest> get copyWith =>
+  _$$_InitedRequestCopyWith<_$_InitedRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 InitedRequestPayload _$InitedRequestPayloadFromJson(Map<String, dynamic> json) {
   return _InitedRequestPayload.fromJson(json);
 }
-
-/// @nodoc
-class _$InitedRequestPayloadTearOff {
-  const _$InitedRequestPayloadTearOff();
-
-  _InitedRequestPayload call(
-      {String sdk = 'iOS', String type = 'sdk', String version = '2.3.0'}) {
-    return _InitedRequestPayload(
-      sdk: sdk,
-      type: type,
-      version: version,
-    );
-  }
-
-  InitedRequestPayload fromJson(Map<String, Object?> json) {
-    return InitedRequestPayload.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $InitedRequestPayload = _$InitedRequestPayloadTearOff();
 
 /// @nodoc
 mixin _$InitedRequestPayload {
@@ -354,25 +309,25 @@ class _$InitedRequestPayloadCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$InitedRequestPayloadCopyWith<$Res>
+abstract class _$$_InitedRequestPayloadCopyWith<$Res>
     implements $InitedRequestPayloadCopyWith<$Res> {
-  factory _$InitedRequestPayloadCopyWith(_InitedRequestPayload value,
-          $Res Function(_InitedRequestPayload) then) =
-      __$InitedRequestPayloadCopyWithImpl<$Res>;
+  factory _$$_InitedRequestPayloadCopyWith(_$_InitedRequestPayload value,
+          $Res Function(_$_InitedRequestPayload) then) =
+      __$$_InitedRequestPayloadCopyWithImpl<$Res>;
   @override
   $Res call({String sdk, String type, String version});
 }
 
 /// @nodoc
-class __$InitedRequestPayloadCopyWithImpl<$Res>
+class __$$_InitedRequestPayloadCopyWithImpl<$Res>
     extends _$InitedRequestPayloadCopyWithImpl<$Res>
-    implements _$InitedRequestPayloadCopyWith<$Res> {
-  __$InitedRequestPayloadCopyWithImpl(
-      _InitedRequestPayload _value, $Res Function(_InitedRequestPayload) _then)
-      : super(_value, (v) => _then(v as _InitedRequestPayload));
+    implements _$$_InitedRequestPayloadCopyWith<$Res> {
+  __$$_InitedRequestPayloadCopyWithImpl(_$_InitedRequestPayload _value,
+      $Res Function(_$_InitedRequestPayload) _then)
+      : super(_value, (v) => _then(v as _$_InitedRequestPayload));
 
   @override
-  _InitedRequestPayload get _value => super._value as _InitedRequestPayload;
+  _$_InitedRequestPayload get _value => super._value as _$_InitedRequestPayload;
 
   @override
   $Res call({
@@ -380,7 +335,7 @@ class __$InitedRequestPayloadCopyWithImpl<$Res>
     Object? type = freezed,
     Object? version = freezed,
   }) {
-    return _then(_InitedRequestPayload(
+    return _then(_$_InitedRequestPayload(
       sdk: sdk == freezed
           ? _value.sdk
           : sdk // ignore: cast_nullable_to_non_nullable
@@ -406,14 +361,14 @@ class _$_InitedRequestPayload implements _InitedRequestPayload {
   factory _$_InitedRequestPayload.fromJson(Map<String, dynamic> json) =>
       _$$_InitedRequestPayloadFromJson(json);
 
-  @JsonKey()
   @override
+  @JsonKey()
   final String sdk;
-  @JsonKey()
   @override
+  @JsonKey()
   final String type;
-  @JsonKey()
   @override
+  @JsonKey()
   final String version;
 
   @override
@@ -425,12 +380,13 @@ class _$_InitedRequestPayload implements _InitedRequestPayload {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _InitedRequestPayload &&
+            other is _$_InitedRequestPayload &&
             const DeepCollectionEquality().equals(other.sdk, sdk) &&
             const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality().equals(other.version, version));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -440,19 +396,23 @@ class _$_InitedRequestPayload implements _InitedRequestPayload {
 
   @JsonKey(ignore: true)
   @override
-  _$InitedRequestPayloadCopyWith<_InitedRequestPayload> get copyWith =>
-      __$InitedRequestPayloadCopyWithImpl<_InitedRequestPayload>(
+  _$$_InitedRequestPayloadCopyWith<_$_InitedRequestPayload> get copyWith =>
+      __$$_InitedRequestPayloadCopyWithImpl<_$_InitedRequestPayload>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_InitedRequestPayloadToJson(this);
+    return _$$_InitedRequestPayloadToJson(
+      this,
+    );
   }
 }
 
 abstract class _InitedRequestPayload implements InitedRequestPayload {
   const factory _InitedRequestPayload(
-      {String sdk, String type, String version}) = _$_InitedRequestPayload;
+      {final String sdk,
+      final String type,
+      final String version}) = _$_InitedRequestPayload;
 
   factory _InitedRequestPayload.fromJson(Map<String, dynamic> json) =
       _$_InitedRequestPayload.fromJson;
@@ -465,6 +425,6 @@ abstract class _InitedRequestPayload implements InitedRequestPayload {
   String get version;
   @override
   @JsonKey(ignore: true)
-  _$InitedRequestPayloadCopyWith<_InitedRequestPayload> get copyWith =>
+  _$$_InitedRequestPayloadCopyWith<_$_InitedRequestPayload> get copyWith =>
       throw _privateConstructorUsedError;
 }

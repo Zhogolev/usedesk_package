@@ -43,7 +43,7 @@ class SetupTicket with _$SetupTicket {
     required int clientId,
     required int companyId,
     required String? email,
-    required String subject,
+    required String? subject,
     required int channelId,
     required DateTime publishedAt,
     required DateTime statusUpdatedAt,

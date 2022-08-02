@@ -12,33 +12,12 @@ part of 'additional_fields_request.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 AdditionalFieldsRequest _$AdditionalFieldsRequestFromJson(
     Map<String, dynamic> json) {
   return _AdditionalFieldsRequest.fromJson(json);
 }
-
-/// @nodoc
-class _$AdditionalFieldsRequestTearOff {
-  const _$AdditionalFieldsRequestTearOff();
-
-  _AdditionalFieldsRequest call(
-      {required String chatToken,
-      required List<AdditionalFieldsItemRequest> additionalFields}) {
-    return _AdditionalFieldsRequest(
-      chatToken: chatToken,
-      additionalFields: additionalFields,
-    );
-  }
-
-  AdditionalFieldsRequest fromJson(Map<String, Object?> json) {
-    return AdditionalFieldsRequest.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $AdditionalFieldsRequest = _$AdditionalFieldsRequestTearOff();
 
 /// @nodoc
 mixin _$AdditionalFieldsRequest {
@@ -89,40 +68,40 @@ class _$AdditionalFieldsRequestCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$AdditionalFieldsRequestCopyWith<$Res>
+abstract class _$$_AdditionalFieldsRequestCopyWith<$Res>
     implements $AdditionalFieldsRequestCopyWith<$Res> {
-  factory _$AdditionalFieldsRequestCopyWith(_AdditionalFieldsRequest value,
-          $Res Function(_AdditionalFieldsRequest) then) =
-      __$AdditionalFieldsRequestCopyWithImpl<$Res>;
+  factory _$$_AdditionalFieldsRequestCopyWith(_$_AdditionalFieldsRequest value,
+          $Res Function(_$_AdditionalFieldsRequest) then) =
+      __$$_AdditionalFieldsRequestCopyWithImpl<$Res>;
   @override
   $Res call(
       {String chatToken, List<AdditionalFieldsItemRequest> additionalFields});
 }
 
 /// @nodoc
-class __$AdditionalFieldsRequestCopyWithImpl<$Res>
+class __$$_AdditionalFieldsRequestCopyWithImpl<$Res>
     extends _$AdditionalFieldsRequestCopyWithImpl<$Res>
-    implements _$AdditionalFieldsRequestCopyWith<$Res> {
-  __$AdditionalFieldsRequestCopyWithImpl(_AdditionalFieldsRequest _value,
-      $Res Function(_AdditionalFieldsRequest) _then)
-      : super(_value, (v) => _then(v as _AdditionalFieldsRequest));
+    implements _$$_AdditionalFieldsRequestCopyWith<$Res> {
+  __$$_AdditionalFieldsRequestCopyWithImpl(_$_AdditionalFieldsRequest _value,
+      $Res Function(_$_AdditionalFieldsRequest) _then)
+      : super(_value, (v) => _then(v as _$_AdditionalFieldsRequest));
 
   @override
-  _AdditionalFieldsRequest get _value =>
-      super._value as _AdditionalFieldsRequest;
+  _$_AdditionalFieldsRequest get _value =>
+      super._value as _$_AdditionalFieldsRequest;
 
   @override
   $Res call({
     Object? chatToken = freezed,
     Object? additionalFields = freezed,
   }) {
-    return _then(_AdditionalFieldsRequest(
+    return _then(_$_AdditionalFieldsRequest(
       chatToken: chatToken == freezed
           ? _value.chatToken
           : chatToken // ignore: cast_nullable_to_non_nullable
               as String,
       additionalFields: additionalFields == freezed
-          ? _value.additionalFields
+          ? _value._additionalFields
           : additionalFields // ignore: cast_nullable_to_non_nullable
               as List<AdditionalFieldsItemRequest>,
     ));
@@ -134,15 +113,21 @@ class __$AdditionalFieldsRequestCopyWithImpl<$Res>
 @JsonSerializable(fieldRename: FieldRename.snake)
 class _$_AdditionalFieldsRequest implements _AdditionalFieldsRequest {
   const _$_AdditionalFieldsRequest(
-      {required this.chatToken, required this.additionalFields});
+      {required this.chatToken,
+      required final List<AdditionalFieldsItemRequest> additionalFields})
+      : _additionalFields = additionalFields;
 
   factory _$_AdditionalFieldsRequest.fromJson(Map<String, dynamic> json) =>
       _$$_AdditionalFieldsRequestFromJson(json);
 
   @override
   final String chatToken;
+  final List<AdditionalFieldsItemRequest> _additionalFields;
   @override
-  final List<AdditionalFieldsItemRequest> additionalFields;
+  List<AdditionalFieldsItemRequest> get additionalFields {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_additionalFields);
+  }
 
   @override
   String toString() {
@@ -153,34 +138,38 @@ class _$_AdditionalFieldsRequest implements _AdditionalFieldsRequest {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _AdditionalFieldsRequest &&
+            other is _$_AdditionalFieldsRequest &&
             const DeepCollectionEquality().equals(other.chatToken, chatToken) &&
             const DeepCollectionEquality()
-                .equals(other.additionalFields, additionalFields));
+                .equals(other._additionalFields, _additionalFields));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(chatToken),
-      const DeepCollectionEquality().hash(additionalFields));
+      const DeepCollectionEquality().hash(_additionalFields));
 
   @JsonKey(ignore: true)
   @override
-  _$AdditionalFieldsRequestCopyWith<_AdditionalFieldsRequest> get copyWith =>
-      __$AdditionalFieldsRequestCopyWithImpl<_AdditionalFieldsRequest>(
-          this, _$identity);
+  _$$_AdditionalFieldsRequestCopyWith<_$_AdditionalFieldsRequest>
+      get copyWith =>
+          __$$_AdditionalFieldsRequestCopyWithImpl<_$_AdditionalFieldsRequest>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AdditionalFieldsRequestToJson(this);
+    return _$$_AdditionalFieldsRequestToJson(
+      this,
+    );
   }
 }
 
 abstract class _AdditionalFieldsRequest implements AdditionalFieldsRequest {
   const factory _AdditionalFieldsRequest(
-          {required String chatToken,
-          required List<AdditionalFieldsItemRequest> additionalFields}) =
+          {required final String chatToken,
+          required final List<AdditionalFieldsItemRequest> additionalFields}) =
       _$_AdditionalFieldsRequest;
 
   factory _AdditionalFieldsRequest.fromJson(Map<String, dynamic> json) =
@@ -192,34 +181,14 @@ abstract class _AdditionalFieldsRequest implements AdditionalFieldsRequest {
   List<AdditionalFieldsItemRequest> get additionalFields;
   @override
   @JsonKey(ignore: true)
-  _$AdditionalFieldsRequestCopyWith<_AdditionalFieldsRequest> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_AdditionalFieldsRequestCopyWith<_$_AdditionalFieldsRequest>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 AdditionalFieldsItemRequest _$AdditionalFieldsItemRequestFromJson(
     Map<String, dynamic> json) {
   return _AdditionalFieldsItemRequest.fromJson(json);
 }
-
-/// @nodoc
-class _$AdditionalFieldsItemRequestTearOff {
-  const _$AdditionalFieldsItemRequestTearOff();
-
-  _AdditionalFieldsItemRequest call(
-      {required String id, required String value}) {
-    return _AdditionalFieldsItemRequest(
-      id: id,
-      value: value,
-    );
-  }
-
-  AdditionalFieldsItemRequest fromJson(Map<String, Object?> json) {
-    return AdditionalFieldsItemRequest.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $AdditionalFieldsItemRequest = _$AdditionalFieldsItemRequestTearOff();
 
 /// @nodoc
 mixin _$AdditionalFieldsItemRequest {
@@ -269,35 +238,35 @@ class _$AdditionalFieldsItemRequestCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$AdditionalFieldsItemRequestCopyWith<$Res>
+abstract class _$$_AdditionalFieldsItemRequestCopyWith<$Res>
     implements $AdditionalFieldsItemRequestCopyWith<$Res> {
-  factory _$AdditionalFieldsItemRequestCopyWith(
-          _AdditionalFieldsItemRequest value,
-          $Res Function(_AdditionalFieldsItemRequest) then) =
-      __$AdditionalFieldsItemRequestCopyWithImpl<$Res>;
+  factory _$$_AdditionalFieldsItemRequestCopyWith(
+          _$_AdditionalFieldsItemRequest value,
+          $Res Function(_$_AdditionalFieldsItemRequest) then) =
+      __$$_AdditionalFieldsItemRequestCopyWithImpl<$Res>;
   @override
   $Res call({String id, String value});
 }
 
 /// @nodoc
-class __$AdditionalFieldsItemRequestCopyWithImpl<$Res>
+class __$$_AdditionalFieldsItemRequestCopyWithImpl<$Res>
     extends _$AdditionalFieldsItemRequestCopyWithImpl<$Res>
-    implements _$AdditionalFieldsItemRequestCopyWith<$Res> {
-  __$AdditionalFieldsItemRequestCopyWithImpl(
-      _AdditionalFieldsItemRequest _value,
-      $Res Function(_AdditionalFieldsItemRequest) _then)
-      : super(_value, (v) => _then(v as _AdditionalFieldsItemRequest));
+    implements _$$_AdditionalFieldsItemRequestCopyWith<$Res> {
+  __$$_AdditionalFieldsItemRequestCopyWithImpl(
+      _$_AdditionalFieldsItemRequest _value,
+      $Res Function(_$_AdditionalFieldsItemRequest) _then)
+      : super(_value, (v) => _then(v as _$_AdditionalFieldsItemRequest));
 
   @override
-  _AdditionalFieldsItemRequest get _value =>
-      super._value as _AdditionalFieldsItemRequest;
+  _$_AdditionalFieldsItemRequest get _value =>
+      super._value as _$_AdditionalFieldsItemRequest;
 
   @override
   $Res call({
     Object? id = freezed,
     Object? value = freezed,
   }) {
-    return _then(_AdditionalFieldsItemRequest(
+    return _then(_$_AdditionalFieldsItemRequest(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -333,11 +302,12 @@ class _$_AdditionalFieldsItemRequest implements _AdditionalFieldsItemRequest {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _AdditionalFieldsItemRequest &&
+            other is _$_AdditionalFieldsItemRequest &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.value, value));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -346,21 +316,23 @@ class _$_AdditionalFieldsItemRequest implements _AdditionalFieldsItemRequest {
 
   @JsonKey(ignore: true)
   @override
-  _$AdditionalFieldsItemRequestCopyWith<_AdditionalFieldsItemRequest>
-      get copyWith => __$AdditionalFieldsItemRequestCopyWithImpl<
-          _AdditionalFieldsItemRequest>(this, _$identity);
+  _$$_AdditionalFieldsItemRequestCopyWith<_$_AdditionalFieldsItemRequest>
+      get copyWith => __$$_AdditionalFieldsItemRequestCopyWithImpl<
+          _$_AdditionalFieldsItemRequest>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AdditionalFieldsItemRequestToJson(this);
+    return _$$_AdditionalFieldsItemRequestToJson(
+      this,
+    );
   }
 }
 
 abstract class _AdditionalFieldsItemRequest
     implements AdditionalFieldsItemRequest {
   const factory _AdditionalFieldsItemRequest(
-      {required String id,
-      required String value}) = _$_AdditionalFieldsItemRequest;
+      {required final String id,
+      required final String value}) = _$_AdditionalFieldsItemRequest;
 
   factory _AdditionalFieldsItemRequest.fromJson(Map<String, dynamic> json) =
       _$_AdditionalFieldsItemRequest.fromJson;
@@ -371,6 +343,6 @@ abstract class _AdditionalFieldsItemRequest
   String get value;
   @override
   @JsonKey(ignore: true)
-  _$AdditionalFieldsItemRequestCopyWith<_AdditionalFieldsItemRequest>
+  _$$_AdditionalFieldsItemRequestCopyWith<_$_AdditionalFieldsItemRequest>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -12,46 +12,11 @@ part of 'chat.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 Chat _$ChatFromJson(Map<String, dynamic> json) {
   return _Chat.fromJson(json);
 }
-
-/// @nodoc
-class _$ChatTearOff {
-  const _$ChatTearOff();
-
-  _Chat call(
-      {required int id,
-      required int channelId,
-      required int clientId,
-      required int companyId,
-      required dynamic ticketId,
-      @JsonKey(fromJson: Chat._onlineFromJson) required bool online,
-      required String token,
-      required DateTime connectedAt,
-      required String url}) {
-    return _Chat(
-      id: id,
-      channelId: channelId,
-      clientId: clientId,
-      companyId: companyId,
-      ticketId: ticketId,
-      online: online,
-      token: token,
-      connectedAt: connectedAt,
-      url: url,
-    );
-  }
-
-  Chat fromJson(Map<String, Object?> json) {
-    return Chat.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Chat = _$ChatTearOff();
 
 /// @nodoc
 mixin _$Chat {
@@ -150,9 +115,9 @@ class _$ChatCopyWithImpl<$Res> implements $ChatCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$ChatCopyWith<$Res> implements $ChatCopyWith<$Res> {
-  factory _$ChatCopyWith(_Chat value, $Res Function(_Chat) then) =
-      __$ChatCopyWithImpl<$Res>;
+abstract class _$$_ChatCopyWith<$Res> implements $ChatCopyWith<$Res> {
+  factory _$$_ChatCopyWith(_$_Chat value, $Res Function(_$_Chat) then) =
+      __$$_ChatCopyWithImpl<$Res>;
   @override
   $Res call(
       {int id,
@@ -167,13 +132,13 @@ abstract class _$ChatCopyWith<$Res> implements $ChatCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$ChatCopyWithImpl<$Res> extends _$ChatCopyWithImpl<$Res>
-    implements _$ChatCopyWith<$Res> {
-  __$ChatCopyWithImpl(_Chat _value, $Res Function(_Chat) _then)
-      : super(_value, (v) => _then(v as _Chat));
+class __$$_ChatCopyWithImpl<$Res> extends _$ChatCopyWithImpl<$Res>
+    implements _$$_ChatCopyWith<$Res> {
+  __$$_ChatCopyWithImpl(_$_Chat _value, $Res Function(_$_Chat) _then)
+      : super(_value, (v) => _then(v as _$_Chat));
 
   @override
-  _Chat get _value => super._value as _Chat;
+  _$_Chat get _value => super._value as _$_Chat;
 
   @override
   $Res call({
@@ -187,7 +152,7 @@ class __$ChatCopyWithImpl<$Res> extends _$ChatCopyWithImpl<$Res>
     Object? connectedAt = freezed,
     Object? url = freezed,
   }) {
-    return _then(_Chat(
+    return _then(_$_Chat(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -255,7 +220,8 @@ class _$_Chat implements _Chat {
   final int companyId;
   @override
   final dynamic ticketId;
-  @override // ignore: invalid_annotation_target
+// ignore: invalid_annotation_target
+  @override
   @JsonKey(fromJson: Chat._onlineFromJson)
   final bool online;
   @override
@@ -274,7 +240,7 @@ class _$_Chat implements _Chat {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Chat &&
+            other is _$_Chat &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.channelId, channelId) &&
             const DeepCollectionEquality().equals(other.clientId, clientId) &&
@@ -287,6 +253,7 @@ class _$_Chat implements _Chat {
             const DeepCollectionEquality().equals(other.url, url));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -302,26 +269,28 @@ class _$_Chat implements _Chat {
 
   @JsonKey(ignore: true)
   @override
-  _$ChatCopyWith<_Chat> get copyWith =>
-      __$ChatCopyWithImpl<_Chat>(this, _$identity);
+  _$$_ChatCopyWith<_$_Chat> get copyWith =>
+      __$$_ChatCopyWithImpl<_$_Chat>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ChatToJson(this);
+    return _$$_ChatToJson(
+      this,
+    );
   }
 }
 
 abstract class _Chat implements Chat {
   const factory _Chat(
-      {required int id,
-      required int channelId,
-      required int clientId,
-      required int companyId,
-      required dynamic ticketId,
-      @JsonKey(fromJson: Chat._onlineFromJson) required bool online,
-      required String token,
-      required DateTime connectedAt,
-      required String url}) = _$_Chat;
+      {required final int id,
+      required final int channelId,
+      required final int clientId,
+      required final int companyId,
+      required final dynamic ticketId,
+      @JsonKey(fromJson: Chat._onlineFromJson) required final bool online,
+      required final String token,
+      required final DateTime connectedAt,
+      required final String url}) = _$_Chat;
 
   factory _Chat.fromJson(Map<String, dynamic> json) = _$_Chat.fromJson;
 
@@ -346,5 +315,5 @@ abstract class _Chat implements Chat {
   String get url;
   @override
   @JsonKey(ignore: true)
-  _$ChatCopyWith<_Chat> get copyWith => throw _privateConstructorUsedError;
+  _$$_ChatCopyWith<_$_Chat> get copyWith => throw _privateConstructorUsedError;
 }

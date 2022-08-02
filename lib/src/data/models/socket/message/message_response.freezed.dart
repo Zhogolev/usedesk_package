@@ -12,31 +12,11 @@ part of 'message_response.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 MessageResponse _$MessageResponseFromJson(Map<String, dynamic> json) {
   return _MessageResponse.fromJson(json);
 }
-
-/// @nodoc
-class _$MessageResponseTearOff {
-  const _$MessageResponseTearOff();
-
-  _MessageResponse call(
-      {required String type, required Message<dynamic> message}) {
-    return _MessageResponse(
-      type: type,
-      message: message,
-    );
-  }
-
-  MessageResponse fromJson(Map<String, Object?> json) {
-    return MessageResponse.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $MessageResponse = _$MessageResponseTearOff();
 
 /// @nodoc
 mixin _$MessageResponse {
@@ -94,11 +74,11 @@ class _$MessageResponseCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$MessageResponseCopyWith<$Res>
+abstract class _$$_MessageResponseCopyWith<$Res>
     implements $MessageResponseCopyWith<$Res> {
-  factory _$MessageResponseCopyWith(
-          _MessageResponse value, $Res Function(_MessageResponse) then) =
-      __$MessageResponseCopyWithImpl<$Res>;
+  factory _$$_MessageResponseCopyWith(
+          _$_MessageResponse value, $Res Function(_$_MessageResponse) then) =
+      __$$_MessageResponseCopyWithImpl<$Res>;
   @override
   $Res call({String type, Message<dynamic> message});
 
@@ -107,22 +87,22 @@ abstract class _$MessageResponseCopyWith<$Res>
 }
 
 /// @nodoc
-class __$MessageResponseCopyWithImpl<$Res>
+class __$$_MessageResponseCopyWithImpl<$Res>
     extends _$MessageResponseCopyWithImpl<$Res>
-    implements _$MessageResponseCopyWith<$Res> {
-  __$MessageResponseCopyWithImpl(
-      _MessageResponse _value, $Res Function(_MessageResponse) _then)
-      : super(_value, (v) => _then(v as _MessageResponse));
+    implements _$$_MessageResponseCopyWith<$Res> {
+  __$$_MessageResponseCopyWithImpl(
+      _$_MessageResponse _value, $Res Function(_$_MessageResponse) _then)
+      : super(_value, (v) => _then(v as _$_MessageResponse));
 
   @override
-  _MessageResponse get _value => super._value as _MessageResponse;
+  _$_MessageResponse get _value => super._value as _$_MessageResponse;
 
   @override
   $Res call({
     Object? type = freezed,
     Object? message = freezed,
   }) {
-    return _then(_MessageResponse(
+    return _then(_$_MessageResponse(
       type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -137,7 +117,6 @@ class __$MessageResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@Implements<BaseResponse>()
 class _$_MessageResponse implements _MessageResponse {
   const _$_MessageResponse({required this.type, required this.message});
 
@@ -158,11 +137,12 @@ class _$_MessageResponse implements _MessageResponse {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _MessageResponse &&
+            other is _$_MessageResponse &&
             const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality().equals(other.message, message));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -171,19 +151,21 @@ class _$_MessageResponse implements _MessageResponse {
 
   @JsonKey(ignore: true)
   @override
-  _$MessageResponseCopyWith<_MessageResponse> get copyWith =>
-      __$MessageResponseCopyWithImpl<_MessageResponse>(this, _$identity);
+  _$$_MessageResponseCopyWith<_$_MessageResponse> get copyWith =>
+      __$$_MessageResponseCopyWithImpl<_$_MessageResponse>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MessageResponseToJson(this);
+    return _$$_MessageResponseToJson(
+      this,
+    );
   }
 }
 
 abstract class _MessageResponse implements MessageResponse, BaseResponse {
   const factory _MessageResponse(
-      {required String type,
-      required Message<dynamic> message}) = _$_MessageResponse;
+      {required final String type,
+      required final Message<dynamic> message}) = _$_MessageResponse;
 
   factory _MessageResponse.fromJson(Map<String, dynamic> json) =
       _$_MessageResponse.fromJson;
@@ -194,6 +176,6 @@ abstract class _MessageResponse implements MessageResponse, BaseResponse {
   Message<dynamic> get message;
   @override
   @JsonKey(ignore: true)
-  _$MessageResponseCopyWith<_MessageResponse> get copyWith =>
+  _$$_MessageResponseCopyWith<_$_MessageResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }

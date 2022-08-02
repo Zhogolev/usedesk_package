@@ -26,7 +26,7 @@ _$_Message<C> _$$_MessageFromJson<C>(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_MessageToJson<C>(_$_Message<C> instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'type': _$MessageTypeEnumMap[instance.type],
+      'type': _$MessageTypeEnumMap[instance.type]!,
       'createdAt': instance.createdAt.toIso8601String(),
       'text': instance.text,
       'name': instance.name,

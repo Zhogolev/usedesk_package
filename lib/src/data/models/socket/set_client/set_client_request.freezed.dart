@@ -12,32 +12,11 @@ part of 'set_client_request.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 SetClientRequest _$SetClientRequestFromJson(Map<String, dynamic> json) {
   return _SetClientRequest.fromJson(json);
 }
-
-/// @nodoc
-class _$SetClientRequestTearOff {
-  const _$SetClientRequestTearOff();
-
-  _SetClientRequest call(
-      {String type = '@@server/chat/SET_CLIENT',
-      required SetClientRequestPayload payload}) {
-    return _SetClientRequest(
-      type: type,
-      payload: payload,
-    );
-  }
-
-  SetClientRequest fromJson(Map<String, Object?> json) {
-    return SetClientRequest.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $SetClientRequest = _$SetClientRequestTearOff();
 
 /// @nodoc
 mixin _$SetClientRequest {
@@ -95,11 +74,11 @@ class _$SetClientRequestCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$SetClientRequestCopyWith<$Res>
+abstract class _$$_SetClientRequestCopyWith<$Res>
     implements $SetClientRequestCopyWith<$Res> {
-  factory _$SetClientRequestCopyWith(
-          _SetClientRequest value, $Res Function(_SetClientRequest) then) =
-      __$SetClientRequestCopyWithImpl<$Res>;
+  factory _$$_SetClientRequestCopyWith(
+          _$_SetClientRequest value, $Res Function(_$_SetClientRequest) then) =
+      __$$_SetClientRequestCopyWithImpl<$Res>;
   @override
   $Res call({String type, SetClientRequestPayload payload});
 
@@ -108,22 +87,22 @@ abstract class _$SetClientRequestCopyWith<$Res>
 }
 
 /// @nodoc
-class __$SetClientRequestCopyWithImpl<$Res>
+class __$$_SetClientRequestCopyWithImpl<$Res>
     extends _$SetClientRequestCopyWithImpl<$Res>
-    implements _$SetClientRequestCopyWith<$Res> {
-  __$SetClientRequestCopyWithImpl(
-      _SetClientRequest _value, $Res Function(_SetClientRequest) _then)
-      : super(_value, (v) => _then(v as _SetClientRequest));
+    implements _$$_SetClientRequestCopyWith<$Res> {
+  __$$_SetClientRequestCopyWithImpl(
+      _$_SetClientRequest _value, $Res Function(_$_SetClientRequest) _then)
+      : super(_value, (v) => _then(v as _$_SetClientRequest));
 
   @override
-  _SetClientRequest get _value => super._value as _SetClientRequest;
+  _$_SetClientRequest get _value => super._value as _$_SetClientRequest;
 
   @override
   $Res call({
     Object? type = freezed,
     Object? payload = freezed,
   }) {
-    return _then(_SetClientRequest(
+    return _then(_$_SetClientRequest(
       type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -145,8 +124,8 @@ class _$_SetClientRequest implements _SetClientRequest {
   factory _$_SetClientRequest.fromJson(Map<String, dynamic> json) =>
       _$$_SetClientRequestFromJson(json);
 
-  @JsonKey()
   @override
+  @JsonKey()
   final String type;
   @override
   final SetClientRequestPayload payload;
@@ -160,11 +139,12 @@ class _$_SetClientRequest implements _SetClientRequest {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _SetClientRequest &&
+            other is _$_SetClientRequest &&
             const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality().equals(other.payload, payload));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -173,19 +153,21 @@ class _$_SetClientRequest implements _SetClientRequest {
 
   @JsonKey(ignore: true)
   @override
-  _$SetClientRequestCopyWith<_SetClientRequest> get copyWith =>
-      __$SetClientRequestCopyWithImpl<_SetClientRequest>(this, _$identity);
+  _$$_SetClientRequestCopyWith<_$_SetClientRequest> get copyWith =>
+      __$$_SetClientRequestCopyWithImpl<_$_SetClientRequest>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SetClientRequestToJson(this);
+    return _$$_SetClientRequestToJson(
+      this,
+    );
   }
 }
 
 abstract class _SetClientRequest implements SetClientRequest {
   const factory _SetClientRequest(
-      {String type,
-      required SetClientRequestPayload payload}) = _$_SetClientRequest;
+      {final String type,
+      required final SetClientRequestPayload payload}) = _$_SetClientRequest;
 
   factory _SetClientRequest.fromJson(Map<String, dynamic> json) =
       _$_SetClientRequest.fromJson;
@@ -196,7 +178,7 @@ abstract class _SetClientRequest implements SetClientRequest {
   SetClientRequestPayload get payload;
   @override
   @JsonKey(ignore: true)
-  _$SetClientRequestCopyWith<_SetClientRequest> get copyWith =>
+  _$$_SetClientRequestCopyWith<_$_SetClientRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -204,35 +186,6 @@ SetClientRequestPayload _$SetClientRequestPayloadFromJson(
     Map<String, dynamic> json) {
   return _SetClientRequestPayload.fromJson(json);
 }
-
-/// @nodoc
-class _$SetClientRequestPayloadTearOff {
-  const _$SetClientRequestPayloadTearOff();
-
-  _SetClientRequestPayload call(
-      {String? token,
-      String? email,
-      String? username,
-      String? note,
-      int? phone,
-      String? additionalId}) {
-    return _SetClientRequestPayload(
-      token: token,
-      email: email,
-      username: username,
-      note: note,
-      phone: phone,
-      additionalId: additionalId,
-    );
-  }
-
-  SetClientRequestPayload fromJson(Map<String, Object?> json) {
-    return SetClientRequestPayload.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $SetClientRequestPayload = _$SetClientRequestPayloadTearOff();
 
 /// @nodoc
 mixin _$SetClientRequestPayload {
@@ -311,11 +264,11 @@ class _$SetClientRequestPayloadCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$SetClientRequestPayloadCopyWith<$Res>
+abstract class _$$_SetClientRequestPayloadCopyWith<$Res>
     implements $SetClientRequestPayloadCopyWith<$Res> {
-  factory _$SetClientRequestPayloadCopyWith(_SetClientRequestPayload value,
-          $Res Function(_SetClientRequestPayload) then) =
-      __$SetClientRequestPayloadCopyWithImpl<$Res>;
+  factory _$$_SetClientRequestPayloadCopyWith(_$_SetClientRequestPayload value,
+          $Res Function(_$_SetClientRequestPayload) then) =
+      __$$_SetClientRequestPayloadCopyWithImpl<$Res>;
   @override
   $Res call(
       {String? token,
@@ -327,16 +280,16 @@ abstract class _$SetClientRequestPayloadCopyWith<$Res>
 }
 
 /// @nodoc
-class __$SetClientRequestPayloadCopyWithImpl<$Res>
+class __$$_SetClientRequestPayloadCopyWithImpl<$Res>
     extends _$SetClientRequestPayloadCopyWithImpl<$Res>
-    implements _$SetClientRequestPayloadCopyWith<$Res> {
-  __$SetClientRequestPayloadCopyWithImpl(_SetClientRequestPayload _value,
-      $Res Function(_SetClientRequestPayload) _then)
-      : super(_value, (v) => _then(v as _SetClientRequestPayload));
+    implements _$$_SetClientRequestPayloadCopyWith<$Res> {
+  __$$_SetClientRequestPayloadCopyWithImpl(_$_SetClientRequestPayload _value,
+      $Res Function(_$_SetClientRequestPayload) _then)
+      : super(_value, (v) => _then(v as _$_SetClientRequestPayload));
 
   @override
-  _SetClientRequestPayload get _value =>
-      super._value as _SetClientRequestPayload;
+  _$_SetClientRequestPayload get _value =>
+      super._value as _$_SetClientRequestPayload;
 
   @override
   $Res call({
@@ -347,7 +300,7 @@ class __$SetClientRequestPayloadCopyWithImpl<$Res>
     Object? phone = freezed,
     Object? additionalId = freezed,
   }) {
-    return _then(_SetClientRequestPayload(
+    return _then(_$_SetClientRequestPayload(
       token: token == freezed
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
@@ -413,7 +366,7 @@ class _$_SetClientRequestPayload implements _SetClientRequestPayload {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _SetClientRequestPayload &&
+            other is _$_SetClientRequestPayload &&
             const DeepCollectionEquality().equals(other.token, token) &&
             const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality().equals(other.username, username) &&
@@ -423,6 +376,7 @@ class _$_SetClientRequestPayload implements _SetClientRequestPayload {
                 .equals(other.additionalId, additionalId));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -435,24 +389,27 @@ class _$_SetClientRequestPayload implements _SetClientRequestPayload {
 
   @JsonKey(ignore: true)
   @override
-  _$SetClientRequestPayloadCopyWith<_SetClientRequestPayload> get copyWith =>
-      __$SetClientRequestPayloadCopyWithImpl<_SetClientRequestPayload>(
-          this, _$identity);
+  _$$_SetClientRequestPayloadCopyWith<_$_SetClientRequestPayload>
+      get copyWith =>
+          __$$_SetClientRequestPayloadCopyWithImpl<_$_SetClientRequestPayload>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SetClientRequestPayloadToJson(this);
+    return _$$_SetClientRequestPayloadToJson(
+      this,
+    );
   }
 }
 
 abstract class _SetClientRequestPayload implements SetClientRequestPayload {
   const factory _SetClientRequestPayload(
-      {String? token,
-      String? email,
-      String? username,
-      String? note,
-      int? phone,
-      String? additionalId}) = _$_SetClientRequestPayload;
+      {final String? token,
+      final String? email,
+      final String? username,
+      final String? note,
+      final int? phone,
+      final String? additionalId}) = _$_SetClientRequestPayload;
 
   factory _SetClientRequestPayload.fromJson(Map<String, dynamic> json) =
       _$_SetClientRequestPayload.fromJson;
@@ -471,6 +428,6 @@ abstract class _SetClientRequestPayload implements SetClientRequestPayload {
   String? get additionalId;
   @override
   @JsonKey(ignore: true)
-  _$SetClientRequestPayloadCopyWith<_SetClientRequestPayload> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_SetClientRequestPayloadCopyWith<_$_SetClientRequestPayload>
+      get copyWith => throw _privateConstructorUsedError;
 }

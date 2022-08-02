@@ -42,7 +42,7 @@ Map<String, dynamic> _$$_MessageTextClientToJson(
       'id': instance.id,
       'localId': instance.localId,
       'createdAt': instance.createdAt.toIso8601String(),
-      'status': _$MessageSentStatusEnumMap[instance.status],
+      'status': _$MessageSentStatusEnumMap[instance.status]!,
       'text': instance.text,
       'buttons': instance.buttons.map((e) => e.toJson()).toList(),
     };
@@ -83,7 +83,7 @@ Map<String, dynamic> _$$_MessageImageClientToJson(
       'id': instance.id,
       'localId': instance.localId,
       'createdAt': instance.createdAt.toIso8601String(),
-      'status': _$MessageSentStatusEnumMap[instance.status],
+      'status': _$MessageSentStatusEnumMap[instance.status]!,
       'file': instance.file.toJson(),
     };
 
@@ -119,6 +119,6 @@ Map<String, dynamic> _$$_MessageUnknownFileClientToJson(
       'id': instance.id,
       'localId': instance.localId,
       'createdAt': instance.createdAt.toIso8601String(),
-      'status': _$MessageSentStatusEnumMap[instance.status],
+      'status': _$MessageSentStatusEnumMap[instance.status]!,
       'file': instance.file.toJson(),
     };
