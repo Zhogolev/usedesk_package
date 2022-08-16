@@ -23,17 +23,21 @@ class MessageImageClient
         MessageBase,
         MessageFromClient,
         MessageImageBase,
-        MessageFileBase {
+        MessageFileBase,
+        MessageUploadFileBase {
   @Implements<MessageBase>()
   @Implements<MessageFromClient>()
   @Implements<MessageImageBase>()
   @Implements<MessageFileBase>()
+  @Implements<MessageUploadFileBase>()
   const factory MessageImageClient({
     required int id,
     required int? localId,
     required DateTime createdAt,
     required MessageSentStatus status,
     required MessageFile file,
+    // ignore: invalid_annotation_target
+    @JsonKey(ignore: true) Stream<double>? uploadProgress,
   }) = _MessageImageClient;
 
   factory MessageImageClient.fromJson(Map<String, dynamic> json) =>

@@ -1,5 +1,10 @@
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:usedesk/usedesk.dart';
+import 'package:path/path.dart' as p;
 
 class SharedPreferencesUsedeskChatStorage extends UsedeskChatStorageProvider
     with UsedeskChatCachedStorage {
@@ -19,6 +24,24 @@ class SharedPreferencesUsedeskChatStorage extends UsedeskChatStorageProvider
   @override
   Future<void> clearToken() {
     return prefs.remove('usedesk_chat:token');
+  }
+
+  @override
+  Future<String> prepareUploadCache(String filename, Uint8List data) async {
+    final tempDir = await getTemporaryDirectory();
+    final cache = File(p.join(tempDir.path, filename));
+    cache.createSync(recursive: true);
+    await cache.writeAsBytes(data);
+    return cache.path;
+  }
+
+  @override
+  Future<void> removeUploadCache(String filename) async {
+    final tempDir = await getTemporaryDirectory();
+    final cache = File(p.join(tempDir.path, filename));
+    if (cache.existsSync()) {
+      cache.deleteSync();
+    }
   }
 
   @override

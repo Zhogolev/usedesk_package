@@ -91,23 +91,37 @@ class UsedeskChatNetwork implements UsedeskChatSocketCallbacks {
     );
   }
 
-  Future<bool> sendFile(String filename, Uint8List bytes, int? localId) {
+  Future<bool> sendFile(
+    String filename,
+    Uint8List bytes,
+    int? localId, {
+    void Function(double percentage)? progress,
+  }) async {
     if (_clientToken == null) {
       return Future.value(false);
     }
     return Network.uploadFiles(
-      apiConfig.urlToSendFile,
-      {
+      url: apiConfig.urlToSendFile,
+      fields: {
         'chat_token': _clientToken!,
         if (localId != null) 'message_id': localId.toString(),
       },
-      [
+      files: [
         NetworkFileField(
           filename: filename,
           bytes: bytes,
           fieldName: 'file',
+          tempPath: await storage.prepareUploadCache(filename, bytes),
         )
       ],
+      progress: (receivedLength, contentLength) {
+        var percentage = receivedLength / contentLength * 100;
+        percentage = percentage % 1 == 0
+            ? double.parse(percentage.toStringAsFixed(0))
+            : double.parse(percentage.toStringAsFixed(2));
+
+        progress?.call(percentage);
+      },
     );
   }
 

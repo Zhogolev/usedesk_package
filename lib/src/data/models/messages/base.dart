@@ -40,3 +40,7 @@ abstract class MessageImageBase {
 abstract class MessageFileBase {
   MessageFile get file;
 }
+
+abstract class MessageUploadFileBase {
+  Stream<double>? get uploadProgress;
+}

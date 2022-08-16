@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:filesize/filesize.dart';
@@ -90,8 +91,14 @@ class UsedeskChat {
     }
   }
 
-  Future<bool> sendFile(String filename, Uint8List bytes, [int? localId]) {
+  Future<bool> sendFile(
+    String filename,
+    Uint8List bytes, [
+    int? localId,
+  ]) async {
     _validateConnect();
+    StreamController<double>? uploadProgress;
+    Stream<double>? uploadProgressStream;
     if (localId != null) {
       final mime = lookupMimeType(filename) ?? '';
       final extension = p.extension(filename);
@@ -107,14 +114,18 @@ class UsedeskChat {
           ? MessageSentStatus.sending
           : MessageSentStatus.failed;
 
+      uploadProgress = StreamController<double>()..add(0);
+      uploadProgressStream = uploadProgress.stream.asBroadcastStream();
+
       if (mime.startsWith('image')) {
         _repository.addMessage(
           MessageImageClient(
             id: -localId,
             localId: localId,
-            createdAt: DateTime.now(),
+            createdAt: DateTime.now().toUtc(),
             file: file,
             status: status,
+            uploadProgress: uploadProgressStream,
           ),
         );
       } else {
@@ -122,14 +133,40 @@ class UsedeskChat {
           MessageUnknownFileClient(
             id: -localId,
             localId: localId,
-            createdAt: DateTime.now(),
+            createdAt: DateTime.now().toUtc(),
             file: file,
             status: status,
+            uploadProgress: uploadProgressStream,
           ),
         );
       }
     }
-    return _api.sendFile(filename, bytes, localId);
+    bool result = true;
+
+    Future<void> close() async {
+      uploadProgress?.close();
+      return _repository.storage?.removeUploadCache(filename);
+    }
+
+    try {
+      result = await _api.sendFile(
+        filename,
+        bytes,
+        localId,
+        progress: (percentage) async {
+          if (!(uploadProgress?.isClosed ?? true)) {
+            uploadProgress?.add(percentage);
+          }
+
+          if (percentage == 100) {
+            await close();
+          }
+        },
+      );
+    } catch (_) {
+      await close();
+    }
+    return result;
   }
 
   Future<void> reset() {

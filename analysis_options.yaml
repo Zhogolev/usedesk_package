@@ -6,7 +6,6 @@ analyzer:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
     - "**/*.gr.dart"
-    - "**/*.freezed.dart"
     - "**/*.mocks.dart"
     - "**/*.config.dart"
     - "**/example/**"

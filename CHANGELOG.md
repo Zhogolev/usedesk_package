@@ -1,3 +1,7 @@
+## 0.7.0
+
+* Show upload file message with `uploadProgress` stream instantly
+
 ## 0.6.0
 
 * Upgrade dependencies

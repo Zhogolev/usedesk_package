@@ -21,16 +21,20 @@ class MessageUnknownFileClient
         _$MessageUnknownFileClient,
         MessageBase,
         MessageFromClient,
-        MessageFileBase {
+        MessageFileBase,
+        MessageUploadFileBase {
   @Implements<MessageBase>()
   @Implements<MessageFromClient>()
   @Implements<MessageFileBase>()
+  @Implements<MessageUploadFileBase>()
   const factory MessageUnknownFileClient({
     required int id,
     required int? localId,
     required DateTime createdAt,
     required MessageSentStatus status,
     required MessageFile file,
+    // ignore: invalid_annotation_target
+    @JsonKey(ignore: true) Stream<double>? uploadProgress,
   }) = _MessageUnknownFileClient;
 
   factory MessageUnknownFileClient.fromJson(Map<String, dynamic> json) =>

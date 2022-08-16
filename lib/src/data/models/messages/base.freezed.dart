@@ -664,7 +664,10 @@ mixin _$MessageImageClient {
   int? get localId => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   MessageSentStatus get status => throw _privateConstructorUsedError;
-  MessageFile get file => throw _privateConstructorUsedError;
+  MessageFile get file =>
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+  @JsonKey(ignore: true)
+  Stream<double>? get uploadProgress => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -682,7 +685,8 @@ abstract class $MessageImageClientCopyWith<$Res> {
       int? localId,
       DateTime createdAt,
       MessageSentStatus status,
-      MessageFile file});
+      MessageFile file,
+      @JsonKey(ignore: true) Stream<double>? uploadProgress});
 
   $MessageFileCopyWith<$Res> get file;
 }
@@ -703,6 +707,7 @@ class _$MessageImageClientCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? status = freezed,
     Object? file = freezed,
+    Object? uploadProgress = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -725,6 +730,10 @@ class _$MessageImageClientCopyWithImpl<$Res>
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
               as MessageFile,
+      uploadProgress: uploadProgress == freezed
+          ? _value.uploadProgress
+          : uploadProgress // ignore: cast_nullable_to_non_nullable
+              as Stream<double>?,
     ));
   }
 
@@ -748,7 +757,8 @@ abstract class _$$_MessageImageClientCopyWith<$Res>
       int? localId,
       DateTime createdAt,
       MessageSentStatus status,
-      MessageFile file});
+      MessageFile file,
+      @JsonKey(ignore: true) Stream<double>? uploadProgress});
 
   @override
   $MessageFileCopyWith<$Res> get file;
@@ -772,6 +782,7 @@ class __$$_MessageImageClientCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? status = freezed,
     Object? file = freezed,
+    Object? uploadProgress = freezed,
   }) {
     return _then(_$_MessageImageClient(
       id: id == freezed
@@ -794,6 +805,10 @@ class __$$_MessageImageClientCopyWithImpl<$Res>
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
               as MessageFile,
+      uploadProgress: uploadProgress == freezed
+          ? _value.uploadProgress
+          : uploadProgress // ignore: cast_nullable_to_non_nullable
+              as Stream<double>?,
     ));
   }
 }
@@ -806,7 +821,8 @@ class _$_MessageImageClient implements _MessageImageClient {
       required this.localId,
       required this.createdAt,
       required this.status,
-      required this.file});
+      required this.file,
+      @JsonKey(ignore: true) this.uploadProgress});
 
   factory _$_MessageImageClient.fromJson(Map<String, dynamic> json) =>
       _$$_MessageImageClientFromJson(json);
@@ -821,10 +837,14 @@ class _$_MessageImageClient implements _MessageImageClient {
   final MessageSentStatus status;
   @override
   final MessageFile file;
+// ignore: invalid_annotation_target
+  @override
+  @JsonKey(ignore: true)
+  final Stream<double>? uploadProgress;
 
   @override
   String toString() {
-    return 'MessageImageClient(id: $id, localId: $localId, createdAt: $createdAt, status: $status, file: $file)';
+    return 'MessageImageClient(id: $id, localId: $localId, createdAt: $createdAt, status: $status, file: $file, uploadProgress: $uploadProgress)';
   }
 
   @override
@@ -836,7 +856,9 @@ class _$_MessageImageClient implements _MessageImageClient {
             const DeepCollectionEquality().equals(other.localId, localId) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality().equals(other.file, file));
+            const DeepCollectionEquality().equals(other.file, file) &&
+            const DeepCollectionEquality()
+                .equals(other.uploadProgress, uploadProgress));
   }
 
   @JsonKey(ignore: true)
@@ -847,7 +869,8 @@ class _$_MessageImageClient implements _MessageImageClient {
       const DeepCollectionEquality().hash(localId),
       const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(file));
+      const DeepCollectionEquality().hash(file),
+      const DeepCollectionEquality().hash(uploadProgress));
 
   @JsonKey(ignore: true)
   @override
@@ -869,13 +892,16 @@ abstract class _MessageImageClient
         MessageBase,
         MessageFromClient,
         MessageImageBase,
-        MessageFileBase {
+        MessageFileBase,
+        MessageUploadFileBase {
   const factory _MessageImageClient(
-      {required final int id,
-      required final int? localId,
-      required final DateTime createdAt,
-      required final MessageSentStatus status,
-      required final MessageFile file}) = _$_MessageImageClient;
+          {required final int id,
+          required final int? localId,
+          required final DateTime createdAt,
+          required final MessageSentStatus status,
+          required final MessageFile file,
+          @JsonKey(ignore: true) final Stream<double>? uploadProgress}) =
+      _$_MessageImageClient;
 
   factory _MessageImageClient.fromJson(Map<String, dynamic> json) =
       _$_MessageImageClient.fromJson;
@@ -890,6 +916,9 @@ abstract class _MessageImageClient
   MessageSentStatus get status;
   @override
   MessageFile get file;
+  @override // ignore: invalid_annotation_target
+  @JsonKey(ignore: true)
+  Stream<double>? get uploadProgress;
   @override
   @JsonKey(ignore: true)
   _$$_MessageImageClientCopyWith<_$_MessageImageClient> get copyWith =>
@@ -1094,7 +1123,10 @@ mixin _$MessageUnknownFileClient {
   int? get localId => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   MessageSentStatus get status => throw _privateConstructorUsedError;
-  MessageFile get file => throw _privateConstructorUsedError;
+  MessageFile get file =>
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+  @JsonKey(ignore: true)
+  Stream<double>? get uploadProgress => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1112,7 +1144,8 @@ abstract class $MessageUnknownFileClientCopyWith<$Res> {
       int? localId,
       DateTime createdAt,
       MessageSentStatus status,
-      MessageFile file});
+      MessageFile file,
+      @JsonKey(ignore: true) Stream<double>? uploadProgress});
 
   $MessageFileCopyWith<$Res> get file;
 }
@@ -1133,6 +1166,7 @@ class _$MessageUnknownFileClientCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? status = freezed,
     Object? file = freezed,
+    Object? uploadProgress = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -1155,6 +1189,10 @@ class _$MessageUnknownFileClientCopyWithImpl<$Res>
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
               as MessageFile,
+      uploadProgress: uploadProgress == freezed
+          ? _value.uploadProgress
+          : uploadProgress // ignore: cast_nullable_to_non_nullable
+              as Stream<double>?,
     ));
   }
 
@@ -1179,7 +1217,8 @@ abstract class _$$_MessageUnknownFileClientCopyWith<$Res>
       int? localId,
       DateTime createdAt,
       MessageSentStatus status,
-      MessageFile file});
+      MessageFile file,
+      @JsonKey(ignore: true) Stream<double>? uploadProgress});
 
   @override
   $MessageFileCopyWith<$Res> get file;
@@ -1204,6 +1243,7 @@ class __$$_MessageUnknownFileClientCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? status = freezed,
     Object? file = freezed,
+    Object? uploadProgress = freezed,
   }) {
     return _then(_$_MessageUnknownFileClient(
       id: id == freezed
@@ -1226,6 +1266,10 @@ class __$$_MessageUnknownFileClientCopyWithImpl<$Res>
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
               as MessageFile,
+      uploadProgress: uploadProgress == freezed
+          ? _value.uploadProgress
+          : uploadProgress // ignore: cast_nullable_to_non_nullable
+              as Stream<double>?,
     ));
   }
 }
@@ -1238,7 +1282,8 @@ class _$_MessageUnknownFileClient implements _MessageUnknownFileClient {
       required this.localId,
       required this.createdAt,
       required this.status,
-      required this.file});
+      required this.file,
+      @JsonKey(ignore: true) this.uploadProgress});
 
   factory _$_MessageUnknownFileClient.fromJson(Map<String, dynamic> json) =>
       _$$_MessageUnknownFileClientFromJson(json);
@@ -1253,10 +1298,14 @@ class _$_MessageUnknownFileClient implements _MessageUnknownFileClient {
   final MessageSentStatus status;
   @override
   final MessageFile file;
+// ignore: invalid_annotation_target
+  @override
+  @JsonKey(ignore: true)
+  final Stream<double>? uploadProgress;
 
   @override
   String toString() {
-    return 'MessageUnknownFileClient(id: $id, localId: $localId, createdAt: $createdAt, status: $status, file: $file)';
+    return 'MessageUnknownFileClient(id: $id, localId: $localId, createdAt: $createdAt, status: $status, file: $file, uploadProgress: $uploadProgress)';
   }
 
   @override
@@ -1268,7 +1317,9 @@ class _$_MessageUnknownFileClient implements _MessageUnknownFileClient {
             const DeepCollectionEquality().equals(other.localId, localId) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality().equals(other.file, file));
+            const DeepCollectionEquality().equals(other.file, file) &&
+            const DeepCollectionEquality()
+                .equals(other.uploadProgress, uploadProgress));
   }
 
   @JsonKey(ignore: true)
@@ -1279,7 +1330,8 @@ class _$_MessageUnknownFileClient implements _MessageUnknownFileClient {
       const DeepCollectionEquality().hash(localId),
       const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(file));
+      const DeepCollectionEquality().hash(file),
+      const DeepCollectionEquality().hash(uploadProgress));
 
   @JsonKey(ignore: true)
   @override
@@ -1300,13 +1352,16 @@ abstract class _MessageUnknownFileClient
         MessageUnknownFileClient,
         MessageBase,
         MessageFromClient,
-        MessageFileBase {
+        MessageFileBase,
+        MessageUploadFileBase {
   const factory _MessageUnknownFileClient(
-      {required final int id,
-      required final int? localId,
-      required final DateTime createdAt,
-      required final MessageSentStatus status,
-      required final MessageFile file}) = _$_MessageUnknownFileClient;
+          {required final int id,
+          required final int? localId,
+          required final DateTime createdAt,
+          required final MessageSentStatus status,
+          required final MessageFile file,
+          @JsonKey(ignore: true) final Stream<double>? uploadProgress}) =
+      _$_MessageUnknownFileClient;
 
   factory _MessageUnknownFileClient.fromJson(Map<String, dynamic> json) =
       _$_MessageUnknownFileClient.fromJson;
@@ -1321,6 +1376,9 @@ abstract class _MessageUnknownFileClient
   MessageSentStatus get status;
   @override
   MessageFile get file;
+  @override // ignore: invalid_annotation_target
+  @JsonKey(ignore: true)
+  Stream<double>? get uploadProgress;
   @override
   @JsonKey(ignore: true)
   _$$_MessageUnknownFileClientCopyWith<_$_MessageUnknownFileClient>
