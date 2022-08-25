@@ -10,14 +10,14 @@ enum ResponseType {
   setClient,
 }
 
-ResponseType? responseTypeByValue(String value) {
-  final association = {
-    '@@chat/current/INITED': ResponseType.inited,
-    '@@redbone/ERROR': ResponseType.error,
-    '@@chat/current/ADD_MESSAGE': ResponseType.message,
-    '@@chat/current/CALLBACK_ANSWER': ResponseType.feedback,
-    '@@chat/current/SET': ResponseType.setClient,
-  };
+final _association = {
+  '@@chat/current/INITED': ResponseType.inited,
+  '@@redbone/ERROR': ResponseType.error,
+  '@@chat/current/ADD_MESSAGE': ResponseType.message,
+  '@@chat/current/CALLBACK_ANSWER': ResponseType.feedback,
+  '@@chat/current/SET': ResponseType.setClient,
+};
 
-  return association[value];
+ResponseType? responseTypeByValue(String value) {
+  return _association[value];
 }

@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:usedesk/src/data/models/messages/base.dart';
+import 'package:usedesk/src/data/models/socket/message.dart';
+import 'package:usedesk/src/data/models/socket/message/message_response.dart';
 import 'package:usedesk/src/data/resources/usedesk_chat_storage_provider.dart';
 
 class UsedeskChatRepository {
@@ -12,53 +14,60 @@ class UsedeskChatRepository {
   bool _disposed = false;
   final UsedeskChatCachedStorage? storage;
 
-  final List<MessageBase> _messages = [];
+  final List<MessageResponse> _messages = [];
   final List<MessageFromClient> _queueForDeletion = [];
-  final _onMessageStreamController = StreamController<MessageBase>.broadcast();
-  final _messagesController = StreamController<List<MessageBase>>.broadcast();
+  final _onMessageStreamController =
+      StreamController<MessageResponse>.broadcast();
+  final _messagesController =
+      StreamController<List<MessageResponse>>.broadcast();
 
-  List<MessageBase> get messages => _messages;
-  Stream<MessageBase> get onMessageStream =>
+  List<MessageResponse> get messages => _messages;
+  Stream<MessageResponse> get onMessageStream =>
       _onMessageStreamController.stream.asBroadcastStream();
-  Stream<List<MessageBase>> get messagesStream =>
+  Stream<List<MessageResponse>> get messagesStream =>
       _messagesController.stream.asBroadcastStream();
 
-  void initMessages(List<MessageBase> messages) {
-    final failedMessages = _messages
-        .whereType<MessageTextClient>()
-        .where((message) => message.status == MessageSentStatus.failed)
-        .toList();
+  void initMessages(List<MessageResponse> messages) {
+    // TODO: check this
+    // final failedMessages = _messages
+    //     .whereType<MessageResponse>()
+    //     .where((message) => message.message.status == MessageSentStatus.failed)
+    //     .toList();
     if (_messages.isNotEmpty) {
       _messages.clear();
     }
     if (messages != _messages) {
-      _messages.addAll({...messages, ...failedMessages});
+      // TODO: check this
+      //_messages.addAll({...messages, ...failedMessages});
+      _messages.addAll({...messages});
       _messagesController.sink.add(_messages);
     }
   }
 
-  void addMessage(MessageBase message) {
+  void addMessage(MessageResponse messageResponse) {
     final index = _messages.indexWhere((existMessage) {
-      if (message is MessageFromClient && existMessage is MessageFromClient) {
-        final clientMessage = message as MessageFromClient;
-        final clientExistMessage = existMessage as MessageFromClient;
-        if (clientMessage.localId != null &&
-            clientExistMessage.localId != null) {
-          return clientMessage.localId == clientExistMessage.localId;
-        }
-      }
-      return existMessage.id == message.id;
+      // TODO: check this.
+      // if ([MessageType.clientToBot, MessageType.clientToOperator]
+      //     .contains(messageResponse.message.type)) {
+      //   final clientMessage = messageResponse as MessageFromClient;
+      //   final clientExistMessage = existMessage as MessageFromClient;
+      //   if (clientMessage.localId != null &&
+      //       clientExistMessage.localId != null) {
+      //     return clientMessage.localId == clientExistMessage.localId;
+      //   }
+      // }
+      return existMessage.message.id == messageResponse.message.id;
     });
     if (index == -1) {
-      _messages.add(message);
+      _messages.add(messageResponse);
     } else {
-      _messages[index] = message;
+      _messages[index] = messageResponse;
     }
-    _onMessageStreamController.sink.add(message);
+    _onMessageStreamController.sink.add(messageResponse);
     _messagesController.sink.add(_messages);
 
-    if (storage != null && message is MessageFromClient) {
-      final clientMessage = message as MessageFromClient;
+    if (storage != null && messageResponse is MessageFromClient) {
+      final clientMessage = messageResponse as MessageFromClient;
       final cachedMessageIndex = _queueForDeletion.indexWhere(
           (messageForDeletion) =>
               messageForDeletion.localId == clientMessage.localId);
@@ -76,16 +85,17 @@ class UsedeskChatRepository {
   }
 
   void markFailedMessages() {
-    for (int i = 0; i < _messages.length; i++) {
-      final message = _messages[i];
-      if (message is MessageTextClient &&
-          message.status == MessageSentStatus.sending &&
-          message.localId != null) {
-        _messages[i] = message.copyWith(
-          status: MessageSentStatus.failed,
-        );
-      }
-    }
+    // TODO: check this.
+    // for (int i = 0; i < _messages.length; i++) {
+    //   final message = _messages[i].message;
+    //   if (message is MessageTextClient &&
+    //       message.status == MessageSentStatus.sending &&
+    //       message.localId != null) {
+    //     _messages[i] = message.copyWith(
+    //       status: MessageSentStatus.failed,
+    //     );
+    //   }
+    // }
     if (!_disposed) {
       _messagesController.sink.add(_messages);
     }

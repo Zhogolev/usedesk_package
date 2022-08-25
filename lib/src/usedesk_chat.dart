@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:filesize/filesize.dart';
 import 'package:mime/mime.dart';
 import 'package:path/path.dart' as p;
+import 'package:usedesk/src/data/models/socket/message/message_response.dart';
 
 import 'usedesk_chat_network.dart';
 import 'data/models/configuration/chat_api_configuration.dart';
@@ -24,10 +25,14 @@ class UsedeskChat {
   final UsedeskChatNetwork _api;
   final UsedeskChatRepository _repository;
   final bool debug;
-
-  List<MessageBase> get messages => _repository.messages;
-  Stream<MessageBase> get onMessageStream => _repository.onMessageStream;
-  Stream<List<MessageBase>> get messagesStream => _repository.messagesStream;
+  // TODO: check this out.
+  List<MessageResponse> get messages => _repository.messages;
+  Stream<MessageResponse> get onMessageStream => _repository.onMessageStream;
+  Stream<List<MessageResponse>> get messagesStream =>
+      _repository.messagesStream;
+  //List<MessageBase> get messages => _repository.messages;
+  //Stream<MessageBase> get onMessageStream => _repository.onMessageStream;
+  //Stream<List<MessageBase>> get messagesStream => _repository.messagesStream;
 
   static Future<UsedeskChat> init({
     required UsedeskChatStorageProvider storage,
@@ -74,16 +79,24 @@ class UsedeskChat {
 
   void sendText(String text, [int? localId]) {
     if (localId != null) {
-      _repository.addMessage(MessageTextClient(
-        id: -localId,
-        localId: localId,
-        createdAt: DateTime.now(),
-        text: text,
-        status: _api.isConnected
-            ? MessageSentStatus.sending
-            : MessageSentStatus.failed,
-        buttons: [],
-      ));
+      // TODO: check this
+      _repository.addMessage(MessageResponse(
+          message: Message(
+            id: -localId,
+            createdAt: DateTime.now(),
+            type: MessageType.clientToOperator,
+          ),
+          type: '@@chat/current/ADD_MESSAGE'));
+      // _repository.addMessage(MessageTextClient(
+      //   id: -localId,
+      //   localId: localId,
+      //   createdAt: DateTime.now(),
+      //   text: text,
+      //   status: _api.isConnected
+      //       ? MessageSentStatus.sending
+      //       : MessageSentStatus.failed,
+      //   buttons: [],
+      // ));
       _repository.saveFailedMessages();
     }
     if (_api.isConnected) {
@@ -116,30 +129,36 @@ class UsedeskChat {
 
       uploadProgress = StreamController<double>()..add(0);
       uploadProgressStream = uploadProgress.stream.asBroadcastStream();
-
-      if (mime.startsWith('image')) {
-        _repository.addMessage(
-          MessageImageClient(
-            id: -localId,
-            localId: localId,
-            createdAt: DateTime.now().toUtc(),
-            file: file,
-            status: status,
-            uploadProgress: uploadProgressStream,
-          ),
-        );
-      } else {
-        _repository.addMessage(
-          MessageUnknownFileClient(
-            id: -localId,
-            localId: localId,
-            createdAt: DateTime.now().toUtc(),
-            file: file,
-            status: status,
-            uploadProgress: uploadProgressStream,
-          ),
-        );
-      }
+      _repository.addMessage(MessageResponse(
+          type: "@@chat/current/ADD_MESSAGE",
+          message: Message(
+              id: -localId,
+              type: MessageType.clientToOperator,
+              createdAt: DateTime.now().toUtc(),
+              file: file)));
+      //if (mime.startsWith('image')) {
+      // _repository.addMessage(
+      //   MessageImageClient(
+      //     id: -localId,
+      //     localId: localId,
+      //     createdAt: DateTime.now().toUtc(),
+      //     file: file,
+      //     status: status,
+      //     uploadProgress: uploadProgressStream,
+      //   ),
+      // );
+      // } else {
+      //   _repository.addMessage(
+      //     MessageUnknownFileClient(
+      //       id: -localId,
+      //       localId: localId,
+      //       createdAt: DateTime.now().toUtc(),
+      //       file: file,
+      //       status: status,
+      //       uploadProgress: uploadProgressStream,
+      //     ),
+      //   );
+      // }
     }
     bool result = true;
 

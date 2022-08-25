@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:usedesk/src/data/interfaces/usedesk_chat_socket_callbacks.dart';
 import 'package:usedesk/src/data/models/configuration/chat_api_configuration.dart';
@@ -46,6 +48,10 @@ class UsedeskChatSocketProvider {
   }
 
   void _onResponse(Map<String, dynamic> rawData) {
+    print("-------");
+    print(jsonEncode(rawData));
+    print("-------");
+
     final typeRaw =
         rawData.containsKey('type') ? rawData['type'] as String : '';
     final type = responseTypeByValue(typeRaw);

@@ -167,15 +167,15 @@ class UsedeskChatNetwork implements UsedeskChatSocketCallbacks {
       _setToken(response.token);
     }
 
-    repository.initMessages(
-      response.setup.messages
-          .where((message) {
-            // Temporary ignore online status message
-            return !(message.file == null && (message.text?.isEmpty ?? true));
-          })
-          .map(MessageConverter.convertToTypedMessage)
-          .toList(),
-    );
+    // repository.initMessages(
+    //   response.setup.messages
+    //       .where((message) {
+    //         // Temporary ignore online status message
+    //         return !(message.file == null && (message.text?.isEmpty ?? true));
+    //       })
+    //       .map(MessageConverter.convertToTypedMessage)
+    //       .toList(),
+    // );
 
     if (_identify != null) {
       _socket.send(
@@ -209,9 +209,9 @@ class UsedeskChatNetwork implements UsedeskChatSocketCallbacks {
       return;
     }
 
-    repository.addMessage(
-      MessageConverter.convertToTypedMessage(response.message),
-    );
+    repository.addMessage(response
+        //MessageConverter.convertToTypedMessage(response.message),
+        );
   }
 
   @override
