@@ -119,7 +119,7 @@ class UsedeskChat {
       final file = MessageFile(
         name: filename,
         size: filesize(bytes.length),
-        content: '__loading__',
+        content: filename,
         type: extension,
         bytes: bytes,
       );
@@ -182,7 +182,10 @@ class UsedeskChat {
           }
         },
       );
-    } catch (_) {
+    } catch (e) {
+      print('------- ERROR -----');
+      print(e);
+      print('------- ERROR -----');
       await close();
     }
     return result;
