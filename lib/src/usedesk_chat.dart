@@ -26,10 +26,9 @@ class UsedeskChat {
   final UsedeskChatRepository _repository;
   final bool debug;
   // TODO: check this out.
-  List<MessageResponse> get messages => _repository.messages;
-  Stream<MessageResponse> get onMessageStream => _repository.onMessageStream;
-  Stream<List<MessageResponse>> get messagesStream =>
-      _repository.messagesStream;
+  List<Message> get messages => _repository.messages;
+  Stream<Message> get onMessageStream => _repository.onMessageStream;
+  Stream<List<Message>> get messagesStream => _repository.messagesStream;
   //List<MessageBase> get messages => _repository.messages;
   //Stream<MessageBase> get onMessageStream => _repository.onMessageStream;
   //Stream<List<MessageBase>> get messagesStream => _repository.messagesStream;
@@ -79,14 +78,11 @@ class UsedeskChat {
 
   void sendText(String text, [int? localId]) {
     if (localId != null) {
-      // TODO: check this
-      _repository.addMessage(MessageResponse(
-          message: Message(
-            id: -localId,
-            createdAt: DateTime.now(),
-            type: MessageType.clientToOperator,
-          ),
-          type: '@@chat/current/ADD_MESSAGE'));
+      _repository.addMessage(Message(
+        id: -localId,
+        createdAt: DateTime.now(),
+        type: MessageType.clientToOperator,
+      ));
       // _repository.addMessage(MessageTextClient(
       //   id: -localId,
       //   localId: localId,
@@ -129,13 +125,11 @@ class UsedeskChat {
 
       uploadProgress = StreamController<double>()..add(0);
       uploadProgressStream = uploadProgress.stream.asBroadcastStream();
-      _repository.addMessage(MessageResponse(
-          type: "@@chat/current/ADD_MESSAGE",
-          message: Message(
-              id: -localId,
-              type: MessageType.clientToOperator,
-              createdAt: DateTime.now().toUtc(),
-              file: file)));
+      _repository.addMessage(Message(
+          id: localId,
+          type: MessageType.clientToOperator,
+          createdAt: DateTime.now().toUtc(),
+          file: file));
       //if (mime.startsWith('image')) {
       // _repository.addMessage(
       //   MessageImageClient(
@@ -183,9 +177,6 @@ class UsedeskChat {
         },
       );
     } catch (e) {
-      print('------- ERROR -----');
-      print(e);
-      print('------- ERROR -----');
       await close();
     }
     return result;

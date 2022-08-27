@@ -361,6 +361,7 @@ mixin _$SetClientResponseStateClient {
   String? get token => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   int? get chat => throw _privateConstructorUsedError;
+  List<Message>? get messages => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -374,7 +375,7 @@ abstract class $SetClientResponseStateClientCopyWith<$Res> {
           SetClientResponseStateClient value,
           $Res Function(SetClientResponseStateClient) then) =
       _$SetClientResponseStateClientCopyWithImpl<$Res>;
-  $Res call({String? token, String? email, int? chat});
+  $Res call({String? token, String? email, int? chat, List<Message>? messages});
 }
 
 /// @nodoc
@@ -391,6 +392,7 @@ class _$SetClientResponseStateClientCopyWithImpl<$Res>
     Object? token = freezed,
     Object? email = freezed,
     Object? chat = freezed,
+    Object? messages = freezed,
   }) {
     return _then(_value.copyWith(
       token: token == freezed
@@ -405,6 +407,10 @@ class _$SetClientResponseStateClientCopyWithImpl<$Res>
           ? _value.chat
           : chat // ignore: cast_nullable_to_non_nullable
               as int?,
+      messages: messages == freezed
+          ? _value.messages
+          : messages // ignore: cast_nullable_to_non_nullable
+              as List<Message>?,
     ));
   }
 }
@@ -417,7 +423,7 @@ abstract class _$$_SetClientResponseStateClientCopyWith<$Res>
           $Res Function(_$_SetClientResponseStateClient) then) =
       __$$_SetClientResponseStateClientCopyWithImpl<$Res>;
   @override
-  $Res call({String? token, String? email, int? chat});
+  $Res call({String? token, String? email, int? chat, List<Message>? messages});
 }
 
 /// @nodoc
@@ -438,6 +444,7 @@ class __$$_SetClientResponseStateClientCopyWithImpl<$Res>
     Object? token = freezed,
     Object? email = freezed,
     Object? chat = freezed,
+    Object? messages = freezed,
   }) {
     return _then(_$_SetClientResponseStateClient(
       token: token == freezed
@@ -452,6 +459,10 @@ class __$$_SetClientResponseStateClientCopyWithImpl<$Res>
           ? _value.chat
           : chat // ignore: cast_nullable_to_non_nullable
               as int?,
+      messages: messages == freezed
+          ? _value._messages
+          : messages // ignore: cast_nullable_to_non_nullable
+              as List<Message>?,
     ));
   }
 }
@@ -459,7 +470,9 @@ class __$$_SetClientResponseStateClientCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_SetClientResponseStateClient implements _SetClientResponseStateClient {
-  const _$_SetClientResponseStateClient({this.token, this.email, this.chat});
+  const _$_SetClientResponseStateClient(
+      {this.token, this.email, this.chat, final List<Message>? messages})
+      : _messages = messages;
 
   factory _$_SetClientResponseStateClient.fromJson(Map<String, dynamic> json) =>
       _$$_SetClientResponseStateClientFromJson(json);
@@ -470,10 +483,18 @@ class _$_SetClientResponseStateClient implements _SetClientResponseStateClient {
   final String? email;
   @override
   final int? chat;
+  final List<Message>? _messages;
+  @override
+  List<Message>? get messages {
+    final value = _messages;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'SetClientResponseStateClient(token: $token, email: $email, chat: $chat)';
+    return 'SetClientResponseStateClient(token: $token, email: $email, chat: $chat, messages: $messages)';
   }
 
   @override
@@ -483,7 +504,8 @@ class _$_SetClientResponseStateClient implements _SetClientResponseStateClient {
             other is _$_SetClientResponseStateClient &&
             const DeepCollectionEquality().equals(other.token, token) &&
             const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.chat, chat));
+            const DeepCollectionEquality().equals(other.chat, chat) &&
+            const DeepCollectionEquality().equals(other._messages, _messages));
   }
 
   @JsonKey(ignore: true)
@@ -492,7 +514,8 @@ class _$_SetClientResponseStateClient implements _SetClientResponseStateClient {
       runtimeType,
       const DeepCollectionEquality().hash(token),
       const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(chat));
+      const DeepCollectionEquality().hash(chat),
+      const DeepCollectionEquality().hash(_messages));
 
   @JsonKey(ignore: true)
   @override
@@ -513,7 +536,8 @@ abstract class _SetClientResponseStateClient
   const factory _SetClientResponseStateClient(
       {final String? token,
       final String? email,
-      final int? chat}) = _$_SetClientResponseStateClient;
+      final int? chat,
+      final List<Message>? messages}) = _$_SetClientResponseStateClient;
 
   factory _SetClientResponseStateClient.fromJson(Map<String, dynamic> json) =
       _$_SetClientResponseStateClient.fromJson;
@@ -524,6 +548,8 @@ abstract class _SetClientResponseStateClient
   String? get email;
   @override
   int? get chat;
+  @override
+  List<Message>? get messages;
   @override
   @JsonKey(ignore: true)
   _$$_SetClientResponseStateClientCopyWith<_$_SetClientResponseStateClient>

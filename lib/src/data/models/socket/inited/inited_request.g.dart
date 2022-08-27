@@ -16,6 +16,7 @@ _$_InitedRequest _$$_InitedRequestFromJson(Map<String, dynamic> json) =>
               json['payload'] as Map<String, dynamic>),
       url: json['url'] as String?,
       token: json['token'] as String?,
+      channelId: json['channel_id'] as String?,
     );
 
 Map<String, dynamic> _$$_InitedRequestToJson(_$_InitedRequest instance) =>
@@ -25,6 +26,7 @@ Map<String, dynamic> _$$_InitedRequestToJson(_$_InitedRequest instance) =>
       'payload': instance.payload.toJson(),
       'url': instance.url,
       'token': instance.token,
+      'channel_id': instance.channelId,
     };
 
 _$_InitedRequestPayload _$$_InitedRequestPayloadFromJson(

@@ -13,6 +13,7 @@ class InitedRequest with _$InitedRequest {
     @Default(InitedRequestPayload()) InitedRequestPayload payload,
     String? url,
     String? token,
+    String? channelId,
   }) = _InitedRequest;
 
   factory InitedRequest.fromJson(Map<String, dynamic> json) =>

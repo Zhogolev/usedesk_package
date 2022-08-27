@@ -14,20 +14,18 @@ class UsedeskChatRepository {
   bool _disposed = false;
   final UsedeskChatCachedStorage? storage;
 
-  final List<MessageResponse> _messages = [];
+  final List<Message> _messages = [];
   final List<MessageFromClient> _queueForDeletion = [];
-  final _onMessageStreamController =
-      StreamController<MessageResponse>.broadcast();
-  final _messagesController =
-      StreamController<List<MessageResponse>>.broadcast();
+  final _onMessageStreamController = StreamController<Message>.broadcast();
+  final _messagesController = StreamController<List<Message>>.broadcast();
 
-  List<MessageResponse> get messages => _messages;
-  Stream<MessageResponse> get onMessageStream =>
+  List<Message> get messages => _messages;
+  Stream<Message> get onMessageStream =>
       _onMessageStreamController.stream.asBroadcastStream();
-  Stream<List<MessageResponse>> get messagesStream =>
+  Stream<List<Message>> get messagesStream =>
       _messagesController.stream.asBroadcastStream();
 
-  void initMessages(List<MessageResponse> messages) {
+  void initMessages(List<Message> messages) {
     // TODO: check this
     // final failedMessages = _messages
     //     .whereType<MessageResponse>()
@@ -44,7 +42,7 @@ class UsedeskChatRepository {
     }
   }
 
-  void addMessage(MessageResponse messageResponse) {
+  void addMessage(Message msg) {
     final index = _messages.indexWhere((existMessage) {
       // TODO: check this.
       // if ([MessageType.clientToBot, MessageType.clientToOperator]
@@ -56,18 +54,18 @@ class UsedeskChatRepository {
       //     return clientMessage.localId == clientExistMessage.localId;
       //   }
       // }
-      return existMessage.message.id == messageResponse.message.id;
+      return existMessage.id == msg.id;
     });
     if (index == -1) {
-      _messages.add(messageResponse);
+      _messages.add(msg);
     } else {
-      _messages[index] = messageResponse;
+      _messages[index] = msg;
     }
-    _onMessageStreamController.sink.add(messageResponse);
+    _onMessageStreamController.sink.add(msg);
     _messagesController.sink.add(_messages);
 
-    if (storage != null && messageResponse is MessageFromClient) {
-      final clientMessage = messageResponse as MessageFromClient;
+    if (storage != null && msg is MessageFromClient) {
+      final clientMessage = msg as MessageFromClient;
       final cachedMessageIndex = _queueForDeletion.indexWhere(
           (messageForDeletion) =>
               messageForDeletion.localId == clientMessage.localId);

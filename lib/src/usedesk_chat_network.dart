@@ -9,6 +9,7 @@ import 'data/models/messages/base.dart';
 import 'data/models/socket/error/error_response.dart';
 import 'data/models/socket/inited/inited_request.dart';
 import 'data/models/socket/inited/inited_response.dart';
+import 'data/models/socket/message.dart';
 import 'data/models/socket/message/message_request.dart';
 import 'data/models/socket/message/message_response.dart';
 import 'data/models/socket/set_client/set_client_request.dart';
@@ -135,16 +136,17 @@ class UsedeskChatNetwork implements UsedeskChatSocketCallbacks {
         ? '${companyId}_$channelId'
         : companyId;
 
-    _socket.send(
-      InitedRequest(
-        companyId: combinedCompanyId,
-        url: apiConfig.urlChat,
-        token: _clientToken,
-        payload: InitedRequestPayload(
-            //   sdk: 'Flutter ${getOperatingSystem()}',
-            ),
-      ).toJson(),
-    );
+    final request = InitedRequest(
+      companyId: combinedCompanyId,
+      url: apiConfig.urlChat,
+      token: _clientToken,
+      channelId: channelId,
+      payload: InitedRequestPayload(
+          //   sdk: 'Flutter ${getOperatingSystem()}',
+          ),
+    ).toJson();
+
+    _socket.send(request);
   }
 
   @override
@@ -167,16 +169,6 @@ class UsedeskChatNetwork implements UsedeskChatSocketCallbacks {
       _setToken(response.token);
     }
 
-    // repository.initMessages(
-    //   response.setup.messages
-    //       .where((message) {
-    //         // Temporary ignore online status message
-    //         return !(message.file == null && (message.text?.isEmpty ?? true));
-    //       })
-    //       .map(MessageConverter.convertToTypedMessage)
-    //       .toList(),
-    // );
-
     if (_identify != null) {
       _socket.send(
         SetClientRequest(
@@ -189,6 +181,10 @@ class UsedeskChatNetwork implements UsedeskChatSocketCallbacks {
           ),
         ).toJson(),
       );
+
+      for (Message message in response.setup.messages) {
+        onMessage(message);
+      }
     } else {
       _reSendMessages();
     }
@@ -202,22 +198,23 @@ class UsedeskChatNetwork implements UsedeskChatSocketCallbacks {
   }
 
   @override
-  void onMessage(MessageResponse response) {
+  void onMessage(Message message) {
     // Temporary ignore online status message
-    if (response.message.file == null &&
-        (response.message.text?.isEmpty ?? true)) {
+    if (message.file == null && (message.text?.isEmpty ?? true)) {
       return;
     }
 
-    repository.addMessage(response
-        //MessageConverter.convertToTypedMessage(response.message),
-        );
+    repository.addMessage(message);
   }
 
   @override
   void onSetClient(SetClientResponse response) {
     if (response.state.client.token != null) {
       _setToken(response.state.client.token!);
+    }
+
+    for (Message msg in response.state.client.messages ?? []) {
+      onMessage(msg);
     }
 
     _reSendMessages();

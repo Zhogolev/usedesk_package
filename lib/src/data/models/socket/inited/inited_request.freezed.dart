@@ -25,6 +25,7 @@ mixin _$InitedRequest {
   InitedRequestPayload get payload => throw _privateConstructorUsedError;
   String? get url => throw _privateConstructorUsedError;
   String? get token => throw _privateConstructorUsedError;
+  String? get channelId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,7 +43,8 @@ abstract class $InitedRequestCopyWith<$Res> {
       String companyId,
       InitedRequestPayload payload,
       String? url,
-      String? token});
+      String? token,
+      String? channelId});
 
   $InitedRequestPayloadCopyWith<$Res> get payload;
 }
@@ -63,6 +65,7 @@ class _$InitedRequestCopyWithImpl<$Res>
     Object? payload = freezed,
     Object? url = freezed,
     Object? token = freezed,
+    Object? channelId = freezed,
   }) {
     return _then(_value.copyWith(
       type: type == freezed
@@ -84,6 +87,10 @@ class _$InitedRequestCopyWithImpl<$Res>
       token: token == freezed
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
+              as String?,
+      channelId: channelId == freezed
+          ? _value.channelId
+          : channelId // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -108,7 +115,8 @@ abstract class _$$_InitedRequestCopyWith<$Res>
       String companyId,
       InitedRequestPayload payload,
       String? url,
-      String? token});
+      String? token,
+      String? channelId});
 
   @override
   $InitedRequestPayloadCopyWith<$Res> get payload;
@@ -132,6 +140,7 @@ class __$$_InitedRequestCopyWithImpl<$Res>
     Object? payload = freezed,
     Object? url = freezed,
     Object? token = freezed,
+    Object? channelId = freezed,
   }) {
     return _then(_$_InitedRequest(
       type: type == freezed
@@ -154,6 +163,10 @@ class __$$_InitedRequestCopyWithImpl<$Res>
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String?,
+      channelId: channelId == freezed
+          ? _value.channelId
+          : channelId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -167,7 +180,8 @@ class _$_InitedRequest implements _InitedRequest {
       required this.companyId,
       this.payload = const InitedRequestPayload(),
       this.url,
-      this.token});
+      this.token,
+      this.channelId});
 
   factory _$_InitedRequest.fromJson(Map<String, dynamic> json) =>
       _$$_InitedRequestFromJson(json);
@@ -184,10 +198,12 @@ class _$_InitedRequest implements _InitedRequest {
   final String? url;
   @override
   final String? token;
+  @override
+  final String? channelId;
 
   @override
   String toString() {
-    return 'InitedRequest(type: $type, companyId: $companyId, payload: $payload, url: $url, token: $token)';
+    return 'InitedRequest(type: $type, companyId: $companyId, payload: $payload, url: $url, token: $token, channelId: $channelId)';
   }
 
   @override
@@ -199,7 +215,8 @@ class _$_InitedRequest implements _InitedRequest {
             const DeepCollectionEquality().equals(other.companyId, companyId) &&
             const DeepCollectionEquality().equals(other.payload, payload) &&
             const DeepCollectionEquality().equals(other.url, url) &&
-            const DeepCollectionEquality().equals(other.token, token));
+            const DeepCollectionEquality().equals(other.token, token) &&
+            const DeepCollectionEquality().equals(other.channelId, channelId));
   }
 
   @JsonKey(ignore: true)
@@ -210,7 +227,8 @@ class _$_InitedRequest implements _InitedRequest {
       const DeepCollectionEquality().hash(companyId),
       const DeepCollectionEquality().hash(payload),
       const DeepCollectionEquality().hash(url),
-      const DeepCollectionEquality().hash(token));
+      const DeepCollectionEquality().hash(token),
+      const DeepCollectionEquality().hash(channelId));
 
   @JsonKey(ignore: true)
   @override
@@ -231,7 +249,8 @@ abstract class _InitedRequest implements InitedRequest {
       required final String companyId,
       final InitedRequestPayload payload,
       final String? url,
-      final String? token}) = _$_InitedRequest;
+      final String? token,
+      final String? channelId}) = _$_InitedRequest;
 
   factory _InitedRequest.fromJson(Map<String, dynamic> json) =
       _$_InitedRequest.fromJson;
@@ -246,6 +265,8 @@ abstract class _InitedRequest implements InitedRequest {
   String? get url;
   @override
   String? get token;
+  @override
+  String? get channelId;
   @override
   @JsonKey(ignore: true)
   _$$_InitedRequestCopyWith<_$_InitedRequest> get copyWith =>

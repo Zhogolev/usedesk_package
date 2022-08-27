@@ -41,6 +41,9 @@ _$_SetClientResponseStateClient _$$_SetClientResponseStateClientFromJson(
       token: json['token'] as String?,
       email: json['email'] as String?,
       chat: json['chat'] as int?,
+      messages: (json['messages'] as List<dynamic>?)
+          ?.map((e) => Message<dynamic>.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_SetClientResponseStateClientToJson(
@@ -49,4 +52,5 @@ Map<String, dynamic> _$$_SetClientResponseStateClientToJson(
       'token': instance.token,
       'email': instance.email,
       'chat': instance.chat,
+      'messages': instance.messages?.map((e) => e.toJson()).toList(),
     };
