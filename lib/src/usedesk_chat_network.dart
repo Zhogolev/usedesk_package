@@ -1,8 +1,9 @@
 import 'dart:typed_data';
-
+import 'dart:io' show Platform;
 import 'data/interfaces/usedesk_chat_socket_callbacks.dart';
 import 'data/models/_converters/message.dart';
 import 'data/models/api/additional_fields/additional_fields_request.dart';
+import 'data/models/api/chat_api.dart';
 import 'data/models/configuration/chat_api_configuration.dart';
 import 'data/models/configuration/identify_configuration.dart';
 import 'data/models/messages/base.dart';
@@ -23,6 +24,7 @@ class UsedeskChatNetwork implements UsedeskChatSocketCallbacks {
   UsedeskChatNetwork({
     required this.repository,
     required this.storage,
+    required this.clientApi,
     required this.apiConfig,
     required this.companyId,
     required this.channelId,
@@ -35,6 +37,7 @@ class UsedeskChatNetwork implements UsedeskChatSocketCallbacks {
     );
   }
 
+  final UsedeskClientApi clientApi;
   final UsedeskChatRepository repository;
   final UsedeskChatStorageProvider storage;
   final ChatApiConfiguration apiConfig;
@@ -47,7 +50,7 @@ class UsedeskChatNetwork implements UsedeskChatSocketCallbacks {
   IdentifyConfiguration? _identify;
   bool _isAdditionalFieldsSended = false;
   Map<String, String> _additionalFields = {};
-
+  bool needToSendAdditionalFields = true;
   bool get isConnected => _socket.isConnected;
 
   set identify(IdentifyConfiguration? config) {
@@ -74,10 +77,24 @@ class UsedeskChatNetwork implements UsedeskChatSocketCallbacks {
     _socket.dispose();
   }
 
-  void sendText(String text, int? localId) {
+  Future<void> sendAdditionalFields() async {
+    print('[USEDESK] send additional fields');
+    try {
+      needToSendAdditionalFields = false;
+      await _sendAdditionalFields();
+    } catch (e) {
+      needToSendAdditionalFields = true;
+    }
+  }
+
+  void sendText(String text, int? localId) async {
     if (text.isEmpty) {
       return;
     }
+    if (needToSendAdditionalFields) {
+      await sendAdditionalFields();
+    }
+
     _socket.send(
       MessageRequest(
         message: MessageRequestTextMessage(
@@ -101,6 +118,11 @@ class UsedeskChatNetwork implements UsedeskChatSocketCallbacks {
     if (_clientToken == null) {
       return Future.value(false);
     }
+
+    if (needToSendAdditionalFields) {
+      await sendAdditionalFields();
+    }
+
     return Network.uploadFiles(
       url: apiConfig.urlToSendFile,
       fields: {
@@ -140,15 +162,14 @@ class UsedeskChatNetwork implements UsedeskChatSocketCallbacks {
       companyId: combinedCompanyId,
       url: apiConfig.urlChat,
       token: _clientToken,
-      channelId: channelId,
-      payload: InitedRequestPayload(
-          //   sdk: 'Flutter ${getOperatingSystem()}',
-          ),
+      payload:
+          InitedRequestPayload(sdk: Platform.isAndroid ? 'android' : 'ios'),
     ).toJson();
 
     _socket.send(request);
   }
 
+  ///{"type":"@@server/chat/INIT", "company_id":"163798_41396","payload":{"message_limit":20,"sdk":"android","type":"sdk"},"url":"https://pubsubsec.usedesk.ru","type":"@@server/chat/INIT"}
   @override
   void onDisconnect() {
     if (debug) {
@@ -164,23 +185,24 @@ class UsedeskChatNetwork implements UsedeskChatSocketCallbacks {
   }
 
   @override
-  void onInited(InitedResponse response) {
+  Future<void> onInited(InitedResponse response) async {
     if (response.token.isNotEmpty) {
       _setToken(response.token);
     }
 
     if (_identify != null) {
-      _socket.send(
-        SetClientRequest(
-          payload: SetClientRequestPayload(
-            token: _clientToken,
-            email: _identify!.email,
-            username: _identify!.name,
-            phone: _identify!.phoneNumber,
-            additionalId: _identify!.additionalId,
-          ),
-        ).toJson(),
+      final resp = await clientApi.setClient(
+        phone: _identify!.phoneNumber,
+        companyId: companyId,
+        token: _clientToken,
+        email: _identify!.email,
+        additionalId: _identify!.additionalId,
+        username: _identify!.name,
       );
+
+      if (resp['token'] != null) {
+        _setToken(resp['token']);
+      }
 
       for (Message message in response.setup.messages) {
         onMessage(message);
@@ -188,8 +210,6 @@ class UsedeskChatNetwork implements UsedeskChatSocketCallbacks {
     } else {
       _reSendMessages();
     }
-
-    _sendAdditionalFields();
   }
 
   @override

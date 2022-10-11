@@ -16,25 +16,32 @@ _$_InitedRequest _$$_InitedRequestFromJson(Map<String, dynamic> json) =>
               json['payload'] as Map<String, dynamic>),
       url: json['url'] as String?,
       token: json['token'] as String?,
-      channelId: json['channel_id'] as String?,
     );
 
-Map<String, dynamic> _$$_InitedRequestToJson(_$_InitedRequest instance) =>
-    <String, dynamic>{
-      'type': instance.type,
-      'company_id': instance.companyId,
-      'payload': instance.payload.toJson(),
-      'url': instance.url,
-      'token': instance.token,
-      'channel_id': instance.channelId,
-    };
+Map<String, dynamic> _$$_InitedRequestToJson(_$_InitedRequest instance) {
+  final val = <String, dynamic>{
+    'type': instance.type,
+    'company_id': instance.companyId,
+    'payload': instance.payload.toJson(),
+    'url': instance.url,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('token', instance.token);
+  return val;
+}
 
 _$_InitedRequestPayload _$$_InitedRequestPayloadFromJson(
         Map<String, dynamic> json) =>
     _$_InitedRequestPayload(
-      sdk: json['sdk'] as String? ?? 'iOS',
+      sdk: json['sdk'] as String? ?? 'ios',
       type: json['type'] as String? ?? 'sdk',
-      version: json['version'] as String? ?? '2.3.0',
+      messageLimit: json['message_limit'] as int? ?? 20,
     );
 
 Map<String, dynamic> _$$_InitedRequestPayloadToJson(
@@ -42,5 +49,5 @@ Map<String, dynamic> _$$_InitedRequestPayloadToJson(
     <String, dynamic>{
       'sdk': instance.sdk,
       'type': instance.type,
-      'version': instance.version,
+      'message_limit': instance.messageLimit,
     };

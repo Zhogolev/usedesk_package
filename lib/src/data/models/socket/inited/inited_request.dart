@@ -12,8 +12,7 @@ class InitedRequest with _$InitedRequest {
     required String companyId,
     @Default(InitedRequestPayload()) InitedRequestPayload payload,
     String? url,
-    String? token,
-    String? channelId,
+    @JsonKey(includeIfNull: false) String? token,
   }) = _InitedRequest;
 
   factory InitedRequest.fromJson(Map<String, dynamic> json) =>
@@ -22,11 +21,11 @@ class InitedRequest with _$InitedRequest {
 
 @freezed
 class InitedRequestPayload with _$InitedRequestPayload {
-  const factory InitedRequestPayload({
-    @Default('iOS') String sdk,
-    @Default('sdk') String type,
-    @Default('2.3.0') String version,
-  }) = _InitedRequestPayload;
+  @JsonSerializable(fieldRename: FieldRename.snake)
+  const factory InitedRequestPayload(
+      {@Default('ios') String sdk,
+      @Default('sdk') String type,
+      @Default(20) int messageLimit}) = _InitedRequestPayload;
 
   factory InitedRequestPayload.fromJson(Map<String, dynamic> json) =>
       _$InitedRequestPayloadFromJson(json);

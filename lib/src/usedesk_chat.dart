@@ -6,6 +6,7 @@ import 'package:mime/mime.dart';
 import 'package:path/path.dart' as p;
 import 'package:usedesk/src/data/models/socket/message/message_response.dart';
 
+import 'data/models/api/chat_api.dart';
 import 'usedesk_chat_network.dart';
 import 'data/models/configuration/chat_api_configuration.dart';
 import 'data/models/configuration/identify_configuration.dart';
@@ -36,6 +37,7 @@ class UsedeskChat {
   static Future<UsedeskChat> init({
     required UsedeskChatStorageProvider storage,
     required String companyId,
+    required UsedeskClientApi clientApi,
     String? channelId,
     ChatApiConfiguration apiConfig = const ChatApiConfiguration(),
     bool debug = false,
@@ -48,6 +50,7 @@ class UsedeskChat {
       repository: repository,
       storage: storage,
       companyId: companyId,
+      clientApi: clientApi,
       channelId: channelId,
       apiConfig: apiConfig,
       token: token,

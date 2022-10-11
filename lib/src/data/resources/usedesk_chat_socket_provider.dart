@@ -41,6 +41,9 @@ class UsedeskChatSocketProvider {
   }
 
   void send(Map<String, dynamic> event) {
+    print('[SOCKET] SEND');
+    print(event);
+    print('[SOCKET] SEND');
     _socket.emit(
       _defaultSocketEvent,
       event,
