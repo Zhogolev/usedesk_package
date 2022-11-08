@@ -91,15 +91,9 @@ class _UsedeskClientApi implements UsedeskClientApi {
   }
 
   @override
-  Future<dynamic> loadPreviousMessages(
-    chatToken, [
-    commentId,
-  ]) async {
+  Future<dynamic> loadPreviousMessages(chatToken) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'chat_token': chatToken,
-      r'comment_id': commentId,
-    };
+    final queryParameters = <String, dynamic>{r'chat_token': chatToken};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
