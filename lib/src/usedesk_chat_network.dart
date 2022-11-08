@@ -230,22 +230,22 @@ class UsedeskChatNetwork implements UsedeskChatSocketCallbacks {
   @override
   void onSetClient(SetClientResponse response) async {
     final token = response.state.client.token;
-
+    List<Message> messages = [];
     if (token != null) {
       _setToken(response.state.client.token!);
-    }
-    for (Message msg in response.state.client.messages ?? []) {
-      onMessage(msg);
-    }
-
-    if (token != null) {
       final resp = await clientApi.loadPreviousMessages(token);
       for (final rawMessage in resp) {
         if (rawMessage is Map<String, dynamic>) {
           final msg = Message.fromJson(rawMessage);
-          onMessage(msg);
+          messages.insert(0, msg);
         }
       }
+    }
+
+    for (Message msg in messages.isNotEmpty
+        ? messages
+        : response.state.client.messages ?? []) {
+      onMessage(msg);
     }
 
     _reSendMessages();
