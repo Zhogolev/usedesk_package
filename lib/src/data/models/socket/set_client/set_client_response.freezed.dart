@@ -34,47 +34,51 @@ mixin _$SetClientResponse {
 abstract class $SetClientResponseCopyWith<$Res> {
   factory $SetClientResponseCopyWith(
           SetClientResponse value, $Res Function(SetClientResponse) then) =
-      _$SetClientResponseCopyWithImpl<$Res>;
+      _$SetClientResponseCopyWithImpl<$Res, SetClientResponse>;
+  @useResult
   $Res call({String type, SetClientResponseState state, bool? reset});
 
   $SetClientResponseStateCopyWith<$Res> get state;
 }
 
 /// @nodoc
-class _$SetClientResponseCopyWithImpl<$Res>
+class _$SetClientResponseCopyWithImpl<$Res, $Val extends SetClientResponse>
     implements $SetClientResponseCopyWith<$Res> {
   _$SetClientResponseCopyWithImpl(this._value, this._then);
 
-  final SetClientResponse _value;
   // ignore: unused_field
-  final $Res Function(SetClientResponse) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? state = freezed,
+    Object? type = null,
+    Object? state = null,
     Object? reset = freezed,
   }) {
     return _then(_value.copyWith(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      state: state == freezed
+      state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as SetClientResponseState,
-      reset: reset == freezed
+      reset: freezed == reset
           ? _value.reset
           : reset // ignore: cast_nullable_to_non_nullable
               as bool?,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $SetClientResponseStateCopyWith<$Res> get state {
     return $SetClientResponseStateCopyWith<$Res>(_value.state, (value) {
-      return _then(_value.copyWith(state: value));
+      return _then(_value.copyWith(state: value) as $Val);
     });
   }
 }
@@ -86,6 +90,7 @@ abstract class _$$_SetClientResponseCopyWith<$Res>
           $Res Function(_$_SetClientResponse) then) =
       __$$_SetClientResponseCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String type, SetClientResponseState state, bool? reset});
 
   @override
@@ -94,31 +99,29 @@ abstract class _$$_SetClientResponseCopyWith<$Res>
 
 /// @nodoc
 class __$$_SetClientResponseCopyWithImpl<$Res>
-    extends _$SetClientResponseCopyWithImpl<$Res>
+    extends _$SetClientResponseCopyWithImpl<$Res, _$_SetClientResponse>
     implements _$$_SetClientResponseCopyWith<$Res> {
   __$$_SetClientResponseCopyWithImpl(
       _$_SetClientResponse _value, $Res Function(_$_SetClientResponse) _then)
-      : super(_value, (v) => _then(v as _$_SetClientResponse));
+      : super(_value, _then);
 
-  @override
-  _$_SetClientResponse get _value => super._value as _$_SetClientResponse;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? state = freezed,
+    Object? type = null,
+    Object? state = null,
     Object? reset = freezed,
   }) {
     return _then(_$_SetClientResponse(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      state: state == freezed
+      state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as SetClientResponseState,
-      reset: reset == freezed
+      reset: freezed == reset
           ? _value.reset
           : reset // ignore: cast_nullable_to_non_nullable
               as bool?,
@@ -152,21 +155,18 @@ class _$_SetClientResponse implements _SetClientResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SetClientResponse &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.state, state) &&
-            const DeepCollectionEquality().equals(other.reset, reset));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.state, state) || other.state == state) &&
+            (identical(other.reset, reset) || other.reset == reset));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(state),
-      const DeepCollectionEquality().hash(reset));
+  int get hashCode => Object.hash(runtimeType, type, state, reset);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SetClientResponseCopyWith<_$_SetClientResponse> get copyWith =>
       __$$_SetClientResponseCopyWithImpl<_$_SetClientResponse>(
           this, _$identity);
@@ -219,37 +219,42 @@ mixin _$SetClientResponseState {
 abstract class $SetClientResponseStateCopyWith<$Res> {
   factory $SetClientResponseStateCopyWith(SetClientResponseState value,
           $Res Function(SetClientResponseState) then) =
-      _$SetClientResponseStateCopyWithImpl<$Res>;
+      _$SetClientResponseStateCopyWithImpl<$Res, SetClientResponseState>;
+  @useResult
   $Res call({SetClientResponseStateClient client});
 
   $SetClientResponseStateClientCopyWith<$Res> get client;
 }
 
 /// @nodoc
-class _$SetClientResponseStateCopyWithImpl<$Res>
+class _$SetClientResponseStateCopyWithImpl<$Res,
+        $Val extends SetClientResponseState>
     implements $SetClientResponseStateCopyWith<$Res> {
   _$SetClientResponseStateCopyWithImpl(this._value, this._then);
 
-  final SetClientResponseState _value;
   // ignore: unused_field
-  final $Res Function(SetClientResponseState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? client = freezed,
+    Object? client = null,
   }) {
     return _then(_value.copyWith(
-      client: client == freezed
+      client: null == client
           ? _value.client
           : client // ignore: cast_nullable_to_non_nullable
               as SetClientResponseStateClient,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $SetClientResponseStateClientCopyWith<$Res> get client {
     return $SetClientResponseStateClientCopyWith<$Res>(_value.client, (value) {
-      return _then(_value.copyWith(client: value));
+      return _then(_value.copyWith(client: value) as $Val);
     });
   }
 }
@@ -261,6 +266,7 @@ abstract class _$$_SetClientResponseStateCopyWith<$Res>
           $Res Function(_$_SetClientResponseState) then) =
       __$$_SetClientResponseStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({SetClientResponseStateClient client});
 
   @override
@@ -269,22 +275,20 @@ abstract class _$$_SetClientResponseStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_SetClientResponseStateCopyWithImpl<$Res>
-    extends _$SetClientResponseStateCopyWithImpl<$Res>
+    extends _$SetClientResponseStateCopyWithImpl<$Res,
+        _$_SetClientResponseState>
     implements _$$_SetClientResponseStateCopyWith<$Res> {
   __$$_SetClientResponseStateCopyWithImpl(_$_SetClientResponseState _value,
       $Res Function(_$_SetClientResponseState) _then)
-      : super(_value, (v) => _then(v as _$_SetClientResponseState));
+      : super(_value, _then);
 
-  @override
-  _$_SetClientResponseState get _value =>
-      super._value as _$_SetClientResponseState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? client = freezed,
+    Object? client = null,
   }) {
     return _then(_$_SetClientResponseState(
-      client: client == freezed
+      client: null == client
           ? _value.client
           : client // ignore: cast_nullable_to_non_nullable
               as SetClientResponseStateClient,
@@ -313,16 +317,16 @@ class _$_SetClientResponseState implements _SetClientResponseState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SetClientResponseState &&
-            const DeepCollectionEquality().equals(other.client, client));
+            (identical(other.client, client) || other.client == client));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(client));
+  int get hashCode => Object.hash(runtimeType, client);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SetClientResponseStateCopyWith<_$_SetClientResponseState> get copyWith =>
       __$$_SetClientResponseStateCopyWithImpl<_$_SetClientResponseState>(
           this, _$identity);
@@ -374,19 +378,24 @@ abstract class $SetClientResponseStateClientCopyWith<$Res> {
   factory $SetClientResponseStateClientCopyWith(
           SetClientResponseStateClient value,
           $Res Function(SetClientResponseStateClient) then) =
-      _$SetClientResponseStateClientCopyWithImpl<$Res>;
+      _$SetClientResponseStateClientCopyWithImpl<$Res,
+          SetClientResponseStateClient>;
+  @useResult
   $Res call({String? token, String? email, int? chat, List<Message>? messages});
 }
 
 /// @nodoc
-class _$SetClientResponseStateClientCopyWithImpl<$Res>
+class _$SetClientResponseStateClientCopyWithImpl<$Res,
+        $Val extends SetClientResponseStateClient>
     implements $SetClientResponseStateClientCopyWith<$Res> {
   _$SetClientResponseStateClientCopyWithImpl(this._value, this._then);
 
-  final SetClientResponseStateClient _value;
   // ignore: unused_field
-  final $Res Function(SetClientResponseStateClient) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? token = freezed,
@@ -395,23 +404,23 @@ class _$SetClientResponseStateClientCopyWithImpl<$Res>
     Object? messages = freezed,
   }) {
     return _then(_value.copyWith(
-      token: token == freezed
+      token: freezed == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String?,
-      email: email == freezed
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      chat: chat == freezed
+      chat: freezed == chat
           ? _value.chat
           : chat // ignore: cast_nullable_to_non_nullable
               as int?,
-      messages: messages == freezed
+      messages: freezed == messages
           ? _value.messages
           : messages // ignore: cast_nullable_to_non_nullable
               as List<Message>?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -423,22 +432,21 @@ abstract class _$$_SetClientResponseStateClientCopyWith<$Res>
           $Res Function(_$_SetClientResponseStateClient) then) =
       __$$_SetClientResponseStateClientCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String? token, String? email, int? chat, List<Message>? messages});
 }
 
 /// @nodoc
 class __$$_SetClientResponseStateClientCopyWithImpl<$Res>
-    extends _$SetClientResponseStateClientCopyWithImpl<$Res>
+    extends _$SetClientResponseStateClientCopyWithImpl<$Res,
+        _$_SetClientResponseStateClient>
     implements _$$_SetClientResponseStateClientCopyWith<$Res> {
   __$$_SetClientResponseStateClientCopyWithImpl(
       _$_SetClientResponseStateClient _value,
       $Res Function(_$_SetClientResponseStateClient) _then)
-      : super(_value, (v) => _then(v as _$_SetClientResponseStateClient));
+      : super(_value, _then);
 
-  @override
-  _$_SetClientResponseStateClient get _value =>
-      super._value as _$_SetClientResponseStateClient;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? token = freezed,
@@ -447,19 +455,19 @@ class __$$_SetClientResponseStateClientCopyWithImpl<$Res>
     Object? messages = freezed,
   }) {
     return _then(_$_SetClientResponseStateClient(
-      token: token == freezed
+      token: freezed == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String?,
-      email: email == freezed
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      chat: chat == freezed
+      chat: freezed == chat
           ? _value.chat
           : chat // ignore: cast_nullable_to_non_nullable
               as int?,
-      messages: messages == freezed
+      messages: freezed == messages
           ? _value._messages
           : messages // ignore: cast_nullable_to_non_nullable
               as List<Message>?,
@@ -502,23 +510,20 @@ class _$_SetClientResponseStateClient implements _SetClientResponseStateClient {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SetClientResponseStateClient &&
-            const DeepCollectionEquality().equals(other.token, token) &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.chat, chat) &&
+            (identical(other.token, token) || other.token == token) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.chat, chat) || other.chat == chat) &&
             const DeepCollectionEquality().equals(other._messages, _messages));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(token),
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(chat),
+  int get hashCode => Object.hash(runtimeType, token, email, chat,
       const DeepCollectionEquality().hash(_messages));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SetClientResponseStateClientCopyWith<_$_SetClientResponseStateClient>
       get copyWith => __$$_SetClientResponseStateClientCopyWithImpl<
           _$_SetClientResponseStateClient>(this, _$identity);

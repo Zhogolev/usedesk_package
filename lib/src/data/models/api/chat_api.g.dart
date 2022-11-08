@@ -92,9 +92,9 @@ class _UsedeskClientApi implements UsedeskClientApi {
 
   @override
   Future<dynamic> loadPreviousMessages(
-    chatToken,
+    chatToken, [
     commentId,
-  ) async {
+  ]) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'chat_token': chatToken,

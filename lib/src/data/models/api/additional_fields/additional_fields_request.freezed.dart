@@ -35,35 +35,39 @@ mixin _$AdditionalFieldsRequest {
 abstract class $AdditionalFieldsRequestCopyWith<$Res> {
   factory $AdditionalFieldsRequestCopyWith(AdditionalFieldsRequest value,
           $Res Function(AdditionalFieldsRequest) then) =
-      _$AdditionalFieldsRequestCopyWithImpl<$Res>;
+      _$AdditionalFieldsRequestCopyWithImpl<$Res, AdditionalFieldsRequest>;
+  @useResult
   $Res call(
       {String chatToken, List<AdditionalFieldsItemRequest> additionalFields});
 }
 
 /// @nodoc
-class _$AdditionalFieldsRequestCopyWithImpl<$Res>
+class _$AdditionalFieldsRequestCopyWithImpl<$Res,
+        $Val extends AdditionalFieldsRequest>
     implements $AdditionalFieldsRequestCopyWith<$Res> {
   _$AdditionalFieldsRequestCopyWithImpl(this._value, this._then);
 
-  final AdditionalFieldsRequest _value;
   // ignore: unused_field
-  final $Res Function(AdditionalFieldsRequest) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? chatToken = freezed,
-    Object? additionalFields = freezed,
+    Object? chatToken = null,
+    Object? additionalFields = null,
   }) {
     return _then(_value.copyWith(
-      chatToken: chatToken == freezed
+      chatToken: null == chatToken
           ? _value.chatToken
           : chatToken // ignore: cast_nullable_to_non_nullable
               as String,
-      additionalFields: additionalFields == freezed
+      additionalFields: null == additionalFields
           ? _value.additionalFields
           : additionalFields // ignore: cast_nullable_to_non_nullable
               as List<AdditionalFieldsItemRequest>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -74,33 +78,32 @@ abstract class _$$_AdditionalFieldsRequestCopyWith<$Res>
           $Res Function(_$_AdditionalFieldsRequest) then) =
       __$$_AdditionalFieldsRequestCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String chatToken, List<AdditionalFieldsItemRequest> additionalFields});
 }
 
 /// @nodoc
 class __$$_AdditionalFieldsRequestCopyWithImpl<$Res>
-    extends _$AdditionalFieldsRequestCopyWithImpl<$Res>
+    extends _$AdditionalFieldsRequestCopyWithImpl<$Res,
+        _$_AdditionalFieldsRequest>
     implements _$$_AdditionalFieldsRequestCopyWith<$Res> {
   __$$_AdditionalFieldsRequestCopyWithImpl(_$_AdditionalFieldsRequest _value,
       $Res Function(_$_AdditionalFieldsRequest) _then)
-      : super(_value, (v) => _then(v as _$_AdditionalFieldsRequest));
+      : super(_value, _then);
 
-  @override
-  _$_AdditionalFieldsRequest get _value =>
-      super._value as _$_AdditionalFieldsRequest;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? chatToken = freezed,
-    Object? additionalFields = freezed,
+    Object? chatToken = null,
+    Object? additionalFields = null,
   }) {
     return _then(_$_AdditionalFieldsRequest(
-      chatToken: chatToken == freezed
+      chatToken: null == chatToken
           ? _value.chatToken
           : chatToken // ignore: cast_nullable_to_non_nullable
               as String,
-      additionalFields: additionalFields == freezed
+      additionalFields: null == additionalFields
           ? _value._additionalFields
           : additionalFields // ignore: cast_nullable_to_non_nullable
               as List<AdditionalFieldsItemRequest>,
@@ -139,20 +142,20 @@ class _$_AdditionalFieldsRequest implements _AdditionalFieldsRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AdditionalFieldsRequest &&
-            const DeepCollectionEquality().equals(other.chatToken, chatToken) &&
+            (identical(other.chatToken, chatToken) ||
+                other.chatToken == chatToken) &&
             const DeepCollectionEquality()
                 .equals(other._additionalFields, _additionalFields));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(chatToken),
+  int get hashCode => Object.hash(runtimeType, chatToken,
       const DeepCollectionEquality().hash(_additionalFields));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AdditionalFieldsRequestCopyWith<_$_AdditionalFieldsRequest>
       get copyWith =>
           __$$_AdditionalFieldsRequestCopyWithImpl<_$_AdditionalFieldsRequest>(
@@ -206,34 +209,39 @@ abstract class $AdditionalFieldsItemRequestCopyWith<$Res> {
   factory $AdditionalFieldsItemRequestCopyWith(
           AdditionalFieldsItemRequest value,
           $Res Function(AdditionalFieldsItemRequest) then) =
-      _$AdditionalFieldsItemRequestCopyWithImpl<$Res>;
+      _$AdditionalFieldsItemRequestCopyWithImpl<$Res,
+          AdditionalFieldsItemRequest>;
+  @useResult
   $Res call({String id, String value});
 }
 
 /// @nodoc
-class _$AdditionalFieldsItemRequestCopyWithImpl<$Res>
+class _$AdditionalFieldsItemRequestCopyWithImpl<$Res,
+        $Val extends AdditionalFieldsItemRequest>
     implements $AdditionalFieldsItemRequestCopyWith<$Res> {
   _$AdditionalFieldsItemRequestCopyWithImpl(this._value, this._then);
 
-  final AdditionalFieldsItemRequest _value;
   // ignore: unused_field
-  final $Res Function(AdditionalFieldsItemRequest) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? value = freezed,
+    Object? id = null,
+    Object? value = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      value: value == freezed
+      value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -245,33 +253,32 @@ abstract class _$$_AdditionalFieldsItemRequestCopyWith<$Res>
           $Res Function(_$_AdditionalFieldsItemRequest) then) =
       __$$_AdditionalFieldsItemRequestCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String id, String value});
 }
 
 /// @nodoc
 class __$$_AdditionalFieldsItemRequestCopyWithImpl<$Res>
-    extends _$AdditionalFieldsItemRequestCopyWithImpl<$Res>
+    extends _$AdditionalFieldsItemRequestCopyWithImpl<$Res,
+        _$_AdditionalFieldsItemRequest>
     implements _$$_AdditionalFieldsItemRequestCopyWith<$Res> {
   __$$_AdditionalFieldsItemRequestCopyWithImpl(
       _$_AdditionalFieldsItemRequest _value,
       $Res Function(_$_AdditionalFieldsItemRequest) _then)
-      : super(_value, (v) => _then(v as _$_AdditionalFieldsItemRequest));
+      : super(_value, _then);
 
-  @override
-  _$_AdditionalFieldsItemRequest get _value =>
-      super._value as _$_AdditionalFieldsItemRequest;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? value = freezed,
+    Object? id = null,
+    Object? value = null,
   }) {
     return _then(_$_AdditionalFieldsItemRequest(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      value: value == freezed
+      value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as String,
@@ -303,19 +310,17 @@ class _$_AdditionalFieldsItemRequest implements _AdditionalFieldsItemRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AdditionalFieldsItemRequest &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.value, value));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.value, value) || other.value == value));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(value));
+  int get hashCode => Object.hash(runtimeType, id, value);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AdditionalFieldsItemRequestCopyWith<_$_AdditionalFieldsItemRequest>
       get copyWith => __$$_AdditionalFieldsItemRequestCopyWithImpl<
           _$_AdditionalFieldsItemRequest>(this, _$identity);

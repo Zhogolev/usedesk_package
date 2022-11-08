@@ -35,44 +35,47 @@ mixin _$ErrorResponse {
 abstract class $ErrorResponseCopyWith<$Res> {
   factory $ErrorResponseCopyWith(
           ErrorResponse value, $Res Function(ErrorResponse) then) =
-      _$ErrorResponseCopyWithImpl<$Res>;
+      _$ErrorResponseCopyWithImpl<$Res, ErrorResponse>;
+  @useResult
   $Res call({String type, int code, String message, String statusMessage});
 }
 
 /// @nodoc
-class _$ErrorResponseCopyWithImpl<$Res>
+class _$ErrorResponseCopyWithImpl<$Res, $Val extends ErrorResponse>
     implements $ErrorResponseCopyWith<$Res> {
   _$ErrorResponseCopyWithImpl(this._value, this._then);
 
-  final ErrorResponse _value;
   // ignore: unused_field
-  final $Res Function(ErrorResponse) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? code = freezed,
-    Object? message = freezed,
-    Object? statusMessage = freezed,
+    Object? type = null,
+    Object? code = null,
+    Object? message = null,
+    Object? statusMessage = null,
   }) {
     return _then(_value.copyWith(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      code: code == freezed
+      code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as int,
-      message: message == freezed
+      message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-      statusMessage: statusMessage == freezed
+      statusMessage: null == statusMessage
           ? _value.statusMessage
           : statusMessage // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -83,41 +86,40 @@ abstract class _$$_ErrorResponseCopyWith<$Res>
           _$_ErrorResponse value, $Res Function(_$_ErrorResponse) then) =
       __$$_ErrorResponseCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String type, int code, String message, String statusMessage});
 }
 
 /// @nodoc
 class __$$_ErrorResponseCopyWithImpl<$Res>
-    extends _$ErrorResponseCopyWithImpl<$Res>
+    extends _$ErrorResponseCopyWithImpl<$Res, _$_ErrorResponse>
     implements _$$_ErrorResponseCopyWith<$Res> {
   __$$_ErrorResponseCopyWithImpl(
       _$_ErrorResponse _value, $Res Function(_$_ErrorResponse) _then)
-      : super(_value, (v) => _then(v as _$_ErrorResponse));
+      : super(_value, _then);
 
-  @override
-  _$_ErrorResponse get _value => super._value as _$_ErrorResponse;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? code = freezed,
-    Object? message = freezed,
-    Object? statusMessage = freezed,
+    Object? type = null,
+    Object? code = null,
+    Object? message = null,
+    Object? statusMessage = null,
   }) {
     return _then(_$_ErrorResponse(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      code: code == freezed
+      code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as int,
-      message: message == freezed
+      message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
-      statusMessage: statusMessage == freezed
+      statusMessage: null == statusMessage
           ? _value.statusMessage
           : statusMessage // ignore: cast_nullable_to_non_nullable
               as String,
@@ -156,24 +158,21 @@ class _$_ErrorResponse implements _ErrorResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ErrorResponse &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.code, code) &&
-            const DeepCollectionEquality().equals(other.message, message) &&
-            const DeepCollectionEquality()
-                .equals(other.statusMessage, statusMessage));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.code, code) || other.code == code) &&
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.statusMessage, statusMessage) ||
+                other.statusMessage == statusMessage));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(code),
-      const DeepCollectionEquality().hash(message),
-      const DeepCollectionEquality().hash(statusMessage));
+  int get hashCode =>
+      Object.hash(runtimeType, type, code, message, statusMessage);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ErrorResponseCopyWith<_$_ErrorResponse> get copyWith =>
       __$$_ErrorResponseCopyWithImpl<_$_ErrorResponse>(this, _$identity);
 

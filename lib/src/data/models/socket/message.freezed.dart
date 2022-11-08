@@ -44,7 +44,8 @@ mixin _$Message<C> {
 /// @nodoc
 abstract class $MessageCopyWith<C, $Res> {
   factory $MessageCopyWith(Message<C> value, $Res Function(Message<C>) then) =
-      _$MessageCopyWithImpl<C, $Res>;
+      _$MessageCopyWithImpl<C, $Res, Message<C>>;
+  @useResult
   $Res call(
       {int id,
       MessageType type,
@@ -64,89 +65,94 @@ abstract class $MessageCopyWith<C, $Res> {
 }
 
 /// @nodoc
-class _$MessageCopyWithImpl<C, $Res> implements $MessageCopyWith<C, $Res> {
+class _$MessageCopyWithImpl<C, $Res, $Val extends Message<C>>
+    implements $MessageCopyWith<C, $Res> {
   _$MessageCopyWithImpl(this._value, this._then);
 
-  final Message<C> _value;
   // ignore: unused_field
-  final $Res Function(Message<C>) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? type = freezed,
-    Object? createdAt = freezed,
+    Object? id = null,
+    Object? type = null,
+    Object? createdAt = null,
     Object? text = freezed,
     Object? name = freezed,
-    Object? user = freezed,
+    Object? user = null,
     Object? payload = freezed,
     Object? chat = freezed,
     Object? buttons = freezed,
     Object? file = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as MessageType,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      text: text == freezed
+      text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: name == freezed
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      user: user == freezed
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      payload: payload == freezed
+      payload: freezed == payload
           ? _value.payload
           : payload // ignore: cast_nullable_to_non_nullable
               as MessagePayload?,
-      chat: chat == freezed
+      chat: freezed == chat
           ? _value.chat
           : chat // ignore: cast_nullable_to_non_nullable
               as C?,
-      buttons: buttons == freezed
+      buttons: freezed == buttons
           ? _value.buttons
           : buttons // ignore: cast_nullable_to_non_nullable
               as List<MessageButton>?,
-      file: file == freezed
+      file: freezed == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
               as MessageFile?,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $MessagePayloadCopyWith<$Res>? get payload {
     if (_value.payload == null) {
       return null;
     }
 
     return $MessagePayloadCopyWith<$Res>(_value.payload!, (value) {
-      return _then(_value.copyWith(payload: value));
+      return _then(_value.copyWith(payload: value) as $Val);
     });
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $MessageFileCopyWith<$Res>? get file {
     if (_value.file == null) {
       return null;
     }
 
     return $MessageFileCopyWith<$Res>(_value.file!, (value) {
-      return _then(_value.copyWith(file: value));
+      return _then(_value.copyWith(file: value) as $Val);
     });
   }
 }
@@ -158,6 +164,7 @@ abstract class _$$_MessageCopyWith<C, $Res>
           _$_Message<C> value, $Res Function(_$_Message<C>) then) =
       __$$_MessageCopyWithImpl<C, $Res>;
   @override
+  @useResult
   $Res call(
       {int id,
       MessageType type,
@@ -179,66 +186,65 @@ abstract class _$$_MessageCopyWith<C, $Res>
 }
 
 /// @nodoc
-class __$$_MessageCopyWithImpl<C, $Res> extends _$MessageCopyWithImpl<C, $Res>
+class __$$_MessageCopyWithImpl<C, $Res>
+    extends _$MessageCopyWithImpl<C, $Res, _$_Message<C>>
     implements _$$_MessageCopyWith<C, $Res> {
   __$$_MessageCopyWithImpl(
       _$_Message<C> _value, $Res Function(_$_Message<C>) _then)
-      : super(_value, (v) => _then(v as _$_Message<C>));
+      : super(_value, _then);
 
-  @override
-  _$_Message<C> get _value => super._value as _$_Message<C>;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? type = freezed,
-    Object? createdAt = freezed,
+    Object? id = null,
+    Object? type = null,
+    Object? createdAt = null,
     Object? text = freezed,
     Object? name = freezed,
-    Object? user = freezed,
+    Object? user = null,
     Object? payload = freezed,
     Object? chat = freezed,
     Object? buttons = freezed,
     Object? file = freezed,
   }) {
     return _then(_$_Message<C>(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as MessageType,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      text: text == freezed
+      text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: name == freezed
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      user: user == freezed
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      payload: payload == freezed
+      payload: freezed == payload
           ? _value.payload
           : payload // ignore: cast_nullable_to_non_nullable
               as MessagePayload?,
-      chat: chat == freezed
+      chat: freezed == chat
           ? _value.chat
           : chat // ignore: cast_nullable_to_non_nullable
               as C?,
-      buttons: buttons == freezed
+      buttons: freezed == buttons
           ? _value._buttons
           : buttons // ignore: cast_nullable_to_non_nullable
               as List<MessageButton>?,
-      file: file == freezed
+      file: freezed == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
               as MessageFile?,
@@ -310,35 +316,37 @@ class _$_Message<C> implements _Message<C> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Message<C> &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.text, text) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.text, text) || other.text == text) &&
+            (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality().equals(other.user, user) &&
-            const DeepCollectionEquality().equals(other.payload, payload) &&
+            (identical(other.payload, payload) || other.payload == payload) &&
             const DeepCollectionEquality().equals(other.chat, chat) &&
             const DeepCollectionEquality().equals(other._buttons, _buttons) &&
-            const DeepCollectionEquality().equals(other.file, file));
+            (identical(other.file, file) || other.file == file));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(text),
-      const DeepCollectionEquality().hash(name),
+      id,
+      type,
+      createdAt,
+      text,
+      name,
       const DeepCollectionEquality().hash(user),
-      const DeepCollectionEquality().hash(payload),
+      payload,
       const DeepCollectionEquality().hash(chat),
       const DeepCollectionEquality().hash(_buttons),
-      const DeepCollectionEquality().hash(file));
+      file);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MessageCopyWith<C, _$_Message<C>> get copyWith =>
       __$$_MessageCopyWithImpl<C, _$_Message<C>>(this, _$identity);
 
@@ -419,7 +427,8 @@ mixin _$MessageFile {
 abstract class $MessageFileCopyWith<$Res> {
   factory $MessageFileCopyWith(
           MessageFile value, $Res Function(MessageFile) then) =
-      _$MessageFileCopyWithImpl<$Res>;
+      _$MessageFileCopyWithImpl<$Res, MessageFile>;
+  @useResult
   $Res call(
       {String name,
       String type,
@@ -429,43 +438,46 @@ abstract class $MessageFileCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MessageFileCopyWithImpl<$Res> implements $MessageFileCopyWith<$Res> {
+class _$MessageFileCopyWithImpl<$Res, $Val extends MessageFile>
+    implements $MessageFileCopyWith<$Res> {
   _$MessageFileCopyWithImpl(this._value, this._then);
 
-  final MessageFile _value;
   // ignore: unused_field
-  final $Res Function(MessageFile) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? type = freezed,
-    Object? content = freezed,
-    Object? size = freezed,
+    Object? name = null,
+    Object? type = null,
+    Object? content = null,
+    Object? size = null,
     Object? bytes = freezed,
   }) {
     return _then(_value.copyWith(
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      content: content == freezed
+      content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      size: size == freezed
+      size: null == size
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
               as String,
-      bytes: bytes == freezed
+      bytes: freezed == bytes
           ? _value.bytes
           : bytes // ignore: cast_nullable_to_non_nullable
               as Uint8List?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -476,6 +488,7 @@ abstract class _$$_MessageFileCopyWith<$Res>
           _$_MessageFile value, $Res Function(_$_MessageFile) then) =
       __$$_MessageFileCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String name,
       String type,
@@ -485,41 +498,40 @@ abstract class _$$_MessageFileCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MessageFileCopyWithImpl<$Res> extends _$MessageFileCopyWithImpl<$Res>
+class __$$_MessageFileCopyWithImpl<$Res>
+    extends _$MessageFileCopyWithImpl<$Res, _$_MessageFile>
     implements _$$_MessageFileCopyWith<$Res> {
   __$$_MessageFileCopyWithImpl(
       _$_MessageFile _value, $Res Function(_$_MessageFile) _then)
-      : super(_value, (v) => _then(v as _$_MessageFile));
+      : super(_value, _then);
 
-  @override
-  _$_MessageFile get _value => super._value as _$_MessageFile;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? type = freezed,
-    Object? content = freezed,
-    Object? size = freezed,
+    Object? name = null,
+    Object? type = null,
+    Object? content = null,
+    Object? size = null,
     Object? bytes = freezed,
   }) {
     return _then(_$_MessageFile(
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      content: content == freezed
+      content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      size: size == freezed
+      size: null == size
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
               as String,
-      bytes: bytes == freezed
+      bytes: freezed == bytes
           ? _value.bytes
           : bytes // ignore: cast_nullable_to_non_nullable
               as Uint8List?,
@@ -563,25 +575,21 @@ class _$_MessageFile implements _MessageFile {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MessageFile &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.content, content) &&
-            const DeepCollectionEquality().equals(other.size, size) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.content, content) || other.content == content) &&
+            (identical(other.size, size) || other.size == size) &&
             const DeepCollectionEquality().equals(other.bytes, bytes));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(content),
-      const DeepCollectionEquality().hash(size),
+  int get hashCode => Object.hash(runtimeType, name, type, content, size,
       const DeepCollectionEquality().hash(bytes));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MessageFileCopyWith<_$_MessageFile> get copyWith =>
       __$$_MessageFileCopyWithImpl<_$_MessageFile>(this, _$identity);
 
@@ -643,7 +651,8 @@ mixin _$MessagePayload {
 abstract class $MessagePayloadCopyWith<$Res> {
   factory $MessagePayloadCopyWith(
           MessagePayload value, $Res Function(MessagePayload) then) =
-      _$MessagePayloadCopyWithImpl<$Res>;
+      _$MessagePayloadCopyWithImpl<$Res, MessagePayload>;
+  @useResult
   $Res call(
       {String? avatar,
       String? userRating,
@@ -652,14 +661,16 @@ abstract class $MessagePayloadCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MessagePayloadCopyWithImpl<$Res>
+class _$MessagePayloadCopyWithImpl<$Res, $Val extends MessagePayload>
     implements $MessagePayloadCopyWith<$Res> {
   _$MessagePayloadCopyWithImpl(this._value, this._then);
 
-  final MessagePayload _value;
   // ignore: unused_field
-  final $Res Function(MessagePayload) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? avatar = freezed,
@@ -667,19 +678,19 @@ class _$MessagePayloadCopyWithImpl<$Res>
     Object? messageId = freezed,
   }) {
     return _then(_value.copyWith(
-      avatar: avatar == freezed
+      avatar: freezed == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
               as String?,
-      userRating: userRating == freezed
+      userRating: freezed == userRating
           ? _value.userRating
           : userRating // ignore: cast_nullable_to_non_nullable
               as String?,
-      messageId: messageId == freezed
+      messageId: freezed == messageId
           ? _value.messageId
           : messageId // ignore: cast_nullable_to_non_nullable
               as int?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -690,6 +701,7 @@ abstract class _$$_MessagePayloadCopyWith<$Res>
           _$_MessagePayload value, $Res Function(_$_MessagePayload) then) =
       __$$_MessagePayloadCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String? avatar,
       String? userRating,
@@ -699,15 +711,13 @@ abstract class _$$_MessagePayloadCopyWith<$Res>
 
 /// @nodoc
 class __$$_MessagePayloadCopyWithImpl<$Res>
-    extends _$MessagePayloadCopyWithImpl<$Res>
+    extends _$MessagePayloadCopyWithImpl<$Res, _$_MessagePayload>
     implements _$$_MessagePayloadCopyWith<$Res> {
   __$$_MessagePayloadCopyWithImpl(
       _$_MessagePayload _value, $Res Function(_$_MessagePayload) _then)
-      : super(_value, (v) => _then(v as _$_MessagePayload));
+      : super(_value, _then);
 
-  @override
-  _$_MessagePayload get _value => super._value as _$_MessagePayload;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? avatar = freezed,
@@ -715,15 +725,15 @@ class __$$_MessagePayloadCopyWithImpl<$Res>
     Object? messageId = freezed,
   }) {
     return _then(_$_MessagePayload(
-      avatar: avatar == freezed
+      avatar: freezed == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
               as String?,
-      userRating: userRating == freezed
+      userRating: freezed == userRating
           ? _value.userRating
           : userRating // ignore: cast_nullable_to_non_nullable
               as String?,
-      messageId: messageId == freezed
+      messageId: freezed == messageId
           ? _value.messageId
           : messageId // ignore: cast_nullable_to_non_nullable
               as int?,
@@ -762,22 +772,20 @@ class _$_MessagePayload implements _MessagePayload {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MessagePayload &&
-            const DeepCollectionEquality().equals(other.avatar, avatar) &&
-            const DeepCollectionEquality()
-                .equals(other.userRating, userRating) &&
-            const DeepCollectionEquality().equals(other.messageId, messageId));
+            (identical(other.avatar, avatar) || other.avatar == avatar) &&
+            (identical(other.userRating, userRating) ||
+                other.userRating == userRating) &&
+            (identical(other.messageId, messageId) ||
+                other.messageId == messageId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(avatar),
-      const DeepCollectionEquality().hash(userRating),
-      const DeepCollectionEquality().hash(messageId));
+  int get hashCode => Object.hash(runtimeType, avatar, userRating, messageId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MessagePayloadCopyWith<_$_MessagePayload> get copyWith =>
       __$$_MessagePayloadCopyWithImpl<_$_MessagePayload>(this, _$identity);
 
@@ -833,44 +841,47 @@ mixin _$MessageButton {
 abstract class $MessageButtonCopyWith<$Res> {
   factory $MessageButtonCopyWith(
           MessageButton value, $Res Function(MessageButton) then) =
-      _$MessageButtonCopyWithImpl<$Res>;
+      _$MessageButtonCopyWithImpl<$Res, MessageButton>;
+  @useResult
   $Res call({String text, bool isShow, String? url, String? type});
 }
 
 /// @nodoc
-class _$MessageButtonCopyWithImpl<$Res>
+class _$MessageButtonCopyWithImpl<$Res, $Val extends MessageButton>
     implements $MessageButtonCopyWith<$Res> {
   _$MessageButtonCopyWithImpl(this._value, this._then);
 
-  final MessageButton _value;
   // ignore: unused_field
-  final $Res Function(MessageButton) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? text = freezed,
-    Object? isShow = freezed,
+    Object? text = null,
+    Object? isShow = null,
     Object? url = freezed,
     Object? type = freezed,
   }) {
     return _then(_value.copyWith(
-      text: text == freezed
+      text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
-      isShow: isShow == freezed
+      isShow: null == isShow
           ? _value.isShow
           : isShow // ignore: cast_nullable_to_non_nullable
               as bool,
-      url: url == freezed
+      url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String?,
-      type: type == freezed
+      type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -881,41 +892,40 @@ abstract class _$$_MessageButtonCopyWith<$Res>
           _$_MessageButton value, $Res Function(_$_MessageButton) then) =
       __$$_MessageButtonCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String text, bool isShow, String? url, String? type});
 }
 
 /// @nodoc
 class __$$_MessageButtonCopyWithImpl<$Res>
-    extends _$MessageButtonCopyWithImpl<$Res>
+    extends _$MessageButtonCopyWithImpl<$Res, _$_MessageButton>
     implements _$$_MessageButtonCopyWith<$Res> {
   __$$_MessageButtonCopyWithImpl(
       _$_MessageButton _value, $Res Function(_$_MessageButton) _then)
-      : super(_value, (v) => _then(v as _$_MessageButton));
+      : super(_value, _then);
 
-  @override
-  _$_MessageButton get _value => super._value as _$_MessageButton;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? text = freezed,
-    Object? isShow = freezed,
+    Object? text = null,
+    Object? isShow = null,
     Object? url = freezed,
     Object? type = freezed,
   }) {
     return _then(_$_MessageButton(
-      text: text == freezed
+      text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
-      isShow: isShow == freezed
+      isShow: null == isShow
           ? _value.isShow
           : isShow // ignore: cast_nullable_to_non_nullable
               as bool,
-      url: url == freezed
+      url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String?,
-      type: type == freezed
+      type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -951,23 +961,19 @@ class _$_MessageButton implements _MessageButton {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MessageButton &&
-            const DeepCollectionEquality().equals(other.text, text) &&
-            const DeepCollectionEquality().equals(other.isShow, isShow) &&
-            const DeepCollectionEquality().equals(other.url, url) &&
-            const DeepCollectionEquality().equals(other.type, type));
+            (identical(other.text, text) || other.text == text) &&
+            (identical(other.isShow, isShow) || other.isShow == isShow) &&
+            (identical(other.url, url) || other.url == url) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(text),
-      const DeepCollectionEquality().hash(isShow),
-      const DeepCollectionEquality().hash(url),
-      const DeepCollectionEquality().hash(type));
+  int get hashCode => Object.hash(runtimeType, text, isShow, url, type);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MessageButtonCopyWith<_$_MessageButton> get copyWith =>
       __$$_MessageButtonCopyWithImpl<_$_MessageButton>(this, _$identity);
 

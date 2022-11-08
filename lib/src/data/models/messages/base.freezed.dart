@@ -35,44 +35,48 @@ mixin _$MessageText {
 abstract class $MessageTextCopyWith<$Res> {
   factory $MessageTextCopyWith(
           MessageText value, $Res Function(MessageText) then) =
-      _$MessageTextCopyWithImpl<$Res>;
+      _$MessageTextCopyWithImpl<$Res, MessageText>;
+  @useResult
   $Res call(
       {int id, DateTime createdAt, String text, List<MessageButton> buttons});
 }
 
 /// @nodoc
-class _$MessageTextCopyWithImpl<$Res> implements $MessageTextCopyWith<$Res> {
+class _$MessageTextCopyWithImpl<$Res, $Val extends MessageText>
+    implements $MessageTextCopyWith<$Res> {
   _$MessageTextCopyWithImpl(this._value, this._then);
 
-  final MessageText _value;
   // ignore: unused_field
-  final $Res Function(MessageText) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? createdAt = freezed,
-    Object? text = freezed,
-    Object? buttons = freezed,
+    Object? id = null,
+    Object? createdAt = null,
+    Object? text = null,
+    Object? buttons = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      text: text == freezed
+      text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
-      buttons: buttons == freezed
+      buttons: null == buttons
           ? _value.buttons
           : buttons // ignore: cast_nullable_to_non_nullable
               as List<MessageButton>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -83,41 +87,41 @@ abstract class _$$_MessageTextCopyWith<$Res>
           _$_MessageText value, $Res Function(_$_MessageText) then) =
       __$$_MessageTextCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int id, DateTime createdAt, String text, List<MessageButton> buttons});
 }
 
 /// @nodoc
-class __$$_MessageTextCopyWithImpl<$Res> extends _$MessageTextCopyWithImpl<$Res>
+class __$$_MessageTextCopyWithImpl<$Res>
+    extends _$MessageTextCopyWithImpl<$Res, _$_MessageText>
     implements _$$_MessageTextCopyWith<$Res> {
   __$$_MessageTextCopyWithImpl(
       _$_MessageText _value, $Res Function(_$_MessageText) _then)
-      : super(_value, (v) => _then(v as _$_MessageText));
+      : super(_value, _then);
 
-  @override
-  _$_MessageText get _value => super._value as _$_MessageText;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? createdAt = freezed,
-    Object? text = freezed,
-    Object? buttons = freezed,
+    Object? id = null,
+    Object? createdAt = null,
+    Object? text = null,
+    Object? buttons = null,
   }) {
     return _then(_$_MessageText(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      text: text == freezed
+      text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
-      buttons: buttons == freezed
+      buttons: null == buttons
           ? _value._buttons
           : buttons // ignore: cast_nullable_to_non_nullable
               as List<MessageButton>,
@@ -161,23 +165,21 @@ class _$_MessageText implements _MessageText {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MessageText &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.text, text) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.text, text) || other.text == text) &&
             const DeepCollectionEquality().equals(other._buttons, _buttons));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(text),
+  int get hashCode => Object.hash(runtimeType, id, createdAt, text,
       const DeepCollectionEquality().hash(_buttons));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MessageTextCopyWith<_$_MessageText> get copyWith =>
       __$$_MessageTextCopyWithImpl<_$_MessageText>(this, _$identity);
 
@@ -237,7 +239,8 @@ mixin _$MessageTextClient {
 abstract class $MessageTextClientCopyWith<$Res> {
   factory $MessageTextClientCopyWith(
           MessageTextClient value, $Res Function(MessageTextClient) then) =
-      _$MessageTextClientCopyWithImpl<$Res>;
+      _$MessageTextClientCopyWithImpl<$Res, MessageTextClient>;
+  @useResult
   $Res call(
       {int id,
       int? localId,
@@ -248,49 +251,51 @@ abstract class $MessageTextClientCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MessageTextClientCopyWithImpl<$Res>
+class _$MessageTextClientCopyWithImpl<$Res, $Val extends MessageTextClient>
     implements $MessageTextClientCopyWith<$Res> {
   _$MessageTextClientCopyWithImpl(this._value, this._then);
 
-  final MessageTextClient _value;
   // ignore: unused_field
-  final $Res Function(MessageTextClient) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
     Object? localId = freezed,
-    Object? createdAt = freezed,
-    Object? status = freezed,
-    Object? text = freezed,
-    Object? buttons = freezed,
+    Object? createdAt = null,
+    Object? status = null,
+    Object? text = null,
+    Object? buttons = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      localId: localId == freezed
+      localId: freezed == localId
           ? _value.localId
           : localId // ignore: cast_nullable_to_non_nullable
               as int?,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as MessageSentStatus,
-      text: text == freezed
+      text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
-      buttons: buttons == freezed
+      buttons: null == buttons
           ? _value.buttons
           : buttons // ignore: cast_nullable_to_non_nullable
               as List<MessageButton>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -301,6 +306,7 @@ abstract class _$$_MessageTextClientCopyWith<$Res>
           $Res Function(_$_MessageTextClient) then) =
       __$$_MessageTextClientCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int id,
       int? localId,
@@ -312,46 +318,44 @@ abstract class _$$_MessageTextClientCopyWith<$Res>
 
 /// @nodoc
 class __$$_MessageTextClientCopyWithImpl<$Res>
-    extends _$MessageTextClientCopyWithImpl<$Res>
+    extends _$MessageTextClientCopyWithImpl<$Res, _$_MessageTextClient>
     implements _$$_MessageTextClientCopyWith<$Res> {
   __$$_MessageTextClientCopyWithImpl(
       _$_MessageTextClient _value, $Res Function(_$_MessageTextClient) _then)
-      : super(_value, (v) => _then(v as _$_MessageTextClient));
+      : super(_value, _then);
 
-  @override
-  _$_MessageTextClient get _value => super._value as _$_MessageTextClient;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
     Object? localId = freezed,
-    Object? createdAt = freezed,
-    Object? status = freezed,
-    Object? text = freezed,
-    Object? buttons = freezed,
+    Object? createdAt = null,
+    Object? status = null,
+    Object? text = null,
+    Object? buttons = null,
   }) {
     return _then(_$_MessageTextClient(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      localId: localId == freezed
+      localId: freezed == localId
           ? _value.localId
           : localId // ignore: cast_nullable_to_non_nullable
               as int?,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as MessageSentStatus,
-      text: text == freezed
+      text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
-      buttons: buttons == freezed
+      buttons: null == buttons
           ? _value._buttons
           : buttons // ignore: cast_nullable_to_non_nullable
               as List<MessageButton>,
@@ -401,27 +405,23 @@ class _$_MessageTextClient implements _MessageTextClient {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MessageTextClient &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.localId, localId) &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality().equals(other.text, text) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.localId, localId) || other.localId == localId) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.text, text) || other.text == text) &&
             const DeepCollectionEquality().equals(other._buttons, _buttons));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(localId),
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(text),
-      const DeepCollectionEquality().hash(_buttons));
+  int get hashCode => Object.hash(runtimeType, id, localId, createdAt, status,
+      text, const DeepCollectionEquality().hash(_buttons));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MessageTextClientCopyWith<_$_MessageTextClient> get copyWith =>
       __$$_MessageTextClientCopyWithImpl<_$_MessageTextClient>(
           this, _$identity);
@@ -489,46 +489,51 @@ mixin _$MessageImage {
 abstract class $MessageImageCopyWith<$Res> {
   factory $MessageImageCopyWith(
           MessageImage value, $Res Function(MessageImage) then) =
-      _$MessageImageCopyWithImpl<$Res>;
+      _$MessageImageCopyWithImpl<$Res, MessageImage>;
+  @useResult
   $Res call({int id, DateTime createdAt, MessageFile file});
 
   $MessageFileCopyWith<$Res> get file;
 }
 
 /// @nodoc
-class _$MessageImageCopyWithImpl<$Res> implements $MessageImageCopyWith<$Res> {
+class _$MessageImageCopyWithImpl<$Res, $Val extends MessageImage>
+    implements $MessageImageCopyWith<$Res> {
   _$MessageImageCopyWithImpl(this._value, this._then);
 
-  final MessageImage _value;
   // ignore: unused_field
-  final $Res Function(MessageImage) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? createdAt = freezed,
-    Object? file = freezed,
+    Object? id = null,
+    Object? createdAt = null,
+    Object? file = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      file: file == freezed
+      file: null == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
               as MessageFile,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $MessageFileCopyWith<$Res> get file {
     return $MessageFileCopyWith<$Res>(_value.file, (value) {
-      return _then(_value.copyWith(file: value));
+      return _then(_value.copyWith(file: value) as $Val);
     });
   }
 }
@@ -540,6 +545,7 @@ abstract class _$$_MessageImageCopyWith<$Res>
           _$_MessageImage value, $Res Function(_$_MessageImage) then) =
       __$$_MessageImageCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({int id, DateTime createdAt, MessageFile file});
 
   @override
@@ -548,31 +554,29 @@ abstract class _$$_MessageImageCopyWith<$Res>
 
 /// @nodoc
 class __$$_MessageImageCopyWithImpl<$Res>
-    extends _$MessageImageCopyWithImpl<$Res>
+    extends _$MessageImageCopyWithImpl<$Res, _$_MessageImage>
     implements _$$_MessageImageCopyWith<$Res> {
   __$$_MessageImageCopyWithImpl(
       _$_MessageImage _value, $Res Function(_$_MessageImage) _then)
-      : super(_value, (v) => _then(v as _$_MessageImage));
+      : super(_value, _then);
 
-  @override
-  _$_MessageImage get _value => super._value as _$_MessageImage;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? createdAt = freezed,
-    Object? file = freezed,
+    Object? id = null,
+    Object? createdAt = null,
+    Object? file = null,
   }) {
     return _then(_$_MessageImage(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      file: file == freezed
+      file: null == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
               as MessageFile,
@@ -606,21 +610,19 @@ class _$_MessageImage implements _MessageImage {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MessageImage &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.file, file));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.file, file) || other.file == file));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(file));
+  int get hashCode => Object.hash(runtimeType, id, createdAt, file);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MessageImageCopyWith<_$_MessageImage> get copyWith =>
       __$$_MessageImageCopyWithImpl<_$_MessageImage>(this, _$identity);
 
@@ -679,7 +681,8 @@ mixin _$MessageImageClient {
 abstract class $MessageImageClientCopyWith<$Res> {
   factory $MessageImageClientCopyWith(
           MessageImageClient value, $Res Function(MessageImageClient) then) =
-      _$MessageImageClientCopyWithImpl<$Res>;
+      _$MessageImageClientCopyWithImpl<$Res, MessageImageClient>;
+  @useResult
   $Res call(
       {int id,
       int? localId,
@@ -692,55 +695,58 @@ abstract class $MessageImageClientCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MessageImageClientCopyWithImpl<$Res>
+class _$MessageImageClientCopyWithImpl<$Res, $Val extends MessageImageClient>
     implements $MessageImageClientCopyWith<$Res> {
   _$MessageImageClientCopyWithImpl(this._value, this._then);
 
-  final MessageImageClient _value;
   // ignore: unused_field
-  final $Res Function(MessageImageClient) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
     Object? localId = freezed,
-    Object? createdAt = freezed,
-    Object? status = freezed,
-    Object? file = freezed,
+    Object? createdAt = null,
+    Object? status = null,
+    Object? file = null,
     Object? uploadProgress = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      localId: localId == freezed
+      localId: freezed == localId
           ? _value.localId
           : localId // ignore: cast_nullable_to_non_nullable
               as int?,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as MessageSentStatus,
-      file: file == freezed
+      file: null == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
               as MessageFile,
-      uploadProgress: uploadProgress == freezed
+      uploadProgress: freezed == uploadProgress
           ? _value.uploadProgress
           : uploadProgress // ignore: cast_nullable_to_non_nullable
               as Stream<double>?,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $MessageFileCopyWith<$Res> get file {
     return $MessageFileCopyWith<$Res>(_value.file, (value) {
-      return _then(_value.copyWith(file: value));
+      return _then(_value.copyWith(file: value) as $Val);
     });
   }
 }
@@ -752,6 +758,7 @@ abstract class _$$_MessageImageClientCopyWith<$Res>
           $Res Function(_$_MessageImageClient) then) =
       __$$_MessageImageClientCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int id,
       int? localId,
@@ -766,46 +773,44 @@ abstract class _$$_MessageImageClientCopyWith<$Res>
 
 /// @nodoc
 class __$$_MessageImageClientCopyWithImpl<$Res>
-    extends _$MessageImageClientCopyWithImpl<$Res>
+    extends _$MessageImageClientCopyWithImpl<$Res, _$_MessageImageClient>
     implements _$$_MessageImageClientCopyWith<$Res> {
   __$$_MessageImageClientCopyWithImpl(
       _$_MessageImageClient _value, $Res Function(_$_MessageImageClient) _then)
-      : super(_value, (v) => _then(v as _$_MessageImageClient));
+      : super(_value, _then);
 
-  @override
-  _$_MessageImageClient get _value => super._value as _$_MessageImageClient;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
     Object? localId = freezed,
-    Object? createdAt = freezed,
-    Object? status = freezed,
-    Object? file = freezed,
+    Object? createdAt = null,
+    Object? status = null,
+    Object? file = null,
     Object? uploadProgress = freezed,
   }) {
     return _then(_$_MessageImageClient(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      localId: localId == freezed
+      localId: freezed == localId
           ? _value.localId
           : localId // ignore: cast_nullable_to_non_nullable
               as int?,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as MessageSentStatus,
-      file: file == freezed
+      file: null == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
               as MessageFile,
-      uploadProgress: uploadProgress == freezed
+      uploadProgress: freezed == uploadProgress
           ? _value.uploadProgress
           : uploadProgress // ignore: cast_nullable_to_non_nullable
               as Stream<double>?,
@@ -852,28 +857,24 @@ class _$_MessageImageClient implements _MessageImageClient {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MessageImageClient &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.localId, localId) &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality().equals(other.file, file) &&
-            const DeepCollectionEquality()
-                .equals(other.uploadProgress, uploadProgress));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.localId, localId) || other.localId == localId) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.file, file) || other.file == file) &&
+            (identical(other.uploadProgress, uploadProgress) ||
+                other.uploadProgress == uploadProgress));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(localId),
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(file),
-      const DeepCollectionEquality().hash(uploadProgress));
+      runtimeType, id, localId, createdAt, status, file, uploadProgress);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MessageImageClientCopyWith<_$_MessageImageClient> get copyWith =>
       __$$_MessageImageClientCopyWithImpl<_$_MessageImageClient>(
           this, _$identity);
@@ -945,47 +946,51 @@ mixin _$MessageUnknownFile {
 abstract class $MessageUnknownFileCopyWith<$Res> {
   factory $MessageUnknownFileCopyWith(
           MessageUnknownFile value, $Res Function(MessageUnknownFile) then) =
-      _$MessageUnknownFileCopyWithImpl<$Res>;
+      _$MessageUnknownFileCopyWithImpl<$Res, MessageUnknownFile>;
+  @useResult
   $Res call({int id, DateTime createdAt, MessageFile file});
 
   $MessageFileCopyWith<$Res> get file;
 }
 
 /// @nodoc
-class _$MessageUnknownFileCopyWithImpl<$Res>
+class _$MessageUnknownFileCopyWithImpl<$Res, $Val extends MessageUnknownFile>
     implements $MessageUnknownFileCopyWith<$Res> {
   _$MessageUnknownFileCopyWithImpl(this._value, this._then);
 
-  final MessageUnknownFile _value;
   // ignore: unused_field
-  final $Res Function(MessageUnknownFile) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? createdAt = freezed,
-    Object? file = freezed,
+    Object? id = null,
+    Object? createdAt = null,
+    Object? file = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      file: file == freezed
+      file: null == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
               as MessageFile,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $MessageFileCopyWith<$Res> get file {
     return $MessageFileCopyWith<$Res>(_value.file, (value) {
-      return _then(_value.copyWith(file: value));
+      return _then(_value.copyWith(file: value) as $Val);
     });
   }
 }
@@ -997,6 +1002,7 @@ abstract class _$$_MessageUnknownFileCopyWith<$Res>
           $Res Function(_$_MessageUnknownFile) then) =
       __$$_MessageUnknownFileCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({int id, DateTime createdAt, MessageFile file});
 
   @override
@@ -1005,31 +1011,29 @@ abstract class _$$_MessageUnknownFileCopyWith<$Res>
 
 /// @nodoc
 class __$$_MessageUnknownFileCopyWithImpl<$Res>
-    extends _$MessageUnknownFileCopyWithImpl<$Res>
+    extends _$MessageUnknownFileCopyWithImpl<$Res, _$_MessageUnknownFile>
     implements _$$_MessageUnknownFileCopyWith<$Res> {
   __$$_MessageUnknownFileCopyWithImpl(
       _$_MessageUnknownFile _value, $Res Function(_$_MessageUnknownFile) _then)
-      : super(_value, (v) => _then(v as _$_MessageUnknownFile));
+      : super(_value, _then);
 
-  @override
-  _$_MessageUnknownFile get _value => super._value as _$_MessageUnknownFile;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? createdAt = freezed,
-    Object? file = freezed,
+    Object? id = null,
+    Object? createdAt = null,
+    Object? file = null,
   }) {
     return _then(_$_MessageUnknownFile(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      file: file == freezed
+      file: null == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
               as MessageFile,
@@ -1063,21 +1067,19 @@ class _$_MessageUnknownFile implements _MessageUnknownFile {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MessageUnknownFile &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.file, file));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.file, file) || other.file == file));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(file));
+  int get hashCode => Object.hash(runtimeType, id, createdAt, file);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MessageUnknownFileCopyWith<_$_MessageUnknownFile> get copyWith =>
       __$$_MessageUnknownFileCopyWithImpl<_$_MessageUnknownFile>(
           this, _$identity);
@@ -1138,7 +1140,8 @@ mixin _$MessageUnknownFileClient {
 abstract class $MessageUnknownFileClientCopyWith<$Res> {
   factory $MessageUnknownFileClientCopyWith(MessageUnknownFileClient value,
           $Res Function(MessageUnknownFileClient) then) =
-      _$MessageUnknownFileClientCopyWithImpl<$Res>;
+      _$MessageUnknownFileClientCopyWithImpl<$Res, MessageUnknownFileClient>;
+  @useResult
   $Res call(
       {int id,
       int? localId,
@@ -1151,55 +1154,59 @@ abstract class $MessageUnknownFileClientCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MessageUnknownFileClientCopyWithImpl<$Res>
+class _$MessageUnknownFileClientCopyWithImpl<$Res,
+        $Val extends MessageUnknownFileClient>
     implements $MessageUnknownFileClientCopyWith<$Res> {
   _$MessageUnknownFileClientCopyWithImpl(this._value, this._then);
 
-  final MessageUnknownFileClient _value;
   // ignore: unused_field
-  final $Res Function(MessageUnknownFileClient) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
     Object? localId = freezed,
-    Object? createdAt = freezed,
-    Object? status = freezed,
-    Object? file = freezed,
+    Object? createdAt = null,
+    Object? status = null,
+    Object? file = null,
     Object? uploadProgress = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      localId: localId == freezed
+      localId: freezed == localId
           ? _value.localId
           : localId // ignore: cast_nullable_to_non_nullable
               as int?,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as MessageSentStatus,
-      file: file == freezed
+      file: null == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
               as MessageFile,
-      uploadProgress: uploadProgress == freezed
+      uploadProgress: freezed == uploadProgress
           ? _value.uploadProgress
           : uploadProgress // ignore: cast_nullable_to_non_nullable
               as Stream<double>?,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $MessageFileCopyWith<$Res> get file {
     return $MessageFileCopyWith<$Res>(_value.file, (value) {
-      return _then(_value.copyWith(file: value));
+      return _then(_value.copyWith(file: value) as $Val);
     });
   }
 }
@@ -1212,6 +1219,7 @@ abstract class _$$_MessageUnknownFileClientCopyWith<$Res>
           $Res Function(_$_MessageUnknownFileClient) then) =
       __$$_MessageUnknownFileClientCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int id,
       int? localId,
@@ -1226,47 +1234,45 @@ abstract class _$$_MessageUnknownFileClientCopyWith<$Res>
 
 /// @nodoc
 class __$$_MessageUnknownFileClientCopyWithImpl<$Res>
-    extends _$MessageUnknownFileClientCopyWithImpl<$Res>
+    extends _$MessageUnknownFileClientCopyWithImpl<$Res,
+        _$_MessageUnknownFileClient>
     implements _$$_MessageUnknownFileClientCopyWith<$Res> {
   __$$_MessageUnknownFileClientCopyWithImpl(_$_MessageUnknownFileClient _value,
       $Res Function(_$_MessageUnknownFileClient) _then)
-      : super(_value, (v) => _then(v as _$_MessageUnknownFileClient));
+      : super(_value, _then);
 
-  @override
-  _$_MessageUnknownFileClient get _value =>
-      super._value as _$_MessageUnknownFileClient;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
     Object? localId = freezed,
-    Object? createdAt = freezed,
-    Object? status = freezed,
-    Object? file = freezed,
+    Object? createdAt = null,
+    Object? status = null,
+    Object? file = null,
     Object? uploadProgress = freezed,
   }) {
     return _then(_$_MessageUnknownFileClient(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      localId: localId == freezed
+      localId: freezed == localId
           ? _value.localId
           : localId // ignore: cast_nullable_to_non_nullable
               as int?,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      status: status == freezed
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as MessageSentStatus,
-      file: file == freezed
+      file: null == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
               as MessageFile,
-      uploadProgress: uploadProgress == freezed
+      uploadProgress: freezed == uploadProgress
           ? _value.uploadProgress
           : uploadProgress // ignore: cast_nullable_to_non_nullable
               as Stream<double>?,
@@ -1313,28 +1319,24 @@ class _$_MessageUnknownFileClient implements _MessageUnknownFileClient {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MessageUnknownFileClient &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.localId, localId) &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality().equals(other.file, file) &&
-            const DeepCollectionEquality()
-                .equals(other.uploadProgress, uploadProgress));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.localId, localId) || other.localId == localId) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.file, file) || other.file == file) &&
+            (identical(other.uploadProgress, uploadProgress) ||
+                other.uploadProgress == uploadProgress));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(localId),
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(file),
-      const DeepCollectionEquality().hash(uploadProgress));
+      runtimeType, id, localId, createdAt, status, file, uploadProgress);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MessageUnknownFileClientCopyWith<_$_MessageUnknownFileClient>
       get copyWith => __$$_MessageUnknownFileClientCopyWithImpl<
           _$_MessageUnknownFileClient>(this, _$identity);

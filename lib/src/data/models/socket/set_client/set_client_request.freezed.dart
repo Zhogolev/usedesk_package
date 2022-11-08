@@ -33,42 +33,46 @@ mixin _$SetClientRequest {
 abstract class $SetClientRequestCopyWith<$Res> {
   factory $SetClientRequestCopyWith(
           SetClientRequest value, $Res Function(SetClientRequest) then) =
-      _$SetClientRequestCopyWithImpl<$Res>;
+      _$SetClientRequestCopyWithImpl<$Res, SetClientRequest>;
+  @useResult
   $Res call({String type, SetClientRequestPayload payload});
 
   $SetClientRequestPayloadCopyWith<$Res> get payload;
 }
 
 /// @nodoc
-class _$SetClientRequestCopyWithImpl<$Res>
+class _$SetClientRequestCopyWithImpl<$Res, $Val extends SetClientRequest>
     implements $SetClientRequestCopyWith<$Res> {
   _$SetClientRequestCopyWithImpl(this._value, this._then);
 
-  final SetClientRequest _value;
   // ignore: unused_field
-  final $Res Function(SetClientRequest) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? payload = freezed,
+    Object? type = null,
+    Object? payload = null,
   }) {
     return _then(_value.copyWith(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      payload: payload == freezed
+      payload: null == payload
           ? _value.payload
           : payload // ignore: cast_nullable_to_non_nullable
               as SetClientRequestPayload,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $SetClientRequestPayloadCopyWith<$Res> get payload {
     return $SetClientRequestPayloadCopyWith<$Res>(_value.payload, (value) {
-      return _then(_value.copyWith(payload: value));
+      return _then(_value.copyWith(payload: value) as $Val);
     });
   }
 }
@@ -80,6 +84,7 @@ abstract class _$$_SetClientRequestCopyWith<$Res>
           _$_SetClientRequest value, $Res Function(_$_SetClientRequest) then) =
       __$$_SetClientRequestCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String type, SetClientRequestPayload payload});
 
   @override
@@ -88,26 +93,24 @@ abstract class _$$_SetClientRequestCopyWith<$Res>
 
 /// @nodoc
 class __$$_SetClientRequestCopyWithImpl<$Res>
-    extends _$SetClientRequestCopyWithImpl<$Res>
+    extends _$SetClientRequestCopyWithImpl<$Res, _$_SetClientRequest>
     implements _$$_SetClientRequestCopyWith<$Res> {
   __$$_SetClientRequestCopyWithImpl(
       _$_SetClientRequest _value, $Res Function(_$_SetClientRequest) _then)
-      : super(_value, (v) => _then(v as _$_SetClientRequest));
+      : super(_value, _then);
 
-  @override
-  _$_SetClientRequest get _value => super._value as _$_SetClientRequest;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? payload = freezed,
+    Object? type = null,
+    Object? payload = null,
   }) {
     return _then(_$_SetClientRequest(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      payload: payload == freezed
+      payload: null == payload
           ? _value.payload
           : payload // ignore: cast_nullable_to_non_nullable
               as SetClientRequestPayload,
@@ -140,19 +143,17 @@ class _$_SetClientRequest implements _SetClientRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SetClientRequest &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.payload, payload));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.payload, payload) || other.payload == payload));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(payload));
+  int get hashCode => Object.hash(runtimeType, type, payload);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SetClientRequestCopyWith<_$_SetClientRequest> get copyWith =>
       __$$_SetClientRequestCopyWithImpl<_$_SetClientRequest>(this, _$identity);
 
@@ -206,7 +207,8 @@ mixin _$SetClientRequestPayload {
 abstract class $SetClientRequestPayloadCopyWith<$Res> {
   factory $SetClientRequestPayloadCopyWith(SetClientRequestPayload value,
           $Res Function(SetClientRequestPayload) then) =
-      _$SetClientRequestPayloadCopyWithImpl<$Res>;
+      _$SetClientRequestPayloadCopyWithImpl<$Res, SetClientRequestPayload>;
+  @useResult
   $Res call(
       {String? token,
       String? email,
@@ -217,14 +219,17 @@ abstract class $SetClientRequestPayloadCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SetClientRequestPayloadCopyWithImpl<$Res>
+class _$SetClientRequestPayloadCopyWithImpl<$Res,
+        $Val extends SetClientRequestPayload>
     implements $SetClientRequestPayloadCopyWith<$Res> {
   _$SetClientRequestPayloadCopyWithImpl(this._value, this._then);
 
-  final SetClientRequestPayload _value;
   // ignore: unused_field
-  final $Res Function(SetClientRequestPayload) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? token = freezed,
@@ -235,31 +240,31 @@ class _$SetClientRequestPayloadCopyWithImpl<$Res>
     Object? additionalId = freezed,
   }) {
     return _then(_value.copyWith(
-      token: token == freezed
+      token: freezed == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String?,
-      email: email == freezed
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      username: username == freezed
+      username: freezed == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String?,
-      note: note == freezed
+      note: freezed == note
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
               as String?,
-      phone: phone == freezed
+      phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as int?,
-      additionalId: additionalId == freezed
+      additionalId: freezed == additionalId
           ? _value.additionalId
           : additionalId // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -270,6 +275,7 @@ abstract class _$$_SetClientRequestPayloadCopyWith<$Res>
           $Res Function(_$_SetClientRequestPayload) then) =
       __$$_SetClientRequestPayloadCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String? token,
       String? email,
@@ -281,16 +287,14 @@ abstract class _$$_SetClientRequestPayloadCopyWith<$Res>
 
 /// @nodoc
 class __$$_SetClientRequestPayloadCopyWithImpl<$Res>
-    extends _$SetClientRequestPayloadCopyWithImpl<$Res>
+    extends _$SetClientRequestPayloadCopyWithImpl<$Res,
+        _$_SetClientRequestPayload>
     implements _$$_SetClientRequestPayloadCopyWith<$Res> {
   __$$_SetClientRequestPayloadCopyWithImpl(_$_SetClientRequestPayload _value,
       $Res Function(_$_SetClientRequestPayload) _then)
-      : super(_value, (v) => _then(v as _$_SetClientRequestPayload));
+      : super(_value, _then);
 
-  @override
-  _$_SetClientRequestPayload get _value =>
-      super._value as _$_SetClientRequestPayload;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? token = freezed,
@@ -301,27 +305,27 @@ class __$$_SetClientRequestPayloadCopyWithImpl<$Res>
     Object? additionalId = freezed,
   }) {
     return _then(_$_SetClientRequestPayload(
-      token: token == freezed
+      token: freezed == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String?,
-      email: email == freezed
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      username: username == freezed
+      username: freezed == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String?,
-      note: note == freezed
+      note: freezed == note
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
               as String?,
-      phone: phone == freezed
+      phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as int?,
-      additionalId: additionalId == freezed
+      additionalId: freezed == additionalId
           ? _value.additionalId
           : additionalId // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -367,28 +371,24 @@ class _$_SetClientRequestPayload implements _SetClientRequestPayload {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SetClientRequestPayload &&
-            const DeepCollectionEquality().equals(other.token, token) &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.username, username) &&
-            const DeepCollectionEquality().equals(other.note, note) &&
-            const DeepCollectionEquality().equals(other.phone, phone) &&
-            const DeepCollectionEquality()
-                .equals(other.additionalId, additionalId));
+            (identical(other.token, token) || other.token == token) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.username, username) ||
+                other.username == username) &&
+            (identical(other.note, note) || other.note == note) &&
+            (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.additionalId, additionalId) ||
+                other.additionalId == additionalId));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(token),
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(username),
-      const DeepCollectionEquality().hash(note),
-      const DeepCollectionEquality().hash(phone),
-      const DeepCollectionEquality().hash(additionalId));
+      runtimeType, token, email, username, note, phone, additionalId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SetClientRequestPayloadCopyWith<_$_SetClientRequestPayload>
       get copyWith =>
           __$$_SetClientRequestPayloadCopyWithImpl<_$_SetClientRequestPayload>(

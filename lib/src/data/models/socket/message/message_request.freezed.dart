@@ -33,42 +33,46 @@ mixin _$MessageRequest {
 abstract class $MessageRequestCopyWith<$Res> {
   factory $MessageRequestCopyWith(
           MessageRequest value, $Res Function(MessageRequest) then) =
-      _$MessageRequestCopyWithImpl<$Res>;
+      _$MessageRequestCopyWithImpl<$Res, MessageRequest>;
+  @useResult
   $Res call({String type, MessageRequestTextMessage message});
 
   $MessageRequestTextMessageCopyWith<$Res> get message;
 }
 
 /// @nodoc
-class _$MessageRequestCopyWithImpl<$Res>
+class _$MessageRequestCopyWithImpl<$Res, $Val extends MessageRequest>
     implements $MessageRequestCopyWith<$Res> {
   _$MessageRequestCopyWithImpl(this._value, this._then);
 
-  final MessageRequest _value;
   // ignore: unused_field
-  final $Res Function(MessageRequest) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? message = freezed,
+    Object? type = null,
+    Object? message = null,
   }) {
     return _then(_value.copyWith(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      message: message == freezed
+      message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as MessageRequestTextMessage,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $MessageRequestTextMessageCopyWith<$Res> get message {
     return $MessageRequestTextMessageCopyWith<$Res>(_value.message, (value) {
-      return _then(_value.copyWith(message: value));
+      return _then(_value.copyWith(message: value) as $Val);
     });
   }
 }
@@ -80,6 +84,7 @@ abstract class _$$_MessageRequestCopyWith<$Res>
           _$_MessageRequest value, $Res Function(_$_MessageRequest) then) =
       __$$_MessageRequestCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String type, MessageRequestTextMessage message});
 
   @override
@@ -88,26 +93,24 @@ abstract class _$$_MessageRequestCopyWith<$Res>
 
 /// @nodoc
 class __$$_MessageRequestCopyWithImpl<$Res>
-    extends _$MessageRequestCopyWithImpl<$Res>
+    extends _$MessageRequestCopyWithImpl<$Res, _$_MessageRequest>
     implements _$$_MessageRequestCopyWith<$Res> {
   __$$_MessageRequestCopyWithImpl(
       _$_MessageRequest _value, $Res Function(_$_MessageRequest) _then)
-      : super(_value, (v) => _then(v as _$_MessageRequest));
+      : super(_value, _then);
 
-  @override
-  _$_MessageRequest get _value => super._value as _$_MessageRequest;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? message = freezed,
+    Object? type = null,
+    Object? message = null,
   }) {
     return _then(_$_MessageRequest(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      message: message == freezed
+      message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as MessageRequestTextMessage,
@@ -140,19 +143,17 @@ class _$_MessageRequest implements _MessageRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MessageRequest &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.message, message));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(message));
+  int get hashCode => Object.hash(runtimeType, type, message);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MessageRequestCopyWith<_$_MessageRequest> get copyWith =>
       __$$_MessageRequestCopyWithImpl<_$_MessageRequest>(this, _$identity);
 
@@ -203,39 +204,44 @@ mixin _$MessageRequestTextMessage {
 abstract class $MessageRequestTextMessageCopyWith<$Res> {
   factory $MessageRequestTextMessageCopyWith(MessageRequestTextMessage value,
           $Res Function(MessageRequestTextMessage) then) =
-      _$MessageRequestTextMessageCopyWithImpl<$Res>;
+      _$MessageRequestTextMessageCopyWithImpl<$Res, MessageRequestTextMessage>;
+  @useResult
   $Res call({String text, MessageRequestTextMessagePayload? payload});
 
   $MessageRequestTextMessagePayloadCopyWith<$Res>? get payload;
 }
 
 /// @nodoc
-class _$MessageRequestTextMessageCopyWithImpl<$Res>
+class _$MessageRequestTextMessageCopyWithImpl<$Res,
+        $Val extends MessageRequestTextMessage>
     implements $MessageRequestTextMessageCopyWith<$Res> {
   _$MessageRequestTextMessageCopyWithImpl(this._value, this._then);
 
-  final MessageRequestTextMessage _value;
   // ignore: unused_field
-  final $Res Function(MessageRequestTextMessage) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? text = freezed,
+    Object? text = null,
     Object? payload = freezed,
   }) {
     return _then(_value.copyWith(
-      text: text == freezed
+      text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
-      payload: payload == freezed
+      payload: freezed == payload
           ? _value.payload
           : payload // ignore: cast_nullable_to_non_nullable
               as MessageRequestTextMessagePayload?,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $MessageRequestTextMessagePayloadCopyWith<$Res>? get payload {
     if (_value.payload == null) {
       return null;
@@ -243,7 +249,7 @@ class _$MessageRequestTextMessageCopyWithImpl<$Res>
 
     return $MessageRequestTextMessagePayloadCopyWith<$Res>(_value.payload!,
         (value) {
-      return _then(_value.copyWith(payload: value));
+      return _then(_value.copyWith(payload: value) as $Val);
     });
   }
 }
@@ -256,6 +262,7 @@ abstract class _$$_MessageRequestTextMessageCopyWith<$Res>
           $Res Function(_$_MessageRequestTextMessage) then) =
       __$$_MessageRequestTextMessageCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String text, MessageRequestTextMessagePayload? payload});
 
   @override
@@ -264,28 +271,26 @@ abstract class _$$_MessageRequestTextMessageCopyWith<$Res>
 
 /// @nodoc
 class __$$_MessageRequestTextMessageCopyWithImpl<$Res>
-    extends _$MessageRequestTextMessageCopyWithImpl<$Res>
+    extends _$MessageRequestTextMessageCopyWithImpl<$Res,
+        _$_MessageRequestTextMessage>
     implements _$$_MessageRequestTextMessageCopyWith<$Res> {
   __$$_MessageRequestTextMessageCopyWithImpl(
       _$_MessageRequestTextMessage _value,
       $Res Function(_$_MessageRequestTextMessage) _then)
-      : super(_value, (v) => _then(v as _$_MessageRequestTextMessage));
+      : super(_value, _then);
 
-  @override
-  _$_MessageRequestTextMessage get _value =>
-      super._value as _$_MessageRequestTextMessage;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? text = freezed,
+    Object? text = null,
     Object? payload = freezed,
   }) {
     return _then(_$_MessageRequestTextMessage(
-      text: text == freezed
+      text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
-      payload: payload == freezed
+      payload: freezed == payload
           ? _value.payload
           : payload // ignore: cast_nullable_to_non_nullable
               as MessageRequestTextMessagePayload?,
@@ -319,19 +324,17 @@ class _$_MessageRequestTextMessage implements _MessageRequestTextMessage {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MessageRequestTextMessage &&
-            const DeepCollectionEquality().equals(other.text, text) &&
-            const DeepCollectionEquality().equals(other.payload, payload));
+            (identical(other.text, text) || other.text == text) &&
+            (identical(other.payload, payload) || other.payload == payload));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(text),
-      const DeepCollectionEquality().hash(payload));
+  int get hashCode => Object.hash(runtimeType, text, payload);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MessageRequestTextMessageCopyWith<_$_MessageRequestTextMessage>
       get copyWith => __$$_MessageRequestTextMessageCopyWithImpl<
           _$_MessageRequestTextMessage>(this, _$identity);
@@ -383,29 +386,34 @@ abstract class $MessageRequestTextMessagePayloadCopyWith<$Res> {
   factory $MessageRequestTextMessagePayloadCopyWith(
           MessageRequestTextMessagePayload value,
           $Res Function(MessageRequestTextMessagePayload) then) =
-      _$MessageRequestTextMessagePayloadCopyWithImpl<$Res>;
+      _$MessageRequestTextMessagePayloadCopyWithImpl<$Res,
+          MessageRequestTextMessagePayload>;
+  @useResult
   $Res call({String? messageId});
 }
 
 /// @nodoc
-class _$MessageRequestTextMessagePayloadCopyWithImpl<$Res>
+class _$MessageRequestTextMessagePayloadCopyWithImpl<$Res,
+        $Val extends MessageRequestTextMessagePayload>
     implements $MessageRequestTextMessagePayloadCopyWith<$Res> {
   _$MessageRequestTextMessagePayloadCopyWithImpl(this._value, this._then);
 
-  final MessageRequestTextMessagePayload _value;
   // ignore: unused_field
-  final $Res Function(MessageRequestTextMessagePayload) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? messageId = freezed,
   }) {
     return _then(_value.copyWith(
-      messageId: messageId == freezed
+      messageId: freezed == messageId
           ? _value.messageId
           : messageId // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -417,28 +425,27 @@ abstract class _$$_MessageRequestTextMessagePayloadCopyWith<$Res>
           $Res Function(_$_MessageRequestTextMessagePayload) then) =
       __$$_MessageRequestTextMessagePayloadCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String? messageId});
 }
 
 /// @nodoc
 class __$$_MessageRequestTextMessagePayloadCopyWithImpl<$Res>
-    extends _$MessageRequestTextMessagePayloadCopyWithImpl<$Res>
+    extends _$MessageRequestTextMessagePayloadCopyWithImpl<$Res,
+        _$_MessageRequestTextMessagePayload>
     implements _$$_MessageRequestTextMessagePayloadCopyWith<$Res> {
   __$$_MessageRequestTextMessagePayloadCopyWithImpl(
       _$_MessageRequestTextMessagePayload _value,
       $Res Function(_$_MessageRequestTextMessagePayload) _then)
-      : super(_value, (v) => _then(v as _$_MessageRequestTextMessagePayload));
+      : super(_value, _then);
 
-  @override
-  _$_MessageRequestTextMessagePayload get _value =>
-      super._value as _$_MessageRequestTextMessagePayload;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? messageId = freezed,
   }) {
     return _then(_$_MessageRequestTextMessagePayload(
-      messageId: messageId == freezed
+      messageId: freezed == messageId
           ? _value.messageId
           : messageId // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -470,16 +477,17 @@ class _$_MessageRequestTextMessagePayload
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MessageRequestTextMessagePayload &&
-            const DeepCollectionEquality().equals(other.messageId, messageId));
+            (identical(other.messageId, messageId) ||
+                other.messageId == messageId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(messageId));
+  int get hashCode => Object.hash(runtimeType, messageId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MessageRequestTextMessagePayloadCopyWith<
           _$_MessageRequestTextMessagePayload>
       get copyWith => __$$_MessageRequestTextMessagePayloadCopyWithImpl<

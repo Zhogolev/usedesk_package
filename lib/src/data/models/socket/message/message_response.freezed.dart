@@ -33,42 +33,46 @@ mixin _$MessageResponse {
 abstract class $MessageResponseCopyWith<$Res> {
   factory $MessageResponseCopyWith(
           MessageResponse value, $Res Function(MessageResponse) then) =
-      _$MessageResponseCopyWithImpl<$Res>;
+      _$MessageResponseCopyWithImpl<$Res, MessageResponse>;
+  @useResult
   $Res call({String type, Message<dynamic> message});
 
   $MessageCopyWith<dynamic, $Res> get message;
 }
 
 /// @nodoc
-class _$MessageResponseCopyWithImpl<$Res>
+class _$MessageResponseCopyWithImpl<$Res, $Val extends MessageResponse>
     implements $MessageResponseCopyWith<$Res> {
   _$MessageResponseCopyWithImpl(this._value, this._then);
 
-  final MessageResponse _value;
   // ignore: unused_field
-  final $Res Function(MessageResponse) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? message = freezed,
+    Object? type = null,
+    Object? message = null,
   }) {
     return _then(_value.copyWith(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      message: message == freezed
+      message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as Message<dynamic>,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $MessageCopyWith<dynamic, $Res> get message {
     return $MessageCopyWith<dynamic, $Res>(_value.message, (value) {
-      return _then(_value.copyWith(message: value));
+      return _then(_value.copyWith(message: value) as $Val);
     });
   }
 }
@@ -80,6 +84,7 @@ abstract class _$$_MessageResponseCopyWith<$Res>
           _$_MessageResponse value, $Res Function(_$_MessageResponse) then) =
       __$$_MessageResponseCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String type, Message<dynamic> message});
 
   @override
@@ -88,26 +93,24 @@ abstract class _$$_MessageResponseCopyWith<$Res>
 
 /// @nodoc
 class __$$_MessageResponseCopyWithImpl<$Res>
-    extends _$MessageResponseCopyWithImpl<$Res>
+    extends _$MessageResponseCopyWithImpl<$Res, _$_MessageResponse>
     implements _$$_MessageResponseCopyWith<$Res> {
   __$$_MessageResponseCopyWithImpl(
       _$_MessageResponse _value, $Res Function(_$_MessageResponse) _then)
-      : super(_value, (v) => _then(v as _$_MessageResponse));
+      : super(_value, _then);
 
-  @override
-  _$_MessageResponse get _value => super._value as _$_MessageResponse;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? message = freezed,
+    Object? type = null,
+    Object? message = null,
   }) {
     return _then(_$_MessageResponse(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      message: message == freezed
+      message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as Message<dynamic>,
@@ -138,19 +141,17 @@ class _$_MessageResponse implements _MessageResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MessageResponse &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.message, message));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(message));
+  int get hashCode => Object.hash(runtimeType, type, message);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MessageResponseCopyWith<_$_MessageResponse> get copyWith =>
       __$$_MessageResponseCopyWithImpl<_$_MessageResponse>(this, _$identity);
 

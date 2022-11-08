@@ -40,7 +40,8 @@ mixin _$Chat {
 /// @nodoc
 abstract class $ChatCopyWith<$Res> {
   factory $ChatCopyWith(Chat value, $Res Function(Chat) then) =
-      _$ChatCopyWithImpl<$Res>;
+      _$ChatCopyWithImpl<$Res, Chat>;
+  @useResult
   $Res call(
       {int id,
       int channelId,
@@ -54,63 +55,66 @@ abstract class $ChatCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ChatCopyWithImpl<$Res> implements $ChatCopyWith<$Res> {
+class _$ChatCopyWithImpl<$Res, $Val extends Chat>
+    implements $ChatCopyWith<$Res> {
   _$ChatCopyWithImpl(this._value, this._then);
 
-  final Chat _value;
   // ignore: unused_field
-  final $Res Function(Chat) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? channelId = freezed,
-    Object? clientId = freezed,
-    Object? companyId = freezed,
-    Object? ticketId = freezed,
-    Object? online = freezed,
-    Object? token = freezed,
-    Object? connectedAt = freezed,
-    Object? url = freezed,
+    Object? id = null,
+    Object? channelId = null,
+    Object? clientId = null,
+    Object? companyId = null,
+    Object? ticketId = null,
+    Object? online = null,
+    Object? token = null,
+    Object? connectedAt = null,
+    Object? url = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      channelId: channelId == freezed
+      channelId: null == channelId
           ? _value.channelId
           : channelId // ignore: cast_nullable_to_non_nullable
               as int,
-      clientId: clientId == freezed
+      clientId: null == clientId
           ? _value.clientId
           : clientId // ignore: cast_nullable_to_non_nullable
               as int,
-      companyId: companyId == freezed
+      companyId: null == companyId
           ? _value.companyId
           : companyId // ignore: cast_nullable_to_non_nullable
               as int,
-      ticketId: ticketId == freezed
+      ticketId: null == ticketId
           ? _value.ticketId
           : ticketId // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      online: online == freezed
+      online: null == online
           ? _value.online
           : online // ignore: cast_nullable_to_non_nullable
               as bool,
-      token: token == freezed
+      token: null == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String,
-      connectedAt: connectedAt == freezed
+      connectedAt: null == connectedAt
           ? _value.connectedAt
           : connectedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      url: url == freezed
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -119,6 +123,7 @@ abstract class _$$_ChatCopyWith<$Res> implements $ChatCopyWith<$Res> {
   factory _$$_ChatCopyWith(_$_Chat value, $Res Function(_$_Chat) then) =
       __$$_ChatCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int id,
       int channelId,
@@ -132,60 +137,58 @@ abstract class _$$_ChatCopyWith<$Res> implements $ChatCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ChatCopyWithImpl<$Res> extends _$ChatCopyWithImpl<$Res>
+class __$$_ChatCopyWithImpl<$Res> extends _$ChatCopyWithImpl<$Res, _$_Chat>
     implements _$$_ChatCopyWith<$Res> {
   __$$_ChatCopyWithImpl(_$_Chat _value, $Res Function(_$_Chat) _then)
-      : super(_value, (v) => _then(v as _$_Chat));
+      : super(_value, _then);
 
-  @override
-  _$_Chat get _value => super._value as _$_Chat;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? channelId = freezed,
-    Object? clientId = freezed,
-    Object? companyId = freezed,
-    Object? ticketId = freezed,
-    Object? online = freezed,
-    Object? token = freezed,
-    Object? connectedAt = freezed,
-    Object? url = freezed,
+    Object? id = null,
+    Object? channelId = null,
+    Object? clientId = null,
+    Object? companyId = null,
+    Object? ticketId = null,
+    Object? online = null,
+    Object? token = null,
+    Object? connectedAt = null,
+    Object? url = null,
   }) {
     return _then(_$_Chat(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      channelId: channelId == freezed
+      channelId: null == channelId
           ? _value.channelId
           : channelId // ignore: cast_nullable_to_non_nullable
               as int,
-      clientId: clientId == freezed
+      clientId: null == clientId
           ? _value.clientId
           : clientId // ignore: cast_nullable_to_non_nullable
               as int,
-      companyId: companyId == freezed
+      companyId: null == companyId
           ? _value.companyId
           : companyId // ignore: cast_nullable_to_non_nullable
               as int,
-      ticketId: ticketId == freezed
+      ticketId: null == ticketId
           ? _value.ticketId
           : ticketId // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      online: online == freezed
+      online: null == online
           ? _value.online
           : online // ignore: cast_nullable_to_non_nullable
               as bool,
-      token: token == freezed
+      token: null == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String,
-      connectedAt: connectedAt == freezed
+      connectedAt: null == connectedAt
           ? _value.connectedAt
           : connectedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      url: url == freezed
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
@@ -241,34 +244,38 @@ class _$_Chat implements _Chat {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Chat &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.channelId, channelId) &&
-            const DeepCollectionEquality().equals(other.clientId, clientId) &&
-            const DeepCollectionEquality().equals(other.companyId, companyId) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.channelId, channelId) ||
+                other.channelId == channelId) &&
+            (identical(other.clientId, clientId) ||
+                other.clientId == clientId) &&
+            (identical(other.companyId, companyId) ||
+                other.companyId == companyId) &&
             const DeepCollectionEquality().equals(other.ticketId, ticketId) &&
-            const DeepCollectionEquality().equals(other.online, online) &&
-            const DeepCollectionEquality().equals(other.token, token) &&
-            const DeepCollectionEquality()
-                .equals(other.connectedAt, connectedAt) &&
-            const DeepCollectionEquality().equals(other.url, url));
+            (identical(other.online, online) || other.online == online) &&
+            (identical(other.token, token) || other.token == token) &&
+            (identical(other.connectedAt, connectedAt) ||
+                other.connectedAt == connectedAt) &&
+            (identical(other.url, url) || other.url == url));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(channelId),
-      const DeepCollectionEquality().hash(clientId),
-      const DeepCollectionEquality().hash(companyId),
+      id,
+      channelId,
+      clientId,
+      companyId,
       const DeepCollectionEquality().hash(ticketId),
-      const DeepCollectionEquality().hash(online),
-      const DeepCollectionEquality().hash(token),
-      const DeepCollectionEquality().hash(connectedAt),
-      const DeepCollectionEquality().hash(url));
+      online,
+      token,
+      connectedAt,
+      url);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ChatCopyWith<_$_Chat> get copyWith =>
       __$$_ChatCopyWithImpl<_$_Chat>(this, _$identity);
 

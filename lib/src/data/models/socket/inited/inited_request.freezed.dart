@@ -37,7 +37,8 @@ mixin _$InitedRequest {
 abstract class $InitedRequestCopyWith<$Res> {
   factory $InitedRequestCopyWith(
           InitedRequest value, $Res Function(InitedRequest) then) =
-      _$InitedRequestCopyWithImpl<$Res>;
+      _$InitedRequestCopyWithImpl<$Res, InitedRequest>;
+  @useResult
   $Res call(
       {String type,
       String companyId,
@@ -49,50 +50,53 @@ abstract class $InitedRequestCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$InitedRequestCopyWithImpl<$Res>
+class _$InitedRequestCopyWithImpl<$Res, $Val extends InitedRequest>
     implements $InitedRequestCopyWith<$Res> {
   _$InitedRequestCopyWithImpl(this._value, this._then);
 
-  final InitedRequest _value;
   // ignore: unused_field
-  final $Res Function(InitedRequest) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? companyId = freezed,
-    Object? payload = freezed,
+    Object? type = null,
+    Object? companyId = null,
+    Object? payload = null,
     Object? url = freezed,
     Object? token = freezed,
   }) {
     return _then(_value.copyWith(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      companyId: companyId == freezed
+      companyId: null == companyId
           ? _value.companyId
           : companyId // ignore: cast_nullable_to_non_nullable
               as String,
-      payload: payload == freezed
+      payload: null == payload
           ? _value.payload
           : payload // ignore: cast_nullable_to_non_nullable
               as InitedRequestPayload,
-      url: url == freezed
+      url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String?,
-      token: token == freezed
+      token: freezed == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $InitedRequestPayloadCopyWith<$Res> get payload {
     return $InitedRequestPayloadCopyWith<$Res>(_value.payload, (value) {
-      return _then(_value.copyWith(payload: value));
+      return _then(_value.copyWith(payload: value) as $Val);
     });
   }
 }
@@ -104,6 +108,7 @@ abstract class _$$_InitedRequestCopyWith<$Res>
           _$_InitedRequest value, $Res Function(_$_InitedRequest) then) =
       __$$_InitedRequestCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String type,
       String companyId,
@@ -117,41 +122,39 @@ abstract class _$$_InitedRequestCopyWith<$Res>
 
 /// @nodoc
 class __$$_InitedRequestCopyWithImpl<$Res>
-    extends _$InitedRequestCopyWithImpl<$Res>
+    extends _$InitedRequestCopyWithImpl<$Res, _$_InitedRequest>
     implements _$$_InitedRequestCopyWith<$Res> {
   __$$_InitedRequestCopyWithImpl(
       _$_InitedRequest _value, $Res Function(_$_InitedRequest) _then)
-      : super(_value, (v) => _then(v as _$_InitedRequest));
+      : super(_value, _then);
 
-  @override
-  _$_InitedRequest get _value => super._value as _$_InitedRequest;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? companyId = freezed,
-    Object? payload = freezed,
+    Object? type = null,
+    Object? companyId = null,
+    Object? payload = null,
     Object? url = freezed,
     Object? token = freezed,
   }) {
     return _then(_$_InitedRequest(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      companyId: companyId == freezed
+      companyId: null == companyId
           ? _value.companyId
           : companyId // ignore: cast_nullable_to_non_nullable
               as String,
-      payload: payload == freezed
+      payload: null == payload
           ? _value.payload
           : payload // ignore: cast_nullable_to_non_nullable
               as InitedRequestPayload,
-      url: url == freezed
+      url: freezed == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String?,
-      token: token == freezed
+      token: freezed == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -197,25 +200,22 @@ class _$_InitedRequest implements _InitedRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_InitedRequest &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.companyId, companyId) &&
-            const DeepCollectionEquality().equals(other.payload, payload) &&
-            const DeepCollectionEquality().equals(other.url, url) &&
-            const DeepCollectionEquality().equals(other.token, token));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.companyId, companyId) ||
+                other.companyId == companyId) &&
+            (identical(other.payload, payload) || other.payload == payload) &&
+            (identical(other.url, url) || other.url == url) &&
+            (identical(other.token, token) || other.token == token));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(companyId),
-      const DeepCollectionEquality().hash(payload),
-      const DeepCollectionEquality().hash(url),
-      const DeepCollectionEquality().hash(token));
+  int get hashCode =>
+      Object.hash(runtimeType, type, companyId, payload, url, token);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_InitedRequestCopyWith<_$_InitedRequest> get copyWith =>
       __$$_InitedRequestCopyWithImpl<_$_InitedRequest>(this, _$identity);
 
@@ -275,39 +275,43 @@ mixin _$InitedRequestPayload {
 abstract class $InitedRequestPayloadCopyWith<$Res> {
   factory $InitedRequestPayloadCopyWith(InitedRequestPayload value,
           $Res Function(InitedRequestPayload) then) =
-      _$InitedRequestPayloadCopyWithImpl<$Res>;
+      _$InitedRequestPayloadCopyWithImpl<$Res, InitedRequestPayload>;
+  @useResult
   $Res call({String sdk, String type, int messageLimit});
 }
 
 /// @nodoc
-class _$InitedRequestPayloadCopyWithImpl<$Res>
+class _$InitedRequestPayloadCopyWithImpl<$Res,
+        $Val extends InitedRequestPayload>
     implements $InitedRequestPayloadCopyWith<$Res> {
   _$InitedRequestPayloadCopyWithImpl(this._value, this._then);
 
-  final InitedRequestPayload _value;
   // ignore: unused_field
-  final $Res Function(InitedRequestPayload) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sdk = freezed,
-    Object? type = freezed,
-    Object? messageLimit = freezed,
+    Object? sdk = null,
+    Object? type = null,
+    Object? messageLimit = null,
   }) {
     return _then(_value.copyWith(
-      sdk: sdk == freezed
+      sdk: null == sdk
           ? _value.sdk
           : sdk // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      messageLimit: messageLimit == freezed
+      messageLimit: null == messageLimit
           ? _value.messageLimit
           : messageLimit // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -318,36 +322,35 @@ abstract class _$$_InitedRequestPayloadCopyWith<$Res>
           $Res Function(_$_InitedRequestPayload) then) =
       __$$_InitedRequestPayloadCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String sdk, String type, int messageLimit});
 }
 
 /// @nodoc
 class __$$_InitedRequestPayloadCopyWithImpl<$Res>
-    extends _$InitedRequestPayloadCopyWithImpl<$Res>
+    extends _$InitedRequestPayloadCopyWithImpl<$Res, _$_InitedRequestPayload>
     implements _$$_InitedRequestPayloadCopyWith<$Res> {
   __$$_InitedRequestPayloadCopyWithImpl(_$_InitedRequestPayload _value,
       $Res Function(_$_InitedRequestPayload) _then)
-      : super(_value, (v) => _then(v as _$_InitedRequestPayload));
+      : super(_value, _then);
 
-  @override
-  _$_InitedRequestPayload get _value => super._value as _$_InitedRequestPayload;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sdk = freezed,
-    Object? type = freezed,
-    Object? messageLimit = freezed,
+    Object? sdk = null,
+    Object? type = null,
+    Object? messageLimit = null,
   }) {
     return _then(_$_InitedRequestPayload(
-      sdk: sdk == freezed
+      sdk: null == sdk
           ? _value.sdk
           : sdk // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      messageLimit: messageLimit == freezed
+      messageLimit: null == messageLimit
           ? _value.messageLimit
           : messageLimit // ignore: cast_nullable_to_non_nullable
               as int,
@@ -385,22 +388,19 @@ class _$_InitedRequestPayload implements _InitedRequestPayload {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_InitedRequestPayload &&
-            const DeepCollectionEquality().equals(other.sdk, sdk) &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality()
-                .equals(other.messageLimit, messageLimit));
+            (identical(other.sdk, sdk) || other.sdk == sdk) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.messageLimit, messageLimit) ||
+                other.messageLimit == messageLimit));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(sdk),
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(messageLimit));
+  int get hashCode => Object.hash(runtimeType, sdk, type, messageLimit);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_InitedRequestPayloadCopyWith<_$_InitedRequestPayload> get copyWith =>
       __$$_InitedRequestPayloadCopyWithImpl<_$_InitedRequestPayload>(
           this, _$identity);
