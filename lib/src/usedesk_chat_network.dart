@@ -237,7 +237,7 @@ class UsedeskChatNetwork implements UsedeskChatSocketCallbacks {
       for (final rawMessage in resp) {
         if (rawMessage is Map<String, dynamic>) {
           final msg = Message.fromJson(rawMessage);
-          messages.insert(0, msg);
+          messages.add(msg);
         }
       }
     }
