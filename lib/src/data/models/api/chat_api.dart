@@ -23,9 +23,9 @@ abstract class UsedeskClientApi {
 
   @GET("uapi/chat/getChatMessage")
   Future<dynamic> loadPreviousMessages(
-    @Query("chat_token") String chatToken,
+    @Query("chat_token") String chatToken, [
     @Query("comment_id") int commentId,
-  );
+  ]);
 
   @POST("uapi/v2/createChat")
   @MultiPart()
